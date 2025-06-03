@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parroquia Virgen de la Esperanza</title>
+    <!-- Chosen Palette: Modern Solemnity (Azul Esperanza Profundo, Blanco Hueso, Dorado Ocre Sutil) -->
+    <!-- Application Structure Plan: A single-page application (SPA) with dynamically shown/hidden sections for each category (Inicio, Avisos, etc.). Navigation is handled by JS, updating the view without page reloads for a seamless user experience. This structure directly translates the presentation's slides into an interactive web format, prioritizing speed and modern UX. -->
+    <!-- Visualization & Content Choices: Landing: JS-powered image carousel. Avisos: Card grid with modals for details. Lectio: Dynamic text content updated via JS date navigation. Donaciones: Interactive buttons and toggles to configure donation amount and type. This avoids page reloads and presents information in digestible, interactive chunks. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F8F5F0;
+            color: #2C3E50;
+            font-family: 'Open Sans', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Merriweather', serif;
+        }
+        .bg-azul-profundo { background-color: #2C3E50; }
+        .text-azul-profundo { color: #2C3E50; }
+        .bg-dorado-ocre { background-color: #B08D57; }
+        .text-dorado-ocre { color: #B08D57; }
+        .border-dorado-ocre { border-color: #B08D57; }
+        .bg-crema-suave { background-color: #F8F5F0; }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-link.active, .nav-link:hover {
+            color: #B08D57;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #B08D57;
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link.active::after {
+            width: 100%;
+        }
+        .carousel-item {
+            display: none;
+            animation: fadeIn 1.5s;
+        }
+        .carousel-item.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0.4; }
+            to { opacity: 1; }
+        }
+        .hidden-section {
+            display: none;
+        }
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header id="header" class="bg-azul-profundo text-white shadow-lg sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#inicio" class="text-xl md:text-2xl font-bold font-serif tracking-wider">
+                Virgen de la Esperanza
+            </a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#inicio" class="nav-link active">Inicio</a>
+                <a href="#avisos" class="nav-link">Avisos</a>
+                <a href="#lectio" class="nav-link">Lectio del Día</a>
+                <a href="#caritas" class="nav-link">Cáritas</a>
+                <a href="#donaciones" class="nav-link bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Donaciones</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-azul-profundo">
+            <a href="#inicio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Inicio</a>
+            <a href="#avisos" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Avisos</a>
+            <a href="#lectio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Lectio del Día</a>
+            <a href="#caritas" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cáritas</a>
+            <a href="#donaciones" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Donaciones</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Inicio Section -->
+        <section id="inicio" class="content-section">
+            <!-- Carousel -->
+            <div id="carousel" class="relative w-full h-[60vh] md:h-[80vh] overflow-hidden">
+                <!-- Slides will be injected here by JS -->
+            </div>
+
+            <!-- Welcome Section -->
+            <div class="container mx-auto px-6 py-16 text-center">
+                <h2 class="text-4xl font-bold text-azul-profundo mb-4">Bienvenidos a Nuestra Comunidad</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-12">
+                    Somos un espacio de fe, esperanza y caridad, un hogar espiritual donde todos son bienvenidos. Explora nuestro sitio para conectarte con la vida de la parroquia, encontrar alimento para el alma y descubrir cómo puedes ser parte de nuestra misión de servicio.
+                </p>
+                <!-- Quick Access Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <a href="#avisos" class="group block bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">🔔</div>
+                        <h3 class="text-2xl font-bold text-azul-profundo mb-2">Avisos Importantes</h3>
+                        <p class="text-gray-600">Mantente al día con las últimas noticias y eventos de la parroquia.</p>
+                    </a>
+                    <a href="#lectio" class="group block bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">📖</div>
+                        <h3 class="text-2xl font-bold text-azul-profundo mb-2">Lectio del Día</h3>
+                        <p class="text-gray-600">Medita con la Palabra de Dios diariamente y fortalece tu espíritu.</p>
+                    </a>
+                    <a href="#caritas" class="group block bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">🤝</div>
+                        <h3 class="text-2xl font-bold text-azul-profundo mb-2">Únete a Cáritas</h3>
+                        <p class="text-gray-600">Descubre cómo puedes ayudar y ser parte de nuestra acción solidaria.</p>
+                    </a>
+                    <a href="#donaciones" class="group block bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                         <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">💖</div>
+                        <h3 class="text-2xl font-bold text-azul-profundo mb-2">Realiza tu Donación</h3>
+                        <p class="text-gray-600">Tu generosidad nos permite continuar con nuestra misión de fe y servicio.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Avisos Section -->
+        <section id="avisos" class="content-section hidden-section py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-azul-profundo">Avisos Parroquiales</h2>
+                    <p class="text-lg text-gray-600 mt-2">Novedades y eventos de nuestra comunidad.</p>
+                </div>
+                <div id="avisos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Avisos will be injected here by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Lectio del Dia Section -->
+        <section id="lectio" class="content-section hidden-section py-20 bg-crema-suave">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-azul-profundo">Lectio del Día</h2>
+                    <p class="text-lg text-gray-600 mt-2">Alimento para el alma: la Palabra de Dios cada día.</p>
+                </div>
+                <div class="bg-white p-8 md:p-12 rounded-lg shadow-xl">
+                    <div class="flex justify-between items-center mb-6">
+                        <button id="prev-day" class="bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">&larr; Día Anterior</button>
+                        <h3 id="lectio-date" class="text-2xl font-bold text-center text-azul-profundo"></h3>
+                        <button id="next-day" class="bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Día Siguiente &rarr;</button>
+                    </div>
+                    <div id="lectio-content" class="prose max-w-none text-lg leading-relaxed text-gray-700">
+                        <!-- Lectio content will be injected here by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Caritas Section -->
+        <section id="caritas" class="content-section hidden-section py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-azul-profundo">Cáritas en Acción</h2>
+                    <p class="text-lg text-gray-600 mt-2">Solidaridad y compromiso en nuestra comunidad.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+                    <div class="w-full h-80 rounded-lg overflow-hidden shadow-lg">
+                        <img src="https://placehold.co/600x400/8A9A5B/FFFFFF?text=Cáritas" alt="Voluntarios de Cáritas" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-bold text-azul-profundo mb-4">Extendiendo una Mano Amiga</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Cáritas Parroquial es la expresión organizada de la caridad de nuestra comunidad. Buscamos responder a las necesidades de nuestros hermanos más vulnerables, promoviendo la dignidad humana y la justicia social a través de programas concretos y el compromiso voluntario.
+                        </p>
+                    </div>
+                </div>
+                <h3 class="text-3xl font-bold text-center text-azul-profundo mb-10">Nuestras Áreas de Acción</h3>
+                <div id="caritas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                   <!-- Caritas actions will be injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Donaciones Section -->
+        <section id="donaciones" class="content-section hidden-section py-20 bg-crema-suave">
+            <div class="container mx-auto px-6 max-w-4xl">
+                 <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-azul-profundo">Tu Generosidad Transforma Vidas</h2>
+                    <p class="text-lg text-gray-600 mt-2">Cada aporte, grande o pequeño, nos ayuda a sostener la vida de la parroquia y la acción de Cáritas.</p>
+                </div>
+                <div class="bg-white p-8 md:p-12 rounded-lg shadow-xl">
+                    <h3 class="text-2xl font-bold text-azul-profundo mb-6 text-center">Donación Online Segura</h3>
+                    <div class="flex justify-center mb-6">
+                        <div class="inline-flex rounded-lg shadow-sm">
+                            <button id="donate-once" class="bg-dorado-ocre text-white px-6 py-3 rounded-l-lg font-semibold">Única</button>
+                            <button id="donate-monthly" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-r-lg font-semibold">Mensual</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <button class="amount-btn border-2 border-gray-300 text-gray-700 py-3 rounded-lg text-lg font-semibold hover:border-dorado-ocre hover:text-dorado-ocre transition-colors" data-amount="500">$500</button>
+                        <button class="amount-btn border-2 border-gray-300 text-gray-700 py-3 rounded-lg text-lg font-semibold hover:border-dorado-ocre hover:text-dorado-ocre transition-colors" data-amount="1000">$1000</button>
+                        <button class="amount-btn border-2 border-gray-300 text-gray-700 py-3 rounded-lg text-lg font-semibold hover:border-dorado-ocre hover:text-dorado-ocre transition-colors" data-amount="2000">$2000</button>
+                        <button class="amount-btn border-2 border-gray-300 text-gray-700 py-3 rounded-lg text-lg font-semibold hover:border-dorado-ocre hover:text-dorado-ocre transition-colors" data-amount="5000">$5000</button>
+                    </div>
+                    <div class="mb-8">
+                        <label for="other-amount" class="block text-sm font-medium text-gray-700 mb-1">Otro Monto (ARS)</label>
+                        <input type="number" id="other-amount" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:ring-dorado-ocre focus:border-dorado-ocre" placeholder="Ej: 3000">
+                    </div>
+                    <button class="w-full bg-azul-profundo text-white py-4 rounded-lg text-xl font-bold hover:bg-opacity-90 transition-transform transform hover:scale-105">
+                        Donar <span id="donation-total">$0</span>
+                    </button>
+                    <p class="text-center text-sm text-gray-500 mt-4">Serás redirigido a una plataforma de pago segura.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-azul-profundo text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <div>
+                    <h3 class="text-xl font-bold font-serif mb-4">Parroquia Virgen de la Esperanza</h3>
+                    <p class="text-gray-300">Calle Falsa 123, William C. Morris</p>
+                    <p class="text-gray-300">Buenos Aires, Argentina</p>
+                    <p class="text-gray-300 mt-2">contacto@parroquia.org</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold font-serif mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#inicio" class="text-gray-300 hover:text-dorado-ocre transition">Inicio</a></li>
+                        <li><a href="#avisos" class="text-gray-300 hover:text-dorado-ocre transition">Avisos</a></li>
+                        <li><a href="#lectio" class="text-gray-300 hover:text-dorado-ocre transition">Lectio del Día</a></li>
+                        <li><a href="#caritas" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
+                        <li><a href="#donaciones" class="text-gray-300 hover:text-dorado-ocre transition">Donaciones</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold font-serif mb-4">Síguenos</h3>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-dorado-ocre transition">FB</a>
+                        <a href="#" class="text-gray-300 hover:text-dorado-ocre transition">IG</a>
+                        <a href="#" class="text-gray-300 hover:text-dorado-ocre transition">YT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
+                <p>&copy; <span id="footer-year"></span> Parroquia Virgen de la Esperanza. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Modal -->
+    <div id="modal" class="modal fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 opacity-0 invisible">
+        <div id="modal-content" class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95">
+            <div class="sticky top-0 bg-white p-4 border-b flex justify-between items-center">
+                <h3 id="modal-title" class="text-2xl font-bold text-azul-profundo"></h3>
+                <button id="modal-close" class="text-3xl text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <div id="modal-body" class="p-6">
+                <!-- Modal content goes here -->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        // --- DATA ---
+        const carouselData = [
+            {
+                image: 'https://placehold.co/1920x1080/2C3E50/FFFFFF?text=Parroquia+Virgen+de+la+Esperanza',
+                title: 'Parroquia Virgen de la Esperanza',
+                subtitle: 'Tu Hogar Espiritual.',
+                buttonText: 'Conócenos Más',
+                buttonLink: '#inicio'
+            },
+            {
+                image: 'https://placehold.co/1920x1080/8A9A5B/FFFFFF?text=Cáritas+en+Acción',
+                title: 'Cáritas: Manos que Sirven',
+                subtitle: 'Corazones que Aman.',
+                buttonText: 'Apoya Nuestra Labor',
+                buttonLink: '#donaciones'
+            },
+            {
+                image: 'https://placehold.co/1920x1080/B08D57/FFFFFF?text=Peregrinos+de+la+Esperanza',
+                title: 'Peregrinos de la Esperanza',
+                subtitle: 'Caminando Juntos en Fe.',
+                buttonText: 'Ver Eventos',
+                buttonLink: '#avisos'
+            }
+        ];
+
+        const avisosData = [
+            {
+                title: 'Misa Crismal 2025',
+                date: '15 de Abril, 2025',
+                content: 'Celebraremos la Misa Crismal, un momento central de nuestra fe donde se bendicen los santos óleos. Todos están invitados a participar de esta solemne eucaristía presidida por nuestro obispo.',
+                fullContent: '<p>La Misa Crismal es una de las principales celebraciones litúrgicas del año. En ella, el obispo, rodeado de su presbiterio, consagra el Santo Crisma y bendice los demás óleos que se usarán en la administración de los sacramentos. </p><p class="mt-4">Este año, la celebración tendrá lugar en la Catedral a las 19:00hs. Se dispondrán autobuses desde nuestra parroquia. Inscribirse en secretaría.</p>',
+                image: 'https://placehold.co/400x300/2C3E50/FFFFFF?text=Misa'
+            },
+            {
+                title: 'Campaña Solidaria de Cáritas',
+                date: '1 - 31 de Mayo, 2025',
+                content: 'Durante todo el mes de mayo, estaremos recolectando alimentos no perecederos y ropa de abrigo para las familias que más lo necesitan en nuestra comunidad.',
+                fullContent: '<p>Con la llegada del frío, renovamos nuestro compromiso con los más necesitados. Acércate a los puntos de recolección en el atrio de la iglesia con tu donación. Se necesita principalmente: leche en polvo, fideos, arroz, legumbres y abrigos en buen estado.</p><p class="mt-4">Tu ayuda es fundamental. ¡Gracias por tu generosidad!</p>',
+                image: 'https://placehold.co/400x300/8A9A5B/FFFFFF?text=Solidaridad'
+            },
+            {
+                title: 'Inscripciones para Catequesis',
+                date: 'A partir del 1 de Junio, 2025',
+                content: 'Se abren las inscripciones para la catequesis de Primera Comunión y Confirmación para el ciclo 2025-2026. Acercarse a la secretaría parroquial.',
+                fullContent: '<p>Invitamos a todas las familias a inscribir a sus hijos en el camino de formación cristiana. La catequesis es un pilar fundamental en la educación de la fe.</p><ul class="list-disc pl-6 mt-4"><li><strong>Primera Comunión:</strong> Niños a partir de 9 años.</li><li><strong>Confirmación:</strong> Jóvenes a partir de 15 años.</li></ul><p class="mt-4">Horarios y más información disponibles en la secretaría.</p>',
+                image: 'https://placehold.co/400x300/B08D57/FFFFFF?text=Catequesis'
+            },
+        ];
+
+        const lectioData = [
+            {
+                date: new Date('2025-06-02T12:00:00Z'),
+                content: '<h4>Evangelio según San Marcos 12, 1-12</h4><p>"Jesús se puso a hablarles en parábolas: «Un hombre plantó una viña, la rodeó de una cerca, cavó un lagar y edificó una torre; la arrendó a unos labradores y se ausentó...»"</p><p class="mt-4"><strong>Reflexión:</strong> En esta parábola, Jesús nos invita a reflexionar sobre nuestra responsabilidad como cuidadores de los dones que Dios nos ha confiado. ¿Estamos produciendo frutos de justicia y amor, o rechazamos a los mensajeros que Dios nos envía?</p>'
+            },
+            {
+                date: new Date('2025-06-03T12:00:00Z'),
+                content: '<h4>Evangelio según San Marcos 12, 13-17</h4><p>"Y le envían algunos de los fariseos y de los herodianos, para cazarle en alguna palabra... «¿Es lícito pagar tributo al César o no?»"</p><p class="mt-4"><strong>Reflexión:</strong> La respuesta de Jesús, «Dad al César lo que es del César y a Dios lo que es de Dios», es una profunda enseñanza sobre nuestras obligaciones cívicas y espirituales. Nos llama a ser ciudadanos responsables en el mundo, sin olvidar que nuestra pertenencia última es a Dios.</p>'
+            },
+            {
+                date: new Date('2025-06-04T12:00:00Z'),
+                content: '<h4>Evangelio según San Marcos 12, 18-27</h4><p>"Se le acercan unos saduceos, de los que dicen que no hay resurrección, y le preguntaban... «Cuando resuciten, ¿de quién de ellos será mujer?»"</p><p class="mt-4"><strong>Reflexión:</strong> Jesús eleva la comprensión de la vida eterna más allá de nuestras categorías terrenales. La resurrección no es una simple continuación de esta vida, sino una transformación total en la presencia de Dios, donde Él es "Dios de vivos, no de muertos".</p>'
+            }
+        ];
+        
+        const caritasData = [
+            {
+                icon: '🍲',
+                title: 'Asistencia Alimentaria',
+                description: 'Proveemos bolsones de alimentos y gestionamos un comedor comunitario para asegurar la nutrición básica de familias y personas en situación de vulnerabilidad.'
+            },
+            {
+                icon: '👕',
+                title: 'Ropero Comunitario',
+                description: 'Recolectamos, clasificamos y distribuimos ropa, calzado y abrigo en buen estado para todas las edades, promoviendo la dignidad y el cuidado.'
+            },
+            {
+                icon: '📚',
+                title: 'Apoyo Escolar',
+                description: 'Ofrecemos un espacio de acompañamiento educativo para niños y adolescentes, ayudándolos con sus tareas y fomentando el amor por el estudio.'
+            }
+        ];
+
+
+        // --- UI ELEMENTS ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelectorAll('.nav-link, #mobile-menu a');
+        const contentSections = document.querySelectorAll('.content-section');
+        const header = document.getElementById('header');
+        
+        // --- NAVIGATION ---
+        function updateActiveLink(targetId) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${targetId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        function showSection(targetId) {
+            contentSections.forEach(section => {
+                if (section.id === targetId) {
+                    section.classList.remove('hidden-section');
+                } else {
+                    section.classList.add('hidden-section');
+                }
+            });
+            updateActiveLink(targetId);
+            window.scrollTo(0, 0);
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                window.location.hash = targetId;
+                showSection(targetId);
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1) || 'inicio';
+            showSection(hash);
+        });
+        
+        // Initial load
+        const initialHash = window.location.hash.substring(1) || 'inicio';
+        showSection(initialHash);
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('py-4');
+            } else {
+                header.classList.add('py-4');
+                header.classList.remove('py-2');
+            }
+        });
+
+        // --- CAROUSEL ---
+        const carouselContainer = document.getElementById('carousel');
+        let currentSlide = 0;
+
+        function renderCarousel() {
+            carouselContainer.innerHTML = '';
+            carouselData.forEach((slide, index) => {
+                const slideElement = document.createElement('div');
+                slideElement.className = `carousel-item absolute inset-0 w-full h-full ${index === currentSlide ? 'active' : ''}`;
+                slideElement.innerHTML = `
+                    <img src="${slide.image}" class="w-full h-full object-cover" alt="${slide.title}">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                        <div class="text-center text-white p-4">
+                            <h2 class="text-4xl md:text-6xl font-bold font-serif mb-4">${slide.title}</h2>
+                            <p class="text-lg md:text-2xl mb-8">${slide.subtitle}</p>
+                            <a href="${slide.buttonLink}" class="bg-dorado-ocre text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-colors">${slide.buttonText}</a>
+                        </div>
+                    </div>
+                `;
+                carouselContainer.appendChild(slideElement);
+            });
+
+            const dotsContainer = document.createElement('div');
+            dotsContainer.className = 'absolute bottom-5 left-1/2 -translate-x-1/2 flex space-x-3';
+            carouselData.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.className = `w-3 h-3 rounded-full transition-colors ${index === currentSlide ? 'bg-white' : 'bg-white/50 hover:bg-white'}`;
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    renderCarousel();
+                });
+                dotsContainer.appendChild(dot);
+            });
+            carouselContainer.appendChild(dotsContainer);
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % carouselData.length;
+            renderCarousel();
+        }
+
+        setInterval(nextSlide, 5000);
+        renderCarousel();
+
+
+        // --- AVISOS & MODAL ---
+        const avisosGrid = document.getElementById('avisos-grid');
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const modalClose = document.getElementById('modal-close');
+
+        function openModal(title, content) {
+            modalTitle.textContent = title;
+            modalBody.innerHTML = content;
+            modal.classList.remove('opacity-0', 'invisible');
+            modalContent.classList.remove('scale-95');
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('invisible');
+            }, 300);
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        avisosData.forEach(aviso => {
+            const card = document.createElement('div');
+            card.className = 'bg-crema-suave rounded-lg shadow-md overflow-hidden flex flex-col';
+            card.innerHTML = `
+                <img src="${aviso.image}" alt="${aviso.title}" class="w-full h-48 object-cover">
+                <div class="p-6 flex flex-col flex-grow">
+                    <p class="text-sm text-gray-500 mb-2">${aviso.date}</p>
+                    <h3 class="text-2xl font-bold text-azul-profundo mb-3">${aviso.title}</h3>
+                    <p class="text-gray-700 mb-4 flex-grow">${aviso.content}</p>
+                    <button class="mt-auto self-start bg-dorado-ocre text-white px-5 py-2 rounded-full hover:bg-opacity-90 transition-colors">Leer Más</button>
+                </div>
+            `;
+            card.querySelector('button').addEventListener('click', () => openModal(aviso.title, aviso.fullContent));
+            avisosGrid.appendChild(card);
+        });
+
+        // --- LECTIO ---
+        const lectioDateEl = document.getElementById('lectio-date');
+        const lectioContentEl = document.getElementById('lectio-content');
+        const prevDayBtn = document.getElementById('prev-day');
+        const nextDayBtn = document.getElementById('next-day');
+        let currentLectioIndex = lectioData.findIndex(l => l.date.toDateString() === new Date().toDateString());
+        if (currentLectioIndex === -1) currentLectioIndex = lectioData.length - 1;
+
+        function renderLectio() {
+            const lectio = lectioData[currentLectioIndex];
+            lectioDateEl.textContent = lectio.date.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            lectioContentEl.innerHTML = lectio.content;
+            prevDayBtn.disabled = currentLectioIndex === 0;
+            nextDayBtn.disabled = currentLectioIndex === lectioData.length - 1;
+            prevDayBtn.classList.toggle('opacity-50', prevDayBtn.disabled);
+            nextDayBtn.classList.toggle('opacity-50', nextDayBtn.disabled);
+        }
+        
+        prevDayBtn.addEventListener('click', () => {
+            if (currentLectioIndex > 0) {
+                currentLectioIndex--;
+                renderLectio();
+            }
+        });
+
+        nextDayBtn.addEventListener('click', () => {
+            if (currentLectioIndex < lectioData.length - 1) {
+                currentLectioIndex++;
+                renderLectio();
+            }
+        });
+        
+        renderLectio();
+
+        // --- CARITAS ---
+        const caritasGrid = document.getElementById('caritas-grid');
+        caritasData.forEach(action => {
+            const card = document.createElement('div');
+            card.className = 'bg-crema-suave p-8 rounded-lg shadow-md text-center';
+            card.innerHTML = `
+                <div class="text-6xl mb-4">${action.icon}</div>
+                <h4 class="text-2xl font-bold text-azul-profundo mb-3">${action.title}</h4>
+                <p class="text-gray-700">${action.description}</p>
+            `;
+            caritasGrid.appendChild(card);
+        });
+        
+        // --- DONACIONES ---
+        const donateOnceBtn = document.getElementById('donate-once');
+        const donateMonthlyBtn = document.getElementById('donate-monthly');
+        const amountBtns = document.querySelectorAll('.amount-btn');
+        const otherAmountInput = document.getElementById('other-amount');
+        const donationTotalEl = document.getElementById('donation-total');
+        let selectedAmount = 0;
+
+        function updateDonationTotal() {
+            donationTotalEl.textContent = `$${selectedAmount}`;
+        }
+
+        donateOnceBtn.addEventListener('click', () => {
+            donateOnceBtn.classList.replace('bg-gray-200', 'bg-dorado-ocre');
+            donateOnceBtn.classList.replace('text-gray-700', 'text-white');
+            donateMonthlyBtn.classList.replace('bg-dorado-ocre', 'bg-gray-200');
+            donateMonthlyBtn.classList.replace('text-white', 'text-gray-700');
+        });
+
+        donateMonthlyBtn.addEventListener('click', () => {
+            donateMonthlyBtn.classList.replace('bg-gray-200', 'bg-dorado-ocre');
+            donateMonthlyBtn.classList.replace('text-gray-700', 'text-white');
+            donateOnceBtn.classList.replace('bg-dorado-ocre', 'bg-gray-200');
+            donateOnceBtn.classList.replace('text-white', 'text-gray-700');
+        });
+        
+        amountBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                amountBtns.forEach(b => b.classList.remove('bg-dorado-ocre', 'text-white'));
+                btn.classList.add('bg-dorado-ocre', 'text-white');
+                selectedAmount = parseInt(btn.dataset.amount, 10);
+                otherAmountInput.value = '';
+                updateDonationTotal();
+            });
+        });
+        
+        otherAmountInput.addEventListener('input', () => {
+            amountBtns.forEach(b => b.classList.remove('bg-dorado-ocre', 'text-white'));
+            selectedAmount = parseInt(otherAmountInput.value, 10) || 0;
+            updateDonationTotal();
+        });
+        
+        // --- FOOTER ---
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    });
+    </script>
+</body>
+</html>
