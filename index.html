@@ -239,9 +239,9 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
                 <div>
                     <h3 class="text-xl font-bold font-serif mb-4">Parroquia Virgen de la Esperanza</h3>
-                    <p class="text-gray-300">Calle Falsa 123, William C. Morris</p>
-                    <p class="text-gray-300">Buenos Aires, Argentina</p>
+                    <p class="text-gray-300">Arribeños 2466, Hurlingham, Provincia de Buenos Aires, Argentina</p>
                     <p class="text-gray-300 mt-2">contacto@parroquia.org</p>
+                    <p class="text-gray-300 mt-2">vesperanzahurlingham@gmail.com</p>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold font-serif mb-4">Enlaces Rápidos</h3>
@@ -256,9 +256,15 @@
                 <div>
                     <h3 class="text-xl font-bold font-serif mb-4">Síguenos</h3>
                     <div class="flex justify-center md:justify-start space-x-4">
-                        <a href="#" class="text-gray-300 hover:text-dorado-ocre transition">FB</a>
-                        <a href="#" class="text-gray-300 hover:text-dorado-ocre transition">IG</a>
-                        <a href="#" class="text-gray-300 hover:text-dorado-ocre transition">YT</a>
+                        <a href="https://www.facebook.com/virgendelaesperanza" class="text-gray-300 hover:text-dorado-ocre transition flex items-center" target="_blank" rel="noopener noreferrer">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="w-6 h-6 mr-2">Facebook
+                        </a>
+                        <a href="https://www.instagram.com/pquiavirgendelaesperanzaok/" class="text-gray-300 hover:text-dorado-ocre transition flex items-center" target="_blank" rel="noopener noreferrer">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="w-6 h-6 mr-2">Instagram
+                        </a>
+                        <a href="http://www.youtube.com/@pquia.virgendelaesperanza2180" class="text-gray-300 hover:text-dorado-ocre transition flex items-center" target="_blank" rel="noopener noreferrer">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube" class="w-6 h-6 mr-2">YouTube
+                        </a>
                     </div>
                 </div>
             </div>
@@ -288,21 +294,24 @@
         // --- DATA ---
         const carouselData = [
             {
-                image: 'https://placehold.co/1920x1080/2C3E50/FFFFFF?text=Parroquia+Virgen+de+la+Esperanza',
+                image: './banner-peregrinos.jpeg',
+                imageMobile: './banner-peregrinos-mobile.jpeg',
                 title: 'Parroquia Virgen de la Esperanza',
                 subtitle: 'Tu Hogar Espiritual.',
                 buttonText: 'Conócenos Más',
                 buttonLink: '#inicio'
             },
             {
-                image: 'https://placehold.co/1920x1080/8A9A5B/FFFFFF?text=Cáritas+en+Acción',
-                title: 'Cáritas: Manos que Sirven',
-                subtitle: 'Corazones que Aman.',
-                buttonText: 'Apoya Nuestra Labor',
-                buttonLink: '#donaciones'
+                image: './caritas-carrusel.png',
+                imageMobile: './banner-caritas-mobile.jpeg',
+                title: 'Colaborá con Cáritas',
+                subtitle: 'Sigamos organizando la esperanza',
+                buttonText: 'Sumate',
+                buttonLink: '#caritas'
             },
             {
-                image: 'https://placehold.co/1920x1080/B08D57/FFFFFF?text=Peregrinos+de+la+Esperanza',
+                image: './banner-peregrinos.jpeg',
+                imageMobile: './banner-peregrinos-mobile.jpeg',
                 title: 'Peregrinos de la Esperanza',
                 subtitle: 'Caminando Juntos en Fe.',
                 buttonText: 'Ver Eventos',
@@ -436,18 +445,15 @@
         let currentSlide = 0;
 
         function renderCarousel() {
+            const carouselContainer = document.getElementById('carousel');
             carouselContainer.innerHTML = '';
             carouselData.forEach((slide, index) => {
                 const slideElement = document.createElement('div');
-                slideElement.className = `carousel-item absolute inset-0 w-full h-full ${index === currentSlide ? 'active' : ''}`;
+                slideElement.className = `carousel-item absolute inset-0 w-full h-full ${index === 0 ? 'active' : ''}`;
                 slideElement.innerHTML = `
-                    <img src="${slide.image}" class="w-full h-full object-cover" alt="${slide.title}">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                        <div class="text-center text-white p-4">
-                            <h2 class="text-4xl md:text-6xl font-bold font-serif mb-4">${slide.title}</h2>
-                            <p class="text-lg md:text-2xl mb-8">${slide.subtitle}</p>
-                            <a href="${slide.buttonLink}" class="bg-dorado-ocre text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-colors">${slide.buttonText}</a>
-                        </div>
+                    <div class="absolute inset-0 w-full h-full bg-cover bg-center z-0" style="background-image: url('${window.innerWidth < 768 ? slide.imageMobile : slide.image}')"></div>
+                    <div class="absolute inset-0 flex items-center justify-center z-10">
+                        <a href="${slide.buttonLink}" class="bg-dorado-ocre text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-colors shadow-lg">${slide.buttonText}</a>
                     </div>
                 `;
                 carouselContainer.appendChild(slideElement);
@@ -457,22 +463,22 @@
             dotsContainer.className = 'absolute bottom-5 left-1/2 -translate-x-1/2 flex space-x-3';
             carouselData.forEach((_, index) => {
                 const dot = document.createElement('button');
-                dot.className = `w-3 h-3 rounded-full transition-colors ${index === currentSlide ? 'bg-white' : 'bg-white/50 hover:bg-white'}`;
+                dot.className = `w-3 h-3 rounded-full transition-colors ${index === 0 ? 'bg-white' : 'bg-white/50 hover:bg-white'}`;
                 dot.addEventListener('click', () => {
-                    currentSlide = index;
-                    renderCarousel();
+                    document.querySelectorAll('.carousel-item').forEach((item, i) => {
+                        item.classList.toggle('active', i === index);
+                    });
+                    document.querySelectorAll('.dots-container button').forEach((button, i) => {
+                        button.classList.toggle('bg-white', i === index);
+                        button.classList.toggle('bg-white/50', i !== index);
+                    });
                 });
                 dotsContainer.appendChild(dot);
             });
+            dotsContainer.classList.add('dots-container');
             carouselContainer.appendChild(dotsContainer);
         }
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % carouselData.length;
-            renderCarousel();
-        }
-
-        setInterval(nextSlide, 5000);
         renderCarousel();
 
 
