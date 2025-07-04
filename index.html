@@ -10,6 +10,8 @@
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="icon.png" type="image/png">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -105,7 +107,39 @@
         <!-- Inicio Section -->
         <section id="inicio" class="content-section">
             <!-- Carousel -->
-        <div id="carousel" class="relative w-full h-[60vh] md:h-[80vh] overflow-hidden ">
+<div id="carousel" class="relative w-full h-[35vh] md:h-[45vh] bg-black flex items-center justify-center p-4">
+  <img id="carousel-image"
+       src="./banner-peregrinos.jpeg"
+       class="max-w-full max-h-full rounded-lg shadow-lg transition-opacity duration-1000"
+       alt="Parroquia Virgen de la Esperanza">
+</div>
+
+<script>
+  const images = [
+    './banner-peregrinos-mobile.jpeg',
+    './caritas-carrusel.png'
+  ];
+
+  let currentIndex = 0;
+  const carouselImage = document.getElementById('carousel-image');
+
+  setInterval(() => {
+    // Fade out
+    carouselImage.classList.add('opacity-0');
+
+    setTimeout(() => {
+      // Change image
+      currentIndex = (currentIndex + 1) % images.length;
+      carouselImage.src = images[currentIndex];
+
+      // Fade in
+      carouselImage.classList.remove('opacity-0');
+    }, 1000); // Match duration-1000
+  }, 5000); // Change image every 5 seconds
+</script>
+
+
+
 
                 <!-- Slides will be injected here by JS -->
             </div>
@@ -157,17 +191,17 @@
 
         <!-- Lectio del Dia Section -->
         <section id="lectio" class="content-section hidden-section py-20 bg-crema-suave">
-            <div class="container mx-auto px-6 max-w-4xl">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold text-azul-profundo">Lectio del Día</h2>
-                    <p class="text-lg text-gray-600 mt-2">Alimento para el alma: la Palabra de Dios cada día.</p>
+            
+<iframe
+  src="https://evangeli.net/evangelio/widget/web"
+  width="100%"
+  height="600"
+  frameborder="2"
+  scrolling="yes">
+</iframe>
+
                 </div>
-                <div class="bg-white p-8 md:p-12 rounded-lg shadow-xl">
-                    <div class="flex justify-between items-center mb-6">
-                        <button id="prev-day" class="bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">&larr; Día Anterior</button>
-                        <h3 id="lectio-date" class="text-2xl font-bold text-center text-azul-profundo"></h3>
-                        <button id="next-day" class="bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Día Siguiente &rarr;</button>
-                    </div>
+              
                     <div id="lectio-content" class="prose max-w-none text-lg leading-relaxed text-gray-700">
                         <!-- Lectio content will be injected here by JS -->
                     </div>
@@ -299,6 +333,7 @@
     document.addEventListener('DOMContentLoaded', function () {
         
         // --- DATA ---
+        /*
         const carouselData = [
             {
                 image: './banner-peregrinos.jpeg',
@@ -324,7 +359,7 @@
                 buttonText: 'Ver Eventos',
                 buttonLink: '#avisos'
             }
-        ];
+        ];*/
 
         const avisosData = [
             {
@@ -351,18 +386,7 @@
         ];
 
         const lectioData = [
-            {
-                date: new Date('2025-06-02T12:00:00Z'),
-                content: '<h4>Evangelio según San Marcos 12, 1-12</h4><p>"Jesús se puso a hablarles en parábolas: «Un hombre plantó una viña, la rodeó de una cerca, cavó un lagar y edificó una torre; la arrendó a unos labradores y se ausentó...»"</p><p class="mt-4"><strong>Reflexión:</strong> En esta parábola, Jesús nos invita a reflexionar sobre nuestra responsabilidad como cuidadores de los dones que Dios nos ha confiado. ¿Estamos produciendo frutos de justicia y amor, o rechazamos a los mensajeros que Dios nos envía?</p>'
-            },
-            {
-                date: new Date('2025-06-03T12:00:00Z'),
-                content: '<h4>Evangelio según San Marcos 12, 13-17</h4><p>"Y le envían algunos de los fariseos y de los herodianos, para cazarle en alguna palabra... «¿Es lícito pagar tributo al César o no?»"</p><p class="mt-4"><strong>Reflexión:</strong> La respuesta de Jesús, «Dad al César lo que es del César y a Dios lo que es de Dios», es una profunda enseñanza sobre nuestras obligaciones cívicas y espirituales. Nos llama a ser ciudadanos responsables en el mundo, sin olvidar que nuestra pertenencia última es a Dios.</p>'
-            },
-            {
-                date: new Date('2025-06-04T12:00:00Z'),
-                content: '<h4>Evangelio según San Marcos 12, 18-27</h4><p>"Se le acercan unos saduceos, de los que dicen que no hay resurrección, y le preguntaban... «Cuando resuciten, ¿de quién de ellos será mujer?»"</p><p class="mt-4"><strong>Reflexión:</strong> Jesús eleva la comprensión de la vida eterna más allá de nuestras categorías terrenales. La resurrección no es una simple continuación de esta vida, sino una transformación total en la presencia de Dios, donde Él es "Dios de vivos, no de muertos".</p>'
-            }
+
         ];
         
         const caritasData = [
@@ -447,8 +471,8 @@
             }
         });
 
-        // --- CAROUSEL ---
-       const carouselContainer = document.getElementById('carousel');
+        // --- CAROUSEL --- 
+    /*   const carouselContainer = document.getElementById('carousel');
 let currentSlide = 0;
 
 function renderCarousel() {
@@ -501,7 +525,7 @@ renderCarousel();
 setInterval(() => {
   currentSlide = (currentSlide + 1) % carouselData.length;
   updateCarousel();
-}, 3000);
+}, 3000);*/
 
 
 function showSlide(index) {
@@ -527,7 +551,7 @@ function autoSlide() {
 }
 
 renderCarousel();
-setInterval(autoSlide, 5000); // cambia cada 5 segundos
+setInterval(autoSlide, 5000); // cambia cada 5 segundos 
 
 
 
