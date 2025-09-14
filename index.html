@@ -117,7 +117,9 @@
 <script>
   const images = [
     './banner-peregrinos-mobile.jpeg',
-    './caritas-carrusel.png'
+    './caritas-carrusel.png',
+    './Recorridas2.png',
+    './Lujan_banner.png'
   ];
 
   let currentIndex = 0;
@@ -363,25 +365,25 @@
 
         const avisosData = [
             {
-                title: 'Misa Crismal 2025',
-                date: '15 de Abril, 2025',
-                content: 'Celebraremos la Misa Crismal, un momento central de nuestra fe donde se bendicen los santos óleos. Todos están invitados a participar de esta solemne eucaristía presidida por nuestro obispo.',
-                fullContent: '<p>La Misa Crismal es una de las principales celebraciones litúrgicas del año. En ella, el obispo, rodeado de su presbiterio, consagra el Santo Crisma y bendice los demás óleos que se usarán en la administración de los sacramentos. </p><p class="mt-4">Este año, la celebración tendrá lugar en la Catedral a las 19:00hs. Se dispondrán autobuses desde nuestra parroquia. Inscribirse en secretaría.</p>',
-                image: 'https://placehold.co/400x300/2C3E50/FFFFFF?text=Misa'
+                title: 'Misa animada por la Renovación Carismática',
+                date: 'Miércoles 17 de Septiembre',
+                content: 'Encuentros del grupo de oración "Espíritu de Esperanza" todos los miércoles a las 19hs.',
+                fullContent: '<p>Te invitamos a la Misa animada por la Renovación Carismática Católica.</p><p class="mt-4"><strong>Horarios:</strong></p><ul class="list-disc pl-6 mt-2"><li><strong>18:30 hs:</strong> Alabanzas</li><li><strong>19:00 hs:</strong> Misa</li></ul><p class="mt-4">¡Te esperamos en Arribeños 2466, Hurlingham!</p>',
+                image: './Misa_renovacion_carismatica.png' // Asegúrate que este es el nombre de tu archivo de imagen
             },
             {
-                title: 'Campaña Solidaria de Cáritas',
-                date: '1 - 31 de Mayo, 2025',
-                content: 'Durante todo el mes de mayo, estaremos recolectando alimentos no perecederos y ropa de abrigo para las familias que más lo necesitan en nuestra comunidad.',
-                fullContent: '<p>Con la llegada del frío, renovamos nuestro compromiso con los más necesitados. Acércate a los puntos de recolección en el atrio de la iglesia con tu donación. Se necesita principalmente: leche en polvo, fideos, arroz, legumbres y abrigos en buen estado.</p><p class="mt-4">Tu ayuda es fundamental. ¡Gracias por tu generosidad!</p>',
-                image: 'https://placehold.co/400x300/8A9A5B/FFFFFF?text=Solidaridad'
+                title: 'Caminata a Lujan 2025',
+                date: 'Sábado 4 de Octubre, 2025',
+                content: 'La 51° Peregrinación Juvenil a Pie a Luján se realizará el sábado 4 de octubre.',
+                fullContent: '<p>La 51° Peregrinación Juvenil a Pie a Luján se realizará el sábado 4 de octubre de 2025 y concluirá en la madrugada del domingo 5 de octubre.</p><p class="mt-4">La caminata partirá del Santuario de San Cayetano en Liniers, y el lema de este año es <strong>"Madre, danos amor para caminar con esperanza"</strong>.</p>',
+                image: './Lujan_0410.png' // Reemplaza esto con la ruta a tu imagen
             },
             {
-                title: 'Inscripciones para Catequesis',
-                date: 'A partir del 1 de Junio, 2025',
-                content: 'Se abren las inscripciones para la catequesis de Primera Comunión y Confirmación para el ciclo 2025-2026. Acercarse a la secretaría parroquial.',
-                fullContent: '<p>Invitamos a todas las familias a inscribir a sus hijos en el camino de formación cristiana. La catequesis es un pilar fundamental en la educación de la fe.</p><ul class="list-disc pl-6 mt-4"><li><strong>Primera Comunión:</strong> Niños a partir de 9 años.</li><li><strong>Confirmación:</strong> Jóvenes a partir de 15 años.</li></ul><p class="mt-4">Horarios y más información disponibles en la secretaría.</p>',
-                image: 'https://placehold.co/400x300/B08D57/FFFFFF?text=Catequesis'
+                title: 'Recorridas',
+                date: 'Dias Miercoles, Viernes y Domingos',
+                content: 'Las recorridas se realizan los días miércoles, viernes y domingos a las 21 hs.',
+                fullContent: '<p>Las recorridas se realizan los días miércoles, viernes y domingos a las 21 hs.Tel de contacto:1121909764/1167968151</p>',
+                image: './Recorridas_desktop.png'
             },
         ];
 
@@ -549,10 +551,10 @@ function autoSlide() {
     currentSlide = (currentSlide + 1) % carouselData.length;
     showSlide(currentSlide);
 }
-
+/*
 renderCarousel();
 setInterval(autoSlide, 5000); // cambia cada 5 segundos 
-
+*/
 
 
         // --- AVISOS & MODAL ---
@@ -601,7 +603,7 @@ setInterval(autoSlide, 5000); // cambia cada 5 segundos
             avisosGrid.appendChild(card);
         });
 
-        // --- LECTIO ---
+        /* --- LECTIO ---
         const lectioDateEl = document.getElementById('lectio-date');
         const lectioContentEl = document.getElementById('lectio-content');
         const prevDayBtn = document.getElementById('prev-day');
@@ -633,7 +635,7 @@ setInterval(autoSlide, 5000); // cambia cada 5 segundos
             }
         });
         
-        renderLectio();
+        renderLectio();*/
 
         // --- CARITAS ---
         const caritasGrid = document.getElementById('caritas-grid');
