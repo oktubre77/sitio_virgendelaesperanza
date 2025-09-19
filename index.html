@@ -118,7 +118,7 @@
   const images = [
     './banner-peregrinos-mobile.jpeg',
     './caritas-carrusel.png',
-    './Recorridas2.png',
+    './Recorridas3.png',
     './Lujan_banner.png'
   ];
 
@@ -156,7 +156,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <a href="#avisos" class="group block bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
                         <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">🔔</div>
-                        <h3 class="text-2xl font-bold text-azul-profundo mb-2">Avisos Importantes</h3>
+                        <h3 class="text-2xl font-bold text-azul-profundo mb-2">Avisos Parroquiales</h3>
                         <p class="text-gray-600">Mantente al día con las últimas noticias y eventos de la parroquia.</p>
                     </a>
                     <a href="#lectio" class="group block bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
@@ -220,7 +220,9 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
                     <div class="w-full h-80 rounded-lg overflow-hidden shadow-lg">
-                        <img src="https://placehold.co/600x400/8A9A5B/FFFFFF?text=Cáritas" alt="Voluntarios de Cáritas" class="w-full h-full object-cover">
+                        <a href="https://caritasmoron.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="./caritas.png" alt="Voluntarios de Cáritas" class="w-full h-full object-cover">
+                        </a>
                     </div>
                     <div>
                         <h3 class="text-3xl font-bold text-azul-profundo mb-4">Extendiendo una Mano Amiga</h3>
@@ -243,28 +245,35 @@
                     <h2 class="text-4xl font-bold text-azul-profundo">Tu Generosidad Transforma Vidas</h2>
                     <p class="text-lg text-gray-600 mt-2">Cada aporte, grande o pequeño, nos ayuda a sostener la vida de la parroquia y la acción de Cáritas.</p>
                 </div>
-                <div class="bg-white p-8 md:p-12 rounded-lg shadow-xl">
-                    <h3 class="text-2xl font-bold text-azul-profundo mb-6 text-center">Donación Online Segura</h3>
-                    <div class="flex justify-center mb-6">
-                        <div class="inline-flex rounded-lg shadow-sm">
-                            <button id="donate-once" class="bg-dorado-ocre text-white px-6 py-3 rounded-l-lg font-semibold">Única</button>
-                            <button id="donate-monthly" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-r-lg font-semibold">Mensual</button>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                        <button class="amount-btn border-2 border-gray-300 text-gray-700 py-3 rounded-lg text-lg font-semibold hover:border-dorado-ocre hover:text-dorado-ocre transition-colors" data-amount="500">$500</button>
-                        <button class="amount-btn border-2 border-gray-300 text-gray-700 py-3 rounded-lg text-lg font-semibold hover:border-dorado-ocre hover:text-dorado-ocre transition-colors" data-amount="1000">$1000</button>
-                        <button class="amount-btn border-2 border-gray-300 text-gray-700 py-3 rounded-lg text-lg font-semibold hover:border-dorado-ocre hover:text-dorado-ocre transition-colors" data-amount="2000">$2000</button>
-                        <button class="amount-btn border-2 border-gray-300 text-gray-700 py-3 rounded-lg text-lg font-semibold hover:border-dorado-ocre hover:text-dorado-ocre transition-colors" data-amount="5000">$5000</button>
-                    </div>
-                    <div class="mb-8">
-                        <label for="other-amount" class="block text-sm font-medium text-gray-700 mb-1">Otro Monto (ARS)</label>
-                        <input type="number" id="other-amount" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:ring-dorado-ocre focus:border-dorado-ocre" placeholder="Ej: 3000">
-                    </div>
-                    <button class="w-full bg-azul-profundo text-white py-4 rounded-lg text-xl font-bold hover:bg-opacity-90 transition-transform transform hover:scale-105">
-                        Donar <span id="donation-total">$0</span>
-                    </button>
-                    <p class="text-center text-sm text-gray-500 mt-4">Serás redirigido a una plataforma de pago segura.</p>
+                <div class="bg-white p-8 md:p-12 rounded-lg shadow-xl text-center">
+                    <h3 class="text-2xl font-bold text-azul-profundo mb-6">Colabora a través de Cáritas Morón</h3>
+                    <p class="text-gray-700 leading-relaxed mb-8">
+                        Puedes realizar tu donación de forma segura a través del portal oficial de Cáritas Diócesis de Morón. Tu contribución es fundamental para continuar nuestra misión.
+                    </p>
+                    <a href="https://caritasmoron.org/como-participar/#donar" target="_blank" rel="noopener noreferrer" class="inline-block w-full md:w-auto bg-azul-profundo text-white py-4 px-10 rounded-lg text-xl font-bold hover:bg-opacity-90 transition-transform transform hover:scale-105">
+                        Donar Ahora
+                    </a>
+                    <p class="text-center text-sm text-gray-500 mt-4">Serás redirigido al sitio seguro de Cáritas Morón.</p>
+                </div>
+            </div>
+        </section>
+        <!-- Ubicacion Section -->
+       <section id="ubicacion" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-azul-profundo">Nuestra Ubicación</h2>
+                    <p class="text-lg text-gray-600 mt-2">Arribeños 2466 (entre Albania y Valentin Alsina), Hurlingham, Buenos Aires.</p>
+                </div>
+                <div class="w-full rounded-lg overflow-hidden shadow-xl">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.902491211138!2d-58.62374882426335!3d-34.5813419804653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb9a3e368c36b%3A0x8c1a1824c8535c7!2sParroquia%20Virgen%20de%20la%20Esperanza!5e0!3m2!1ses!2sar!4v1663352938649!5m2!1ses!2sar"
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
             </div>
         </section>
@@ -365,11 +374,11 @@
 
         const avisosData = [
             {
-                title: 'Misa animada por la Renovación Carismática',
-                date: 'Miércoles 17 de Septiembre',
-                content: 'Encuentros del grupo de oración "Espíritu de Esperanza" todos los miércoles a las 19hs.',
-                fullContent: '<p>Te invitamos a la Misa animada por la Renovación Carismática Católica.</p><p class="mt-4"><strong>Horarios:</strong></p><ul class="list-disc pl-6 mt-2"><li><strong>18:30 hs:</strong> Alabanzas</li><li><strong>19:00 hs:</strong> Misa</li></ul><p class="mt-4">¡Te esperamos en Arribeños 2466, Hurlingham!</p>',
-                image: './Misa_renovacion_carismatica.png' // Asegúrate que este es el nombre de tu archivo de imagen
+                title: 'Misa Parroquia Virgen de la Esperanza',
+                date: 'Miércoles y Domingos',
+                content: 'Te invitamos a la Misa los dias Miércoles 19 hs y Domingos a las 18 hs.',
+                fullContent: '<p>Te invitamos a la Misa Parroquia Virgen de la Esperanza</p>',
+                image: './Misas.png' // Asegúrate que este es el nombre de tu archivo de imagen
             },
             {
                 title: 'Caminata a Lujan 2025',
@@ -385,6 +394,14 @@
                 fullContent: '<p>Las recorridas se realizan los días miércoles, viernes y domingos a las 21 hs.Tel de contacto:1121909764/1167968151</p>',
                 image: './Recorridas_desktop.png'
             },
+            {
+                title: 'Carita Feria de Ropa',
+                date: 'Dias Sabados de 10 a 12 hs',
+                content: 'La feria de ropa se realiza los días sábados de 10 a 12 hs.',
+                fullContent: '<p>La feria de ropa se realiza los días sábados de 10 a 12 hs.Septiembre 13 y 27 y Octubre 4 y 25</p>',
+                image: './Feria_ropa.png'
+            },
+
         ];
 
         const lectioData = [
@@ -402,11 +419,11 @@
                 title: 'Ropero Comunitario',
                 description: 'Recolectamos, clasificamos y distribuimos ropa, calzado y abrigo en buen estado para todas las edades, promoviendo la dignidad y el cuidado.'
             },
-            {
+            /*{
                 icon: '📚',
                 title: 'Apoyo Escolar',
                 description: 'Ofrecemos un espacio de acompañamiento educativo para niños y adolescentes, ayudándolos con sus tareas y fomentando el amor por el estudio.'
-            }
+            }*/
         ];
 
 
