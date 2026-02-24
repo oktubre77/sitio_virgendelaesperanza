@@ -86,6 +86,7 @@
                 <a href="#lectio" class="nav-link">Lectio del Día</a>
                 <a href="#caritas" class="nav-link">Cáritas</a>
                 <a href="#donaciones" class="nav-link bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Donaciones</a>
+                <a href="#inventario" class="nav-link">Inventario</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -100,6 +101,7 @@
             <a href="#lectio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Lectio del Día</a>
             <a href="#caritas" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cáritas</a>
             <a href="#donaciones" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Donaciones</a>
+            <a href="#inventario" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Inventario</a>
         </div>
     </header>
 
@@ -137,7 +139,9 @@
       carouselImage.classList.remove('opacity-0');
     }, 1000); // Match duration-1000
   }, 5000); // Change image every 5 seconds
+  
 </script>
+<script src="inventory.js"></script>
 
 
 
@@ -260,6 +264,113 @@
                 </div>
             </div>
         </section>
+        <!-- Agregar después de la sección donaciones, antes de ubicacion -->
+
+<!-- Inventario Section -->
+<section id="inventario" class="content-section hidden-section py-20 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-azul-profundo">Gestión de Inventario</h2>
+            <p class="text-lg text-gray-600 mt-2">Control de stock de Cáritas</p>
+        </div>
+        
+        <!-- Login Simple -->
+        <div id="login-form" class="max-w-md mx-auto bg-crema-suave p-8 rounded-lg shadow-md">
+            <h3 class="text-2xl font-bold text-azul-profundo mb-4 text-center">🔒 Acceso Administrador</h3>
+            <input type="password" id="admin-password" placeholder="Ingrese contraseña" 
+                   class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-dorado-ocre">
+            <button onclick="loginAdmin()" 
+                    class="w-full bg-dorado-ocre text-white py-3 rounded-lg hover:bg-opacity-90 transition-colors font-semibold">
+                Ingresar
+            </button>
+            <p id="login-error" class="text-red-500 text-center mt-3 hidden">Contraseña incorrecta</p>
+        </div>
+
+        <!-- Panel de Inventario -->
+        <div id="inventory-panel" class="hidden">
+            <!-- Barra de herramientas -->
+            <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
+                <div class="flex items-center gap-4">
+                    <input type="text" id="search-product" placeholder="🔍 Buscar producto..." 
+                           onkeyup="filterProducts()"
+                           class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-dorado-ocre">
+                    <button onclick="loadInventory()" 
+                            class="bg-azul-profundo text-white px-4 py-3 rounded-lg hover:bg-opacity-90">
+                        🔄 Actualizar
+                    </button>
+                </div>
+                <button onclick="openGoogleSheet()" 
+                        class="bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700">
+                    📊 Abrir en Google Sheets
+                </button>
+            </div>
+
+            <!-- Resumen -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-blue-100 p-4 rounded-lg text-center">
+                    <p class="text-3xl font-bold text-blue-700" id="total-items">0</p>
+                    <p class="text-gray-600">Total Productos</p>
+                </div>
+                <div class="bg-green-100 p-4 rounded-lg text-center">
+                    <p class="text-3xl font-bold text-green-700" id="total-stock">0</p>
+                    <p class="text-gray-600">Unidades Totales</p>
+                </div>
+                <div class="bg-yellow-100 p-4 rounded-lg text-center">
+                    <p class="text-3xl font-bold text-yellow-700" id="low-stock">0</p>
+                    <p class="text-gray-600">Stock Bajo (≤5)</p>
+                </div>
+                <div class="bg-red-100 p-4 rounded-lg text-center">
+                    <p class="text-3xl font-bold text-red-700" id="out-of-stock">0</p>
+                    <p class="text-gray-600">Sin Stock</p>
+                </div>
+            </div>
+            
+            <!-- Tabla de Productos -->
+            <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+                <table class="w-full">
+                    <thead class="bg-azul-profundo text-white">
+                        <tr>
+                            <th class="p-4 text-left">Producto</th>
+                            <th class="p-4 text-center">Inventario Total</th>
+                            <th class="p-4 text-left hidden md:table-cell">Descripción</th>
+                            <th class="p-4 text-center">A Retirar</th>
+                            <th class="p-4 text-center">Stock Final</th>
+                            <th class="p-4 text-center">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventory-table">
+                        <tr>
+                            <td colspan="6" class="p-8 text-center text-gray-500">
+                                <div class="animate-pulse">Cargando inventario...</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Leyenda -->
+            <div class="mt-6 flex flex-wrap gap-4 justify-center text-sm">
+                <span class="flex items-center gap-2">
+                    <span class="w-4 h-4 bg-green-200 rounded"></span> Stock OK
+                </span>
+                <span class="flex items-center gap-2">
+                    <span class="w-4 h-4 bg-yellow-200 rounded"></span> Stock Bajo (≤5)
+                </span>
+                <span class="flex items-center gap-2">
+                    <span class="w-4 h-4 bg-red-200 rounded"></span> Sin Stock
+                </span>
+            </div>
+
+            <!-- Nota -->
+            <div class="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <p class="text-blue-800 text-center">
+                    💡 <strong>Nota:</strong> Para modificar el inventario, usa el botón "Abrir en Google Sheets" 
+                    y edita directamente la planilla. Luego presiona "Actualizar" para ver los cambios.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
         
         <!-- Ubicacion Section -->
        <section id="ubicacion" class="py-20 bg-white">
@@ -301,7 +412,7 @@
                         <li><a href="#lectio" class="text-gray-300 hover:text-dorado-ocre transition">Lectio del Día</a></li>
                         <li><a href="#caritas" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
                         <li><a href="#donaciones" class="text-gray-300 hover:text-dorado-ocre transition">Donaciones</a></li>
-                    </ul>
+                        <li><a href="#inventario" class="text-gray-300 hover:text-dorado-ocre transition">Inventario</a></li>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold font-serif mb-4">Síguenos</h3>
