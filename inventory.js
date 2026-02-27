@@ -3,49 +3,21 @@
 // =============================================
 const SHEET_ID = '18p1PD7pWc8dpu3HBIpK5cvym8OIFloRP-61RYH8SHd8';
 const SHEET_GID = '0';
-const ADMIN_PASSWORD = 'caritas2024'; // Cambiar por una contraseña segura
 
 // URL para leer datos como CSV (NO requiere API Key)
 const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vQiMLu3X3IYy1ioW07zWfkVINkL417flSltqucnme3iCfwYB1-ihYGE-wEpM-5pVW9o-1kFQitwM7UH/pub?gid=1473277691&single=true&output=csv`;
 
 // URL para editar
 const EDIT_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit`;
+const LOW_STOCK_THRESHOLD = 5;
 
 let inventoryData = [];
-let isLoggedIn = false;
 
-// =============================================
-// FUNCIONES DE AUTENTICACIÓN
-// =============================================
-function loginAdmin() {
-    const passwordInput = document.getElementById('admin-password');
-    const errorEl = document.getElementById('login-error');
-    
-    if (!passwordInput) return;
-    
-    const password = passwordInput.value;
-    
-    if (password === ADMIN_PASSWORD) {
-        isLoggedIn = true;
-        document.getElementById('login-form').classList.add('hidden');
-        document.getElementById('inventory-panel').classList.remove('hidden');
-        errorEl.classList.add('hidden');
-        loadInventory();
-    } else {
-        errorEl.classList.remove('hidden');
-        passwordInput.value = '';
-    }
-}
-
-// Enter key para login
+// Inicialización
 document.addEventListener('DOMContentLoaded', () => {
-    const passwordInput = document.getElementById('admin-password');
-    if (passwordInput) {
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                loginAdmin();
-            }
-        });
+    const inventoryTable = document.getElementById('inventory-table');
+    if (inventoryTable) {
+        loadInventory();
     }
 });
 
@@ -81,6 +53,7 @@ async function loadInventory() {
         inventoryData = parseCSV(csvText);
         
         renderInventory();
+        updateLastUpdate('Google Sheets');
         showNotification('✅ Inventario actualizado', 'success');
         
     } catch (error) {
@@ -176,6 +149,7 @@ function loadSampleData() {
         { producto: 'Milanesas', inventarioTotal: 10, descripcion: 'Milanesas de carne congeladas (18/02)', cantidadRetirar: 0, stockFinal: 10 }
     ];
     renderInventory();
+    updateLastUpdate('Datos de ejemplo');
     showNotification('📋 Datos de ejemplo cargados', 'info');
 }
 
@@ -223,7 +197,7 @@ function renderInventory() {
             rowClass = 'bg-red-50';
             stockClass = 'text-red-600';
             statusBadge = '<span class="px-2 py-1 bg-red-200 text-red-800 rounded-full text-xs font-semibold">⚠️ Sin Stock</span>';
-        } else if (item.stockFinal <= 5) {
+        } else if (item.stockFinal <= LOW_STOCK_THRESHOLD) {
             lowStock++;
             rowClass = 'bg-yellow-50';
             stockClass = 'text-yellow-600';
@@ -275,6 +249,22 @@ function openGoogleSheet() {
     window.open(EDIT_URL, '_blank');
 }
 
+function updateLastUpdate(source) {
+    const lastUpdateEl = document.getElementById('inventory-last-update');
+    if (!lastUpdateEl) return;
+
+    const now = new Date();
+    const formatted = now.toLocaleString('es-AR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+
+    lastUpdateEl.textContent = `${formatted} (${source})`;
+}
+
 function showNotification(message, type = 'info') {
     const existingNotification = document.getElementById('notification');
     if (existingNotification) existingNotification.remove();
@@ -302,7 +292,6 @@ function showNotification(message, type = 'info') {
 // =============================================
 // EXPORTAR FUNCIONES GLOBALES
 // =============================================
-window.loginAdmin = loginAdmin;
 window.loadInventory = loadInventory;
 window.loadSampleData = loadSampleData;
 window.filterProducts = filterProducts;

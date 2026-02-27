@@ -83,6 +83,7 @@
             <nav class="hidden md:flex space-x-8 items-center">
                 <a href="#inicio" class="nav-link active">Inicio</a>
                 <a href="#avisos" class="nav-link">Avisos</a>
+                <a href="#cronograma" class="nav-link">Cronograma</a>
                 <a href="#lectio" class="nav-link">Lectio del Día</a>
                 <a href="#caritas" class="nav-link">Cáritas</a>
                 <a href="#donaciones" class="nav-link bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Donaciones</a>
@@ -98,6 +99,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-azul-profundo">
             <a href="#inicio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Inicio</a>
             <a href="#avisos" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Avisos</a>
+            <a href="#cronograma" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cronograma</a>
             <a href="#lectio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Lectio del Día</a>
             <a href="#caritas" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cáritas</a>
             <a href="#donaciones" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Donaciones</a>
@@ -194,6 +196,31 @@
             </div>
         </section>
 
+        <!-- Cronograma Section -->
+        <section id="cronograma" class="content-section hidden-section py-20 bg-crema-suave">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-azul-profundo">Cronograma de Recorridas 2026</h2>
+                    <p class="text-lg text-gray-600 mt-2">Calendario mensual editable para miércoles, viernes y domingo.</p>
+                </div>
+
+                <div class="max-w-sm mx-auto mb-6">
+                    <label for="cronograma-month" class="block text-sm font-semibold text-gray-700 mb-2">Seleccionar mes</label>
+                    <select id="cronograma-month" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-dorado-ocre bg-white"></select>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-4 md:p-6 overflow-x-auto">
+                    <div class="min-w-[980px]">
+                        <h3 id="cronograma-title" class="text-2xl font-bold text-azul-profundo mb-4"></h3>
+                        <div id="cronograma-weekdays" class="grid grid-cols-7 gap-2 mb-2"></div>
+                        <div id="cronograma-grid" class="grid grid-cols-7 gap-2"></div>
+                    </div>
+                </div>
+
+                <p class="text-sm text-gray-500 mt-4 text-center">Los nombres se guardan en este navegador. Días no habilitados quedan solo informativos.</p>
+            </div>
+        </section>
+
         <!-- Lectio del Dia Section -->
         <section id="lectio" class="content-section hidden-section py-20 bg-crema-suave">
             
@@ -273,21 +300,15 @@
             <h2 class="text-4xl font-bold text-azul-profundo">Gestión de Inventario</h2>
             <p class="text-lg text-gray-600 mt-2">Control de stock de Cáritas</p>
         </div>
-        
-        <!-- Login Simple -->
-        <div id="login-form" class="max-w-md mx-auto bg-crema-suave p-8 rounded-lg shadow-md">
-            <h3 class="text-2xl font-bold text-azul-profundo mb-4 text-center">🔒 Acceso Administrador</h3>
-            <input type="password" id="admin-password" placeholder="Ingrese contraseña" 
-                   class="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-dorado-ocre">
-            <button onclick="loginAdmin()" 
-                    class="w-full bg-dorado-ocre text-white py-3 rounded-lg hover:bg-opacity-90 transition-colors font-semibold">
-                Ingresar
-            </button>
-            <p id="login-error" class="text-red-500 text-center mt-3 hidden">Contraseña incorrecta</p>
-        </div>
 
         <!-- Panel de Inventario -->
-        <div id="inventory-panel" class="hidden">
+        <div id="inventory-panel">
+            <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <p class="text-blue-800 text-center">
+                    🔒 <strong>Edición segura:</strong> este panel es de consulta. Para modificar el stock, usa 
+                    <strong>Google Sheets</strong> con cuentas autorizadas.
+                </p>
+            </div>
             <!-- Barra de herramientas -->
             <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
                 <div class="flex items-center gap-4">
@@ -303,6 +324,11 @@
                         class="bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700">
                     📊 Abrir en Google Sheets
                 </button>
+            </div>
+
+            <div class="mb-6 p-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700 flex flex-wrap justify-between gap-2">
+                <p><strong>Última actualización:</strong> <span id="inventory-last-update">Pendiente de carga</span></p>
+                <p><strong>Criterio de estado:</strong> Sin Stock = 0 | Bajo = 1 a 5 | OK = mayor a 5</p>
             </div>
 
             <!-- Resumen -->
@@ -365,7 +391,7 @@
             <div class="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
                 <p class="text-blue-800 text-center">
                     💡 <strong>Nota:</strong> Para modificar el inventario, usa el botón "Abrir en Google Sheets" 
-                    y edita directamente la planilla. Luego presiona "Actualizar" para ver los cambios.
+                    y edita directamente la planilla con permisos autorizados. Luego presiona "Actualizar" para ver los cambios.
                 </p>
             </div>
         </div>
@@ -409,6 +435,7 @@
                     <ul class="space-y-2">
                         <li><a href="#inicio" class="text-gray-300 hover:text-dorado-ocre transition">Inicio</a></li>
                         <li><a href="#avisos" class="text-gray-300 hover:text-dorado-ocre transition">Avisos</a></li>
+                        <li><a href="#cronograma" class="text-gray-300 hover:text-dorado-ocre transition">Cronograma</a></li>
                         <li><a href="#lectio" class="text-gray-300 hover:text-dorado-ocre transition">Lectio del Día</a></li>
                         <li><a href="#caritas" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
                         <li><a href="#donaciones" class="text-gray-300 hover:text-dorado-ocre transition">Donaciones</a></li>
@@ -487,7 +514,9 @@
             }
         ];*/
 
-        const avisosData = [
+        const AVISOS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDS3M42YJOsWp8Xl5dAUDF9WMbo3DTJAkncFNefzXU3qx9RDcGVxK_UVoMiP9kfMPCzkIKTW1YLC8O/pub?gid=0&single=true&output=csv'; // Pega aquí el enlace CSV publicado de Google Sheets para avisos
+
+        const avisosFallbackData = [
             {
                 title: 'Misa Parroquia Virgen de la Esperanza',
                 date: 'Miércoles y Domingos',
@@ -704,21 +733,276 @@ setInterval(autoSlide, 5000); // cambia cada 5 segundos
             }
         });
 
-        avisosData.forEach(aviso => {
-            const card = document.createElement('div');
-            card.className = 'bg-crema-suave rounded-lg shadow-md overflow-hidden flex flex-col';
-            card.innerHTML = `
-                <img src="${aviso.image}" alt="${aviso.title}" class="w-full h-48 object-cover">
-                <div class="p-6 flex flex-col flex-grow">
-                    <p class="text-sm text-gray-500 mb-2">${aviso.date}</p>
-                    <h3 class="text-2xl font-bold text-azul-profundo mb-3">${aviso.title}</h3>
-                    <p class="text-gray-700 mb-4 flex-grow">${aviso.content}</p>
-                    <button class="mt-auto self-start bg-dorado-ocre text-white px-5 py-2 rounded-full hover:bg-opacity-90 transition-colors">Leer Más</button>
-                </div>
-            `;
-            card.querySelector('button').addEventListener('click', () => openModal(aviso.title, aviso.fullContent));
-            avisosGrid.appendChild(card);
-        });
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function parseCsvLine(line) {
+            const values = [];
+            let current = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+
+                if (char === '"') {
+                    if (inQuotes && line[i + 1] === '"') {
+                        current += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    values.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+
+            values.push(current.trim());
+            return values;
+        }
+
+        function normalizeHeader(value) {
+            return String(value || '')
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .trim()
+                .toLowerCase();
+        }
+
+        function parseAvisosCsv(csvText) {
+            const lines = csvText
+                .split(/\r?\n/)
+                .map(line => line.trim())
+                .filter(Boolean);
+
+            if (lines.length < 2) return [];
+
+            const headers = parseCsvLine(lines[0]).map(normalizeHeader);
+            const getIndex = (...names) => headers.findIndex(h => names.includes(h));
+
+            const idxTitle = getIndex('titulo', 'title');
+            const idxDate = getIndex('fecha', 'date');
+            const idxContent = getIndex('resumen', 'content');
+            const idxFull = getIndex('detalle', 'fullcontent', 'detallehtml');
+            const idxImage = getIndex('imagen', 'image');
+            const idxStatus = getIndex('estado', 'status');
+
+            const data = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const cols = parseCsvLine(lines[i]);
+                const title = idxTitle >= 0 ? (cols[idxTitle] || '').trim() : '';
+                if (!title) continue;
+
+                const status = idxStatus >= 0 ? (cols[idxStatus] || '').trim().toLowerCase() : 'publicado';
+                if (status && status !== 'publicado') continue;
+
+                const fullRaw = idxFull >= 0 ? (cols[idxFull] || '').trim() : '';
+                const safeDetail = escapeHtml(fullRaw).replace(/\n/g, '<br>');
+
+                data.push({
+                    title,
+                    date: idxDate >= 0 ? (cols[idxDate] || '').trim() : '',
+                    content: idxContent >= 0 ? (cols[idxContent] || '').trim() : '',
+                    fullContent: safeDetail ? `<p>${safeDetail}</p>` : '<p>Sin detalle.</p>',
+                    image: idxImage >= 0 ? (cols[idxImage] || '').trim() : ''
+                });
+            }
+
+            return data;
+        }
+
+        function renderAvisos(avisos) {
+            avisosGrid.innerHTML = '';
+
+            avisos.forEach(aviso => {
+                const card = document.createElement('div');
+                card.className = 'bg-crema-suave rounded-lg shadow-md overflow-hidden flex flex-col';
+
+                const fallbackImage = './Misas.png';
+                const imageSrc = aviso.image && aviso.image.trim() ? aviso.image.trim() : fallbackImage;
+                const safeTitle = escapeHtml(aviso.title);
+                const safeDate = escapeHtml(aviso.date || '');
+                const safeContent = escapeHtml(aviso.content || '');
+
+                card.innerHTML = `
+                    <img src="${imageSrc}" alt="${safeTitle}" onerror="this.onerror=null;this.src='${fallbackImage}'" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <p class="text-sm text-gray-500 mb-2">${safeDate}</p>
+                        <h3 class="text-2xl font-bold text-azul-profundo mb-3">${safeTitle}</h3>
+                        <p class="text-gray-700 mb-4 flex-grow">${safeContent}</p>
+                        <button class="mt-auto self-start bg-dorado-ocre text-white px-5 py-2 rounded-full hover:bg-opacity-90 transition-colors">Leer Más</button>
+                    </div>
+                `;
+
+                card.querySelector('button').addEventListener('click', () => openModal(aviso.title, aviso.fullContent));
+                avisosGrid.appendChild(card);
+            });
+        }
+
+        async function initAvisos() {
+            if (!AVISOS_CSV_URL || !AVISOS_CSV_URL.startsWith('http')) {
+                renderAvisos(avisosFallbackData);
+                return;
+            }
+
+            try {
+                const response = await fetch(AVISOS_CSV_URL);
+                if (!response.ok) {
+                    throw new Error(`Error HTTP ${response.status}`);
+                }
+
+                const csvText = await response.text();
+                const remoteAvisos = parseAvisosCsv(csvText);
+                renderAvisos(remoteAvisos.length > 0 ? remoteAvisos : avisosFallbackData);
+            } catch (error) {
+                console.error('No se pudieron cargar avisos remotos:', error);
+                renderAvisos(avisosFallbackData);
+            }
+        }
+
+        initAvisos();
+
+        // --- CRONOGRAMA RECORRIDAS 2026 ---
+        const cronogramaMonth = document.getElementById('cronograma-month');
+        const cronogramaTitle = document.getElementById('cronograma-title');
+        const cronogramaWeekdays = document.getElementById('cronograma-weekdays');
+        const cronogramaGrid = document.getElementById('cronograma-grid');
+
+        if (cronogramaMonth && cronogramaTitle && cronogramaWeekdays && cronogramaGrid) {
+            const CRONOGRAMA_YEAR = 2026;
+            const CRONOGRAMA_STORAGE_KEY = 'cronograma_recorridas_2026';
+            const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            const DIAS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const DIAS_EDITABLES = new Set([0, 3, 5]);
+
+            function cargarCronogramaGuardado() {
+                try {
+                    const raw = localStorage.getItem(CRONOGRAMA_STORAGE_KEY);
+                    const parsed = raw ? JSON.parse(raw) : {};
+                    return parsed && typeof parsed === 'object' ? parsed : {};
+                } catch {
+                    return {};
+                }
+            }
+
+            function guardarCronograma(data) {
+                localStorage.setItem(CRONOGRAMA_STORAGE_KEY, JSON.stringify(data));
+            }
+
+            function keyFecha(monthIndex, day) {
+                return `${CRONOGRAMA_YEAR}-${String(monthIndex + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            }
+
+            function inicializarMeses() {
+                cronogramaMonth.innerHTML = '';
+                MESES.forEach((mes, index) => {
+                    const option = document.createElement('option');
+                    option.value = String(index);
+                    option.textContent = `${mes} ${CRONOGRAMA_YEAR}`;
+                    cronogramaMonth.appendChild(option);
+                });
+                cronogramaMonth.value = '2';
+            }
+
+            function renderDiasCabecera() {
+                cronogramaWeekdays.innerHTML = '';
+                DIAS.forEach(dia => {
+                    const item = document.createElement('div');
+                    item.className = 'text-center font-semibold text-azul-profundo p-2';
+                    item.textContent = dia;
+                    cronogramaWeekdays.appendChild(item);
+                });
+            }
+
+            function celdaVacia() {
+                const empty = document.createElement('div');
+                empty.className = 'rounded-lg p-2 min-h-[135px] border border-transparent';
+                return empty;
+            }
+
+            function renderMes(monthIndex) {
+                const guardado = cargarCronogramaGuardado();
+                cronogramaTitle.textContent = `${MESES[monthIndex]} ${CRONOGRAMA_YEAR}`;
+                cronogramaGrid.innerHTML = '';
+
+                const firstDay = new Date(CRONOGRAMA_YEAR, monthIndex, 1).getDay();
+                const totalDays = new Date(CRONOGRAMA_YEAR, monthIndex + 1, 0).getDate();
+
+                for (let i = 0; i < firstDay; i++) {
+                    cronogramaGrid.appendChild(celdaVacia());
+                }
+
+                for (let day = 1; day <= totalDays; day++) {
+                    const date = new Date(CRONOGRAMA_YEAR, monthIndex, day);
+                    const dayOfWeek = date.getDay();
+                    const editable = DIAS_EDITABLES.has(dayOfWeek);
+                    const key = keyFecha(monthIndex, day);
+
+                    const cell = document.createElement('div');
+                    cell.className = `rounded-lg p-2 min-h-[135px] border ${editable ? 'border-blue-300 bg-blue-50' : 'border-gray-200 bg-gray-50'} flex flex-col`;
+
+                    const fecha = document.createElement('p');
+                    fecha.className = 'font-bold text-azul-profundo';
+                    fecha.textContent = String(day);
+
+                    const nombreDia = document.createElement('p');
+                    nombreDia.className = 'text-xs text-gray-500 mb-2';
+                    nombreDia.textContent = DIAS[dayOfWeek];
+
+                    cell.appendChild(fecha);
+                    cell.appendChild(nombreDia);
+
+                    if (editable) {
+                        const textarea = document.createElement('textarea');
+                        textarea.className = 'w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:border-dorado-ocre min-h-[62px]';
+                        textarea.placeholder = 'Nombres';
+                        textarea.value = guardado[key] || '';
+
+                        const button = document.createElement('button');
+                        button.type = 'button';
+                        button.className = 'mt-2 bg-dorado-ocre text-white px-3 py-1 rounded-md text-sm hover:bg-opacity-90';
+                        button.textContent = 'Guardar';
+
+                        button.addEventListener('click', () => {
+                            const actualizado = cargarCronogramaGuardado();
+                            actualizado[key] = textarea.value.trim();
+                            guardarCronograma(actualizado);
+                            button.textContent = 'Guardado ✓';
+                            setTimeout(() => {
+                                button.textContent = 'Guardar';
+                            }, 1200);
+                        });
+
+                        cell.appendChild(textarea);
+                        cell.appendChild(button);
+                    } else {
+                        const texto = document.createElement('p');
+                        texto.className = 'text-xs text-gray-400 mt-auto';
+                        texto.textContent = 'Sin carga';
+                        cell.appendChild(texto);
+                    }
+
+                    cronogramaGrid.appendChild(cell);
+                }
+            }
+
+            inicializarMeses();
+            renderDiasCabecera();
+            renderMes(Number(cronogramaMonth.value));
+
+            cronogramaMonth.addEventListener('change', (event) => {
+                renderMes(Number(event.target.value));
+            });
+        }
 
         /* --- LECTIO ---
         const lectioDateEl = document.getElementById('lectio-date');

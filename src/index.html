@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cronograma de Recorridas 2026</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <h1>Cronograma de Recorridas 2026</h1>
+      <p>Calendario mensual para organizar participantes de miércoles, viernes y domingo.</p>
+    </header>
+
+    <section class="controls" aria-label="Controles de calendario">
+      <label for="month-select">Mes</label>
+      <select id="month-select" aria-label="Seleccionar mes de 2026"></select>
+    </section>
+
+    <section class="calendar-wrapper" aria-label="Calendario mensual 2026">
+      <div id="calendar-title" class="calendar-title"></div>
+      <div class="weekdays" id="weekdays"></div>
+      <div id="calendar-grid" class="calendar-grid"></div>
+    </section>
+
+    <section class="legend" aria-label="Leyenda de edición">
+      <p><strong>Editable:</strong> miércoles, viernes y domingo.</p>
+      <p>Los nombres se guardan en tu navegador.</p>
+    </section>
+  </main>
+
+  <script src="./js/calendar.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
