@@ -84,6 +84,7 @@
                 <a href="#inicio" class="nav-link active">Inicio</a>
                 <a href="#avisos" class="nav-link">Avisos</a>
                 <a href="#cronograma" class="nav-link">Cronograma</a>
+                <a href="#bitacoras" class="nav-link">Bitácoras</a>
                 <a href="#lectio" class="nav-link">Lectio del Día</a>
                 <a href="#caritas" class="nav-link">Cáritas</a>
                 <a href="#donaciones" class="nav-link bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Donaciones</a>
@@ -100,6 +101,7 @@
             <a href="#inicio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Inicio</a>
             <a href="#avisos" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Avisos</a>
             <a href="#cronograma" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cronograma</a>
+            <a href="#bitacoras" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Bitácoras</a>
             <a href="#lectio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Lectio del Día</a>
             <a href="#caritas" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cáritas</a>
             <a href="#donaciones" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Donaciones</a>
@@ -221,6 +223,19 @@
             </div>
         </section>
 
+        <!-- Bitacoras Section -->
+        <section id="bitacoras" class="content-section hidden-section py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-azul-profundo">Bitácora de Recorridas</h2>
+                    <p class="text-lg text-gray-600 mt-2">Registro de salidas, equipos y acompañamiento pastoral.</p>
+                </div>
+                <div id="bitacoras-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Bitácoras will be injected here by JS -->
+                </div>
+            </div>
+        </section>
+
         <!-- Lectio del Dia Section -->
         <section id="lectio" class="content-section hidden-section py-20 bg-crema-suave">
             
@@ -264,6 +279,14 @@
                 <h3 class="text-3xl font-bold text-center text-azul-profundo mb-10">Nuestras Áreas de Acción</h3>
                 <div id="caritas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                    <!-- Caritas actions will be injected by JS -->
+                </div>
+
+                <div class="mt-16">
+                    <h3 class="text-3xl font-bold text-center text-azul-profundo mb-3">Noticias de Cáritas</h3>
+                    <p class="text-center text-gray-600 mb-8">Actualización automática desde fuente oficial (con respaldo local si no está disponible).</p>
+                    <div id="caritas-news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Caritas news will be injected by JS -->
+                    </div>
                 </div>
             </div>
         </section>
@@ -436,6 +459,7 @@
                         <li><a href="#inicio" class="text-gray-300 hover:text-dorado-ocre transition">Inicio</a></li>
                         <li><a href="#avisos" class="text-gray-300 hover:text-dorado-ocre transition">Avisos</a></li>
                         <li><a href="#cronograma" class="text-gray-300 hover:text-dorado-ocre transition">Cronograma</a></li>
+                        <li><a href="#bitacoras" class="text-gray-300 hover:text-dorado-ocre transition">Bitácoras</a></li>
                         <li><a href="#lectio" class="text-gray-300 hover:text-dorado-ocre transition">Lectio del Día</a></li>
                         <li><a href="#caritas" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
                         <li><a href="#donaciones" class="text-gray-300 hover:text-dorado-ocre transition">Donaciones</a></li>
@@ -536,6 +560,29 @@
         const lectioData = [
 
         ];
+
+        const bitacorasData = [
+            {
+                title: 'Peregrinos de la Esperanza',
+                date: 'Miércoles 25/02/2026',
+                summary: 'Participaron Daniela, Cecilia, Alicia, Germán, Ramón y Mario. Se entregaron viandas, jugo y gelatina.',
+                fullContent: `<p><strong>Bitácora de la recorrida del miércoles 25 de febrero 2026.</strong></p>
+                <p>En la recorrida salimos: Daniela, Cecilia, Alicia (se incorporó hoy), Germán, Ramón (en bici) y Mario. Cocinó Mirtha.</p>
+                <p>Recorrido: Hospital San Bernardino, estación Hurlingham (Paseo de los Eucaliptus), Remedios de Escalada, Av. Jauretche, estación R. Darío, Av. Julio Roca y Plaza John Ravenscroft. Parte del equipo pasó por la biblioteca municipal (Centro Cultural Benito Quinquela Martín) para reencontrarse luego en estación Hurlingham.</p>
+                <p>Se entregaron viandas (sándwiches de milanesa), jugo y gelatina. Con quienes lo desearon se leyó el Evangelio del día y/o se rezó.</p>
+                <p><strong>Personas encontradas:</strong></p>
+                <ul>
+                    <li>Hospital (estacionamiento): José Luis, Lorena, Alejandro.</li>
+                    <li>Hospital (interior): no estaban las personas habituales ni personas nuevas.</li>
+                    <li>Estación Hurlingham / Paseo de los Eucaliptus: Martín, Thalía (se dejó vianda), Max (entrega al final). También contacto con Pedro (“Moisés”).</li>
+                    <li>Remedios de Escalada: sin personas.</li>
+                    <li>Av. Arturo Jauretche: Eliana, Rodrigo, Bastian, Eric (familia proveniente de Pilar).</li>
+                    <li>Centro Cultural Benito Quinquela Martín: Walter, Juan (se dejó vianda en iglesia Sagrado Corazón, según pedido).</li>
+                    <li>Plaza John Ravenscroft: Héctor (esquina I. la Católica y Güemes).</li>
+                    <li>Bolívar y Río Colorado: Susy (se dejó vianda, 2 sándwiches y gelatina).</li>
+                </ul>`
+            }
+        ];
         
         const caritasData = [
             {
@@ -553,6 +600,23 @@
                 title: 'Apoyo Escolar',
                 description: 'Ofrecemos un espacio de acompañamiento educativo para niños y adolescentes, ayudándolos con sus tareas y fomentando el amor por el estudio.'
             }*/
+        ];
+
+        const CARITAS_RSS_URL = 'https://www.caritas.org/feed/';
+        const CARITAS_RSS_PROXY = 'https://api.rss2json.com/v1/api.json?rss_url=';
+        const caritasNewsFallback = [
+            {
+                title: 'Cáritas: acompañamiento y misión',
+                date: 'Actualización local',
+                summary: 'Conoce iniciativas, campañas y acciones de servicio comunitario de Cáritas.',
+                link: 'https://caritasmoron.org/'
+            },
+            {
+                title: 'Cómo colaborar con Cáritas',
+                date: 'Actualización local',
+                summary: 'Infórmate sobre donaciones, voluntariado y apoyo a familias en situación de vulnerabilidad.',
+                link: 'https://caritasmoron.org/'
+            }
         ];
 
 
@@ -870,6 +934,78 @@ setInterval(autoSlide, 5000); // cambia cada 5 segundos
         }
 
         initAvisos();
+
+        // --- BITACORAS ---
+        const bitacorasGrid = document.getElementById('bitacoras-grid');
+        if (bitacorasGrid) {
+            bitacorasData.forEach(entry => {
+                const card = document.createElement('div');
+                card.className = 'bg-crema-suave rounded-lg shadow-md overflow-hidden flex flex-col p-6';
+                card.innerHTML = `
+                    <p class="text-sm text-gray-500 mb-2">${escapeHtml(entry.date)}</p>
+                    <h3 class="text-2xl font-bold text-azul-profundo mb-3">${escapeHtml(entry.title)}</h3>
+                    <p class="text-gray-700 mb-4 flex-grow">${escapeHtml(entry.summary)}</p>
+                    <button class="mt-auto self-start bg-dorado-ocre text-white px-5 py-2 rounded-full hover:bg-opacity-90 transition-colors">Ver detalle</button>
+                `;
+                card.querySelector('button').addEventListener('click', () => openModal(entry.title, entry.fullContent));
+                bitacorasGrid.appendChild(card);
+            });
+        }
+
+        // --- NOTICIAS CARITAS ---
+        const caritasNewsGrid = document.getElementById('caritas-news-grid');
+
+        function formatNewsDate(value) {
+            if (!value) return 'Sin fecha';
+            const parsed = new Date(value);
+            if (Number.isNaN(parsed.getTime())) return escapeHtml(value);
+            return parsed.toLocaleDateString('es-AR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+        }
+
+        function renderCaritasNews(newsItems) {
+            if (!caritasNewsGrid) return;
+
+            caritasNewsGrid.innerHTML = '';
+            newsItems.forEach(news => {
+                const card = document.createElement('article');
+                card.className = 'bg-crema-suave rounded-lg shadow-md p-6 flex flex-col';
+                card.innerHTML = `
+                    <p class="text-sm text-gray-500 mb-2">${formatNewsDate(news.date)}</p>
+                    <h4 class="text-xl font-bold text-azul-profundo mb-3">${escapeHtml(news.title)}</h4>
+                    <p class="text-gray-700 mb-5 flex-grow">${escapeHtml(news.summary || '')}</p>
+                    <a href="${news.link}" target="_blank" rel="noopener noreferrer" class="mt-auto self-start bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Leer en fuente oficial</a>
+                `;
+                caritasNewsGrid.appendChild(card);
+            });
+        }
+
+        async function initCaritasNews() {
+            if (!caritasNewsGrid) return;
+
+            try {
+                const response = await fetch(`${CARITAS_RSS_PROXY}${encodeURIComponent(CARITAS_RSS_URL)}`);
+                if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
+
+                const data = await response.json();
+                if (!data || !Array.isArray(data.items) || data.items.length === 0) {
+                    throw new Error('Sin items en feed');
+                }
+
+                const mapped = data.items.slice(0, 3).map(item => ({
+                    title: item.title || 'Noticia Cáritas',
+                    date: item.pubDate || '',
+                    summary: item.description ? item.description.replace(/<[^>]+>/g, ' ').trim().slice(0, 180) : '',
+                    link: item.link || 'https://caritasmoron.org/'
+                }));
+
+                renderCaritasNews(mapped);
+            } catch (error) {
+                console.error('No se pudieron cargar noticias automáticas de Cáritas:', error);
+                renderCaritasNews(caritasNewsFallback);
+            }
+        }
+
+        initCaritasNews();
 
         // --- CRONOGRAMA RECORRIDAS 2026 ---
         const cronogramaMonth = document.getElementById('cronograma-month');
