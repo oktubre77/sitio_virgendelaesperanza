@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parroquia Virgen de la Esperanza</title>
+    <title>Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís</title>
     <!-- Chosen Palette: Modern Solemnity (Azul Esperanza Profundo, Blanco Hueso, Dorado Ocre Sutil) -->
     <!-- Application Structure Plan: A single-page application (SPA) with dynamically shown/hidden sections for each category (Inicio, Avisos, etc.). Navigation is handled by JS, updating the view without page reloads for a seamless user experience. This structure directly translates the presentation's slides into an interactive web format, prioritizing speed and modern UX. -->
     <!-- Visualization & Content Choices: Landing: JS-powered image carousel. Avisos: Card grid with modals for details. Lectio: Dynamic text content updated via JS date navigation. Donaciones: Interactive buttons and toggles to configure donation amount and type. This avoids page reloads and presents information in digestible, interactive chunks. -->
@@ -78,7 +78,7 @@
     <header id="header" class="bg-azul-profundo text-white shadow-lg sticky top-0 z-50 transition-all duration-300">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#inicio" class="text-xl md:text-2xl font-bold font-serif tracking-wider">
-                Virgen de la Esperanza
+                <span class="text-xl md:text-2xl font-bold font-serif tracking-wider">Comunidad Virgen de la Esperanza y Santa Clara</span>
             </a>
             <nav class="hidden md:flex space-x-8 items-center">
                 <a href="#inicio" class="nav-link active">Inicio</a>
@@ -110,40 +110,13 @@
     <main>
         <!-- Inicio Section -->
         <section id="inicio" class="content-section">
-            <!-- Carousel -->
-<div id="carousel" class="relative w-full h-[35vh] md:h-[45vh] bg-black flex items-center justify-center p-4">
-  <img id="carousel-image"
-       src="./banner-peregrinos.jpeg"
-       class="max-w-full max-h-full rounded-lg shadow-lg transition-opacity duration-1000"
-       alt="Parroquia Virgen de la Esperanza">
-</div>
+                        <!-- Home Banner (Mobile First) -->
+                        <div id="home-banner" class="relative w-full h-[56vh] md:h-[62vh] overflow-hidden bg-azul-profundo">
+                                <div id="home-banner-slides" class="relative w-full h-full"></div>
+                                <div id="home-banner-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20"></div>
+                        </div>
 
-<script>
-  const images = [
-    './banner-peregrinos-mobile.jpeg',
-    './caritas-carrusel.png',
-    './Recorridas3.png'
-  ];
-
-  let currentIndex = 0;
-  const carouselImage = document.getElementById('carousel-image');
-
-  setInterval(() => {
-    // Fade out
-    carouselImage.classList.add('opacity-0');
-
-    setTimeout(() => {
-      // Change image
-      currentIndex = (currentIndex + 1) % images.length;
-      carouselImage.src = images[currentIndex];
-
-      // Fade in
-      carouselImage.classList.remove('opacity-0');
-    }, 1000); // Match duration-1000
-  }, 5000); // Change image every 5 seconds
-  
-</script>
-<script src="inventory.js"></script>
+                        <script src="inventory.js"></script>
 
 
             <div class="container mx-auto px-6 pt-6">
@@ -155,17 +128,11 @@
                 </div>
             </div>
 
-
-
-
-                <!-- Slides will be injected here by JS -->
-            </div>
-
             <!-- Welcome Section -->
             <div class="container mx-auto px-6 py-16 text-center">
                 <h2 class="text-4xl font-bold text-azul-profundo mb-4">Bienvenidos a Nuestra Comunidad</h2>
                 <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-12">
-                    Somos un espacio de fe, esperanza y caridad, un hogar espiritual donde todos son bienvenidos. Explora nuestro sitio para conectarte con la vida de la parroquia, encontrar alimento para el alma y descubrir cómo puedes ser parte de nuestra misión de servicio.
+                    Un hogar de fe, esperanza y servicio. Aquí encontrarás avisos, recorridas y formas concretas de ayudar a nuestra comunidad.
                 </p>
                 <!-- Quick Access Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -174,10 +141,10 @@
                         <h3 class="text-2xl font-bold text-azul-profundo mb-2">Avisos Parroquiales</h3>
                         <p class="text-gray-600">Mantente al día con las últimas noticias y eventos de la parroquia.</p>
                     </a>
-                    <a href="#lectio" class="group block bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">📖</div>
-                        <h3 class="text-2xl font-bold text-azul-profundo mb-2">Lectio del Día</h3>
-                        <p class="text-gray-600">Medita con la Palabra de Dios diariamente y fortalece tu espíritu.</p>
+                    <a href="#recorridas" class="group block bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">🗺️</div>
+                        <h3 class="text-2xl font-bold text-azul-profundo mb-2">Recorridas</h3>
+                        <p class="text-gray-600">Accede al cronograma, bitácoras e inventario en un solo lugar.</p>
                     </a>
                     <a href="#caritas" class="group block bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
                         <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">🤝</div>
@@ -221,6 +188,21 @@
 
         <!-- Recorridas Parent Section -->
         <section id="recorridas" class="content-section hidden-section py-20 bg-white">
+            <!-- Banner Recorridas Solidarias -->
+            <div class="mb-12">
+                <div class="relative rounded-xl overflow-hidden shadow-lg" style="background: linear-gradient(90deg, #2C3E50 0%, #B08D57 100%); min-height: 220px;">
+                    <div class="absolute inset-0 flex flex-col justify-center items-center z-10">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="32" r="32" fill="#fff" fill-opacity="0.15"/>
+                            <path d="M32 44c-6-4-12-8-12-14a6 6 0 0 1 12 0 6 6 0 0 1 12 0c0 6-6 10-12 14z" fill="#B08D57"/>
+                            <path d="M26 28a6 6 0 0 1 12 0" stroke="#2C3E50" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <h2 class="text-4xl md:text-5xl font-bold text-white mt-4 mb-2 drop-shadow-lg">Recorridas Solidarias</h2>
+                        <p class="text-lg md:text-2xl text-white font-semibold drop-shadow-md">Ayudando juntos, llevando esperanza</p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/30 to-transparent"></div>
+                </div>
+            </div>
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-4xl font-bold text-azul-profundo">Recorridas</h2>
@@ -366,6 +348,8 @@
 
 <!-- Inventario Section -->
 <section id="inventario" class="content-section hidden-section py-20 bg-white">
+
+    <!-- Voluntarios Section -->
     <div class="container mx-auto px-6">
         <div class="text-center mb-12">
             <h2 class="text-4xl font-bold text-azul-profundo">Gestión de Inventario</h2>
@@ -470,25 +454,7 @@
 </section>
         
         <!-- Ubicacion Section -->
-       <section id="ubicacion" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold text-azul-profundo">Nuestra Ubicación</h2>
-                    <p class="text-lg text-gray-600 mt-2">Arribeños 2466 (entre Albania y Valentin Alsina), Hurlingham, Buenos Aires.</p>
-                </div>
-                <div class="w-full rounded-lg overflow-hidden shadow-xl">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.902491211138!2d-58.62374882426335!3d-34.5813419804653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb9a3e368c36b%3A0x8c1a1824c8535c7!2sParroquia%20Virgen%20de%20la%20Esperanza!5e0!3m2!1ses!2sar!4v1663352938649!5m2!1ses!2sar"
-                        width="100%" 
-                        height="450" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </div>
-        </section>
+       <!-- Ubicación eliminada -->
     </main>
 
     <!-- Footer -->
@@ -496,7 +462,7 @@
         <div class="container mx-auto px-6 py-12">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
                 <div>
-                    <h3 class="text-xl font-bold font-serif mb-4">Parroquia Virgen de la Esperanza</h3>
+                    <h3 class="text-xl font-bold font-serif mb-4">Comunidad Virgen de la Esperanza y Santa Clara</h3>
                     <p class="text-gray-300">Arribeños 2466, Hurlingham, Provincia de Buenos Aires, Argentina</p>
                     <p class="text-gray-300 mt-2">contacto@parroquia.org</p>
                     <p class="text-gray-300 mt-2">vesperanzahurlingham@gmail.com</p>
@@ -534,7 +500,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
-                <p>&copy; <span id="footer-year"></span> Parroquia Virgen de la Esperanza. Todos los derechos reservados.</p>
+                <p>&copy; <span id="footer-year"></span> Comunidad Virgen de la Esperanza y Santa Clara. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -562,7 +528,7 @@
             {
                 image: './banner-peregrinos.jpeg',
                 imageMobile: './banner-peregrinos-mobile.jpeg',
-                title: 'Parroquia Virgen de la Esperanza',
+                title: 'Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís',
                 subtitle: 'Tu Hogar Espiritual.',
                 buttonText: 'Conócenos Más',
                 buttonLink: '#inicio'
@@ -587,12 +553,42 @@
 
         const AVISOS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDS3M42YJOsWp8Xl5dAUDF9WMbo3DTJAkncFNefzXU3qx9RDcGVxK_UVoMiP9kfMPCzkIKTW1YLC8O/pub?gid=0&single=true&output=csv'; // Pega aquí el enlace CSV publicado de Google Sheets para avisos
 
+        const homeBannerData = [
+            {
+                title: 'Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís',
+                subtitle: 'Caminamos juntos en fe, servicio y comunidad.',
+                ctaText: 'Ver Avisos',
+                ctaLink: '#avisos',
+                imageMobile: './banner-peregrinos-mobile.jpeg',
+                imageDesktop: './banner-peregrinos.jpeg',
+                fallbackImage: './banner-peregrinos.jpeg'
+            },
+            {
+                title: 'Recorridas Solidarias',
+                subtitle: 'Súmate a las salidas de miércoles, viernes y domingo.',
+                ctaText: 'Ir a Recorridas',
+                ctaLink: '#recorridas',
+                imageMobile: './Recorridas3.png',
+                imageDesktop: './Recorridas_desktop.png',
+                fallbackImage: './Recorridas_desktop.png'
+            },
+            {
+                title: 'Cáritas en Acción',
+                subtitle: 'Tu ayuda sostiene a familias de nuestra comunidad.',
+                ctaText: 'Conocer Cáritas',
+                ctaLink: '#caritas',
+                imageMobile: './banner-caritas-mobile.jpeg',
+                imageDesktop: './caritas-carrusel.png',
+                fallbackImage: './caritas-carrusel.png'
+            }
+        ];
+
         const avisosFallbackData = [
             {
-                title: 'Misa Parroquia Virgen de la Esperanza',
+                title: 'Misa Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís',
                 date: 'Miércoles y Domingos',
                 content: 'Te invitamos a la Misa los dias Domingos a las 19 hs.',
-                fullContent: '<p>Te invitamos a la Misa Parroquia Virgen de la Esperanza</p>',
+                fullContent: '<p>Te invitamos a la Misa de la Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís</p>',
                 image: './Misas.png' // Asegúrate que este es el nombre de tu archivo de imagen
             },
             {
@@ -748,88 +744,78 @@
             }
         });
 
-        // --- CAROUSEL --- 
-    /*   const carouselContainer = document.getElementById('carousel');
-let currentSlide = 0;
+                // --- HOME BANNER (MOBILE FIRST) ---
+                const homeBannerSlides = document.getElementById('home-banner-slides');
+                const homeBannerDots = document.getElementById('home-banner-dots');
 
-function renderCarousel() {
-  carouselContainer.innerHTML = '';
+                if (homeBannerSlides && homeBannerDots && homeBannerData.length > 0) {
+                        let activeBannerIndex = 0;
 
-  carouselData.forEach((slide, index) => {
-    const slideElement = document.createElement('div');
-    slideElement.className = `carousel-item absolute inset-0 w-full h-full ${index === 0 ? 'active opacity-100' : 'opacity-0'}`;
-    slideElement.innerHTML = `
-      <div class="absolute inset-0 w-full h-full bg-cover bg-center z-0" style="background-image: url('${window.innerWidth < 768 ? slide.imageMobile : slide.image}')"></div>
-      <div class="absolute inset-0 flex items-center justify-center z-10">
-        <a href="${slide.buttonLink}" class="bg-dorado-ocre text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-colors shadow-lg">${slide.buttonText}</a>
-      </div>
-    `;
-    carouselContainer.appendChild(slideElement);
-  });
+                    function getBannerImage(item) {
+                        return window.innerWidth < 768 ? item.imageMobile : item.imageDesktop;
+                    }
 
-  const dotsContainer = document.createElement('div');
-  dotsContainer.className = 'absolute bottom-5 left-1/2 -translate-x-1/2 flex space-x-3 dots-container';
-  carouselData.forEach((_, index) => {
-    const dot = document.createElement('button');
-    dot.className = `w-3 h-3 rounded-full transition-colors ${index === 0 ? 'bg-white' : 'bg-white/50 hover:bg-white'}`;
-    dot.addEventListener('click', () => {
-      currentSlide = index;
-      updateCarousel();
-    });
-    dotsContainer.appendChild(dot);
-  });
-  carouselContainer.appendChild(dotsContainer);
-}
+                        function renderHomeBanner() {
+                                homeBannerSlides.innerHTML = '';
+                                homeBannerDots.innerHTML = '';
 
-function updateCarousel() {
-  const slides = document.querySelectorAll('.carousel-item');
-  const dots = document.querySelectorAll('.dots-container button');
+                                homeBannerData.forEach((item, index) => {
+                            const bannerImage = getBannerImage(item);
+                                        const slide = document.createElement('div');
+                                        slide.className = `absolute inset-0 transition-opacity duration-700 ${index === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`;
+                                        slide.dataset.index = String(index);
 
-  slides.forEach((slide, i) => {
-    slide.classList.toggle('active', i === currentSlide);
-    slide.classList.toggle('opacity-100', i === currentSlide);
-    slide.classList.toggle('opacity-0', i !== currentSlide);
-  });
-  dots.forEach((dot, i) => {
-    dot.classList.toggle('bg-white', i === currentSlide);
-    dot.classList.toggle('bg-white/50', i !== currentSlide);
-  });
-}
+                                        slide.innerHTML = `
+                                <img src="${bannerImage}" alt="${item.title}" class="absolute inset-0 w-full h-full object-contain" onerror="this.onerror=null;this.src='${item.fallbackImage || './banner-peregrinos.jpeg'}'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/35 to-black/15"></div>
+                                                <div class="absolute inset-0 flex items-end md:items-center">
+                                    <div class="w-[92%] md:w-full max-w-2xl mx-4 md:mx-10 mb-8 md:mb-10 bg-black/30 rounded-lg p-4 md:p-6 backdrop-blur-sm">
+                                                                <p class="text-white/90 text-sm md:text-base mb-2">Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís</p>
+                                        <h2 class="text-white text-2xl md:text-3xl font-bold leading-tight mb-3">Peregrinos de la Esperanza</h2>
+                                        <p class="text-white/90 text-sm md:text-base mb-4">${item.subtitle}</p>
+                                                                <a href="${item.ctaLink}" class="inline-block bg-dorado-ocre text-white px-5 py-2 rounded-full font-semibold hover:bg-opacity-90 transition-colors">${item.ctaText}</a>
+                                                        </div>
+                                                </div>
+                                        `;
 
-renderCarousel();
+                                        const dot = document.createElement('button');
+                                        dot.type = 'button';
+                                        dot.className = `w-3 h-3 rounded-full transition-colors ${index === 0 ? 'bg-white' : 'bg-white/50 hover:bg-white/80'}`;
+                                        dot.setAttribute('aria-label', `Banner ${index + 1}`);
+                                        dot.addEventListener('click', () => showHomeBanner(index));
 
-// Auto-advance
-setInterval(() => {
-  currentSlide = (currentSlide + 1) % carouselData.length;
-  updateCarousel();
-}, 3000);*/
+                                        homeBannerSlides.appendChild(slide);
+                                        homeBannerDots.appendChild(dot);
+                                });
+                        }
 
+                        function showHomeBanner(index) {
+                                const slides = homeBannerSlides.querySelectorAll('[data-index]');
+                                const dots = homeBannerDots.querySelectorAll('button');
+                                slides.forEach((slide, slideIndex) => {
+                                        const isActive = slideIndex === index;
+                                        slide.classList.toggle('opacity-100', isActive);
+                                        slide.classList.toggle('opacity-0', !isActive);
+                                        slide.classList.toggle('pointer-events-none', !isActive);
+                                });
+                                dots.forEach((dot, dotIndex) => {
+                                        const isActive = dotIndex === index;
+                                        dot.classList.toggle('bg-white', isActive);
+                                        dot.classList.toggle('bg-white/50', !isActive);
+                                });
+                                activeBannerIndex = index;
+                        }
 
-function showSlide(index) {
-    const items = document.querySelectorAll('.carousel-item');
-    const dots = document.querySelectorAll('.dots-container button');
-
-    items.forEach((item, i) => {
-        item.classList.toggle('opacity-100', i === index);
-        item.classList.toggle('opacity-0', i !== index);
-    });
-
-    dots.forEach((dot, i) => {
-        dot.classList.toggle('bg-white', i === index);
-        dot.classList.toggle('bg-white/50', i !== index);
-    });
-
-    currentSlide = index;
-}
-
-function autoSlide() {
-    currentSlide = (currentSlide + 1) % carouselData.length;
-    showSlide(currentSlide);
-}
-/*
-renderCarousel();
-setInterval(autoSlide, 5000); // cambia cada 5 segundos 
-*/
+                        renderHomeBanner();
+                        window.addEventListener('resize', () => {
+                            renderHomeBanner();
+                            showHomeBanner(activeBannerIndex);
+                        });
+                        setInterval(() => {
+                                const nextIndex = (activeBannerIndex + 1) % homeBannerData.length;
+                                showHomeBanner(nextIndex);
+                        }, 6000);
+                }
 
 
         // --- AVISOS & MODAL ---
