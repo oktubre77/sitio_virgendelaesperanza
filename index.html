@@ -76,9 +76,10 @@
 
     <!-- Header -->
     <header id="header" class="bg-azul-profundo text-white shadow-lg sticky top-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#inicio" class="text-xl md:text-2xl font-bold font-serif tracking-wider">
-                <span class="text-xl md:text-2xl font-bold font-serif tracking-wider">Comunidad Virgen de la Esperanza y Santa Clara</span>
+        <div class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
+            <a href="#inicio" class="font-bold font-serif tracking-wider leading-tight">
+                <span class="text-base md:hidden">Virgen de la Esperanza</span>
+                <span class="hidden md:inline text-xl lg:text-2xl">Comunidad Virgen de la Esperanza y Santa Clara</span>
             </a>
             <nav class="hidden md:flex space-x-8 items-center">
                 <a href="#inicio" class="nav-link active">Inicio</a>
@@ -107,11 +108,11 @@
         </div>
     </header>
 
-    <main>
+    <main class="pb-16 md:pb-0">
         <!-- Inicio Section -->
         <section id="inicio" class="content-section">
                         <!-- Home Banner (Mobile First) -->
-                        <div id="home-banner" class="relative w-full h-[70vh] md:h-[85vh] overflow-hidden bg-azul-profundo">
+                        <div id="home-banner" class="relative w-full h-[55vh] md:h-[85vh] overflow-hidden bg-azul-profundo">
                                 <div id="home-banner-slides" class="relative w-full h-full"></div>
                                 <!-- Progress bar -->
                                 <div class="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-20">
@@ -131,8 +132,8 @@
                         <script src="inventory.js"></script>
 
 
-            <div class="container mx-auto px-6 pt-6">
-                <div class="bg-white rounded-lg shadow-md border border-gray-200 p-5 md:p-6">
+            <div class="container mx-auto px-4 md:px-6 pt-4 md:pt-6">
+                <div class="bg-white rounded-lg shadow-md border border-gray-200 p-4 md:p-6">
                     <p class="text-sm font-semibold text-dorado-ocre mb-1">Actualidad del Vaticano</p>
                     <h3 id="vatican-banner-title" class="text-xl md:text-2xl font-bold text-azul-profundo mb-2">Cargando noticia destacada...</h3>
                     <p id="vatican-banner-summary" class="text-gray-700 mb-4">Estamos actualizando la información oficial.</p>
@@ -141,43 +142,43 @@
             </div>
 
             <!-- Welcome Section -->
-            <div class="container mx-auto px-6 py-16 text-center">
-                <h2 class="text-4xl font-bold text-azul-profundo mb-4">Bienvenidos a Nuestra Comunidad</h2>
-                <p class="max-w-3xl mx-auto text-lg text-gray-600 mb-12">
+            <div class="container mx-auto px-4 md:px-6 py-8 md:py-16 text-center">
+                <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo mb-3 md:mb-4">Bienvenidos a Nuestra Comunidad</h2>
+                <p class="max-w-3xl mx-auto text-base md:text-lg text-gray-600 mb-8 md:mb-12">
                     Un hogar de fe, esperanza y servicio. Aquí encontrarás avisos, recorridas y formas concretas de ayudar a nuestra comunidad.
                 </p>
                 <!-- Quick Access Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <a href="#avisos" class="group block bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">🔔</div>
-                        <h3 class="text-2xl font-bold text-azul-profundo mb-2">Avisos Parroquiales</h3>
-                        <p class="text-gray-600">Mantente al día con las últimas noticias y eventos de la parroquia.</p>
+                <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+                    <a href="#avisos" class="group block bg-white p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 active:scale-95">
+                        <div class="text-4xl md:text-5xl mb-3 md:mb-4 flex justify-center">🔔</div>
+                        <h3 class="text-base md:text-2xl font-bold text-azul-profundo mb-1 md:mb-2">Avisos</h3>
+                        <p class="text-gray-600 text-xs md:text-base hidden md:block">Mantente al día con las últimas noticias y eventos de la parroquia.</p>
                     </a>
-                    <a href="#recorridas" class="group block bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">🗺️</div>
-                        <h3 class="text-2xl font-bold text-azul-profundo mb-2">Recorridas</h3>
-                        <p class="text-gray-600">Accede al cronograma, bitácoras e inventario en un solo lugar.</p>
+                    <a href="#recorridas" class="group block bg-white p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 active:scale-95">
+                        <div class="text-4xl md:text-5xl mb-3 md:mb-4 flex justify-center">🗺️</div>
+                        <h3 class="text-base md:text-2xl font-bold text-azul-profundo mb-1 md:mb-2">Recorridas</h3>
+                        <p class="text-gray-600 text-xs md:text-base hidden md:block">Accede al cronograma, bitácoras e inventario en un solo lugar.</p>
                     </a>
-                    <a href="#caritas" class="group block bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                        <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">🤝</div>
-                        <h3 class="text-2xl font-bold text-azul-profundo mb-2">Únete a Cáritas</h3>
-                        <p class="text-gray-600">Descubre cómo puedes ayudar y ser parte de nuestra acción solidaria.</p>
+                    <a href="#caritas" class="group block bg-white p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 active:scale-95">
+                        <div class="text-4xl md:text-5xl mb-3 md:mb-4 flex justify-center">🤝</div>
+                        <h3 class="text-base md:text-2xl font-bold text-azul-profundo mb-1 md:mb-2">Cáritas</h3>
+                        <p class="text-gray-600 text-xs md:text-base hidden md:block">Descubre cómo puedes ayudar y ser parte de nuestra acción solidaria.</p>
                     </a>
-                    <a href="#donaciones" class="group block bg-white p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                         <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">💖</div>
-                        <h3 class="text-2xl font-bold text-azul-profundo mb-2">Realiza tu Donación</h3>
-                        <p class="text-gray-600">Tu generosidad nos permite continuar con nuestra misión de fe y servicio.</p>
+                    <a href="#donaciones" class="group block bg-white p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 active:scale-95">
+                        <div class="text-4xl md:text-5xl mb-3 md:mb-4 flex justify-center">💖</div>
+                        <h3 class="text-base md:text-2xl font-bold text-azul-profundo mb-1 md:mb-2">Donaciones</h3>
+                        <p class="text-gray-600 text-xs md:text-base hidden md:block">Tu generosidad nos permite continuar con nuestra misión de fe y servicio.</p>
                     </a>
                 </div>
             </div>
         </section>
 
         <!-- Avisos Section -->
-        <section id="avisos" class="content-section hidden-section py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold text-azul-profundo">Avisos Parroquiales</h2>
-                    <p class="text-lg text-gray-600 mt-2">Novedades y eventos de nuestra comunidad.</p>
+        <section id="avisos" class="content-section hidden-section py-10 md:py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Avisos Parroquiales</h2>
+                    <p class="text-base md:text-lg text-gray-600 mt-2">Novedades y eventos de nuestra comunidad.</p>
                 </div>
                 <div id="avisos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Avisos will be injected here by JS -->
@@ -186,11 +187,11 @@
         </section>
 
         <!-- Vaticano Section -->
-        <section id="vaticano" class="content-section hidden-section py-20 bg-crema-suave">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold text-azul-profundo">Noticias del Vaticano</h2>
-                    <p class="text-lg text-gray-600 mt-2">Actualización automática desde Vatican News (fuente oficial).</p>
+        <section id="vaticano" class="content-section hidden-section py-10 md:py-20 bg-crema-suave">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Noticias del Vaticano</h2>
+                    <p class="text-base md:text-lg text-gray-600 mt-2">Actualización automática desde Vatican News (fuente oficial).</p>
                 </div>
                 <div id="vatican-news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Vatican news will be injected here by JS -->
@@ -199,23 +200,23 @@
         </section>
 
         <!-- Recorridas Parent Section -->
-        <section id="recorridas" class="content-section hidden-section py-20 bg-white">
+        <section id="recorridas" class="content-section hidden-section py-10 md:py-20 bg-white">
             <!-- Banner Recorridas Solidarias -->
-            <div class="relative w-full overflow-hidden shadow-xl mb-12" style="height: 340px;">
+            <div class="relative w-full overflow-hidden shadow-xl mb-8 md:mb-12" style="height: 200px; min-height: 160px;" class="md:style-340">
                 <img src="./Recorridas_desktop.png" alt="Recorridas Solidarias" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'">
                 <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(44,62,80,0.82) 0%, rgba(176,141,87,0.60) 100%);"></div>
-                <div class="absolute inset-0 flex flex-col justify-center px-8 md:px-20">
-                    <span class="inline-block w-max bg-dorado-ocre/90 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">
+                <div class="absolute inset-0 flex flex-col justify-center px-5 md:px-20">
+                    <span class="inline-block w-max bg-dorado-ocre/90 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-2 md:mb-4">
                         Comunidad en acción
                     </span>
-                    <h2 class="text-4xl md:text-6xl font-bold text-white mb-3 drop-shadow-lg leading-tight">Recorridas Solidarias</h2>
-                    <p class="text-lg md:text-2xl text-white/90 drop-shadow font-medium">Ayudando juntos, llevando esperanza</p>
+                    <h2 class="text-2xl md:text-6xl font-bold text-white mb-1 md:mb-3 drop-shadow-lg leading-tight">Recorridas Solidarias</h2>
+                    <p class="text-sm md:text-2xl text-white/90 drop-shadow font-medium">Ayudando juntos, llevando esperanza</p>
                 </div>
             </div>
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold text-azul-profundo">Recorridas</h2>
-                    <p class="text-lg text-gray-600 mt-2">Gestiona cronograma, bitácoras e inventario en un solo lugar.</p>
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Recorridas</h2>
+                    <p class="text-base md:text-lg text-gray-600 mt-2">Gestiona cronograma, bitácoras e inventario en un solo lugar.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <a href="#cronograma" class="group block bg-crema-suave p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
@@ -238,10 +239,10 @@
         </section>
 
         <!-- Cronograma Section -->
-        <section id="cronograma" class="content-section hidden-section py-20 bg-crema-suave">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold text-azul-profundo">Cronograma de Recorridas 2026</h2>
+        <section id="cronograma" class="content-section hidden-section py-10 md:py-20 bg-crema-suave">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Cronograma de Recorridas 2026</h2>
                     <p class="text-lg text-gray-600 mt-2">Calendario mensual editable para miércoles, viernes y domingo.</p>
                 </div>
 
@@ -263,11 +264,11 @@
         </section>
 
         <!-- Bitacoras Section -->
-        <section id="bitacoras" class="content-section hidden-section py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold text-azul-profundo">Bitácora de Recorridas</h2>
-                    <p class="text-lg text-gray-600 mt-2">Registro de salidas, equipos y acompañamiento pastoral.</p>
+        <section id="bitacoras" class="content-section hidden-section py-10 md:py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Bitácora de Recorridas</h2>
+                    <p class="text-base md:text-lg text-gray-600 mt-2">Registro de salidas, equipos y acompañamiento pastoral.</p>
                 </div>
                 <div id="bitacoras-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Bitácoras will be injected here by JS -->
@@ -296,26 +297,26 @@
         </section>
         
         <!-- Caritas Section -->
-        <section id="caritas" class="content-section hidden-section py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold text-azul-profundo">Cáritas en Acción</h2>
-                    <p class="text-lg text-gray-600 mt-2">Solidaridad y compromiso en nuestra comunidad.</p>
+        <section id="caritas" class="content-section hidden-section py-10 md:py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Cáritas en Acción</h2>
+                    <p class="text-base md:text-lg text-gray-600 mt-2">Solidaridad y compromiso en nuestra comunidad.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-                    <div class="w-full h-80 rounded-lg overflow-hidden shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center mb-10 md:mb-16">
+                    <div class="w-full h-52 md:h-80 rounded-lg overflow-hidden shadow-lg">
                         <a href="https://caritasmoron.org/" target="_blank" rel="noopener noreferrer">
                             <img src="./caritas-carrusel.png" alt="Voluntarios de Cáritas" class="w-full h-full object-cover">
                         </a>
                     </div>
                     <div>
-                        <h3 class="text-3xl font-bold text-azul-profundo mb-4">Extendiendo una Mano Amiga</h3>
+                        <h3 class="text-xl md:text-3xl font-bold text-azul-profundo mb-3 md:mb-4">Extendiendo una Mano Amiga</h3>
                         <p class="text-gray-700 leading-relaxed">
                             Cáritas Parroquial es la expresión organizada de la caridad de nuestra comunidad. Buscamos responder a las necesidades de nuestros hermanos más vulnerables, promoviendo la dignidad humana y la justicia social a través de programas concretos y el compromiso voluntario.
                         </p>
                     </div>
                 </div>
-                <h3 class="text-3xl font-bold text-center text-azul-profundo mb-10">Nuestras Áreas de Acción</h3>
+                <h3 class="text-xl md:text-3xl font-bold text-center text-azul-profundo mb-6 md:mb-10">Nuestras Áreas de Acción</h3>
                 <div id="caritas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                    <!-- Caritas actions will be injected by JS -->
                 </div>
@@ -331,11 +332,11 @@
         </section>
 
         <!-- Donaciones Section -->
-       <section id="donaciones" class="content-section hidden-section py-20 bg-crema-suave">
-            <div class="container mx-auto px-6">
-                 <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold text-azul-profundo">Tu Generosidad Sostiene Nuestra Casa</h2>
-                    <p class="text-lg text-gray-600 mt-2">Tu aporte es fundamental para el mantenimiento y la misión de nuestra parroquia.</p>
+       <section id="donaciones" class="content-section hidden-section py-10 md:py-20 bg-crema-suave">
+            <div class="container mx-auto px-4 md:px-6">
+                 <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Tu Generosidad Sostiene Nuestra Casa</h2>
+                    <p class="text-base md:text-lg text-gray-600 mt-2">Tu aporte es fundamental para el mantenimiento y la misión de nuestra parroquia.</p>
                 </div>
 
                 <div class="grid grid-cols-1 max-w-md mx-auto">
@@ -356,13 +357,13 @@
         <!-- Agregar después de la sección donaciones, antes de ubicacion -->
 
 <!-- Inventario Section -->
-<section id="inventario" class="content-section hidden-section py-20 bg-white">
+<section id="inventario" class="content-section hidden-section py-10 md:py-20 bg-white">
 
     <!-- Voluntarios Section -->
-    <div class="container mx-auto px-6">
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-azul-profundo">Gestión de Inventario</h2>
-            <p class="text-lg text-gray-600 mt-2">Control de stock de Cáritas</p>
+    <div class="container mx-auto px-4 md:px-6">
+        <div class="text-center mb-8 md:mb-12">
+            <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Gestión de Inventario</h2>
+            <p class="text-base md:text-lg text-gray-600 mt-2">Control de stock de Cáritas</p>
         </div>
 
         <!-- Panel de Inventario -->
@@ -374,18 +375,18 @@
                 </p>
             </div>
             <!-- Barra de herramientas -->
-            <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
-                <div class="flex items-center gap-4">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-3">
+                <div class="flex items-center gap-3">
                     <input type="text" id="search-product" placeholder="🔍 Buscar producto..." 
                            onkeyup="filterProducts()"
-                           class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-dorado-ocre">
+                           class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-dorado-ocre text-sm md:text-base">
                     <button onclick="loadInventory()" 
-                            class="bg-azul-profundo text-white px-4 py-3 rounded-lg hover:bg-opacity-90">
+                            class="bg-azul-profundo text-white px-3 py-3 rounded-lg hover:bg-opacity-90 whitespace-nowrap text-sm">
                         🔄 Actualizar
                     </button>
                 </div>
                 <button onclick="openGoogleSheet()" 
-                        class="bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700">
+                        class="w-full md:w-auto bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700 text-sm">
                     📊 Abrir en Google Sheets
                 </button>
             </div>
@@ -396,7 +397,7 @@
             </div>
 
             <!-- Resumen -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
                 <div class="bg-blue-100 p-4 rounded-lg text-center">
                     <p class="text-3xl font-bold text-blue-700" id="total-items">0</p>
                     <p class="text-gray-600">Total Productos</p>
@@ -717,6 +718,8 @@
             });
             updateActiveLink(targetId);
             window.scrollTo(0, 0);
+            // notify bottom nav
+            document.dispatchEvent(new CustomEvent('sectionChanged', { detail: targetId }));
         }
 
         navLinks.forEach(link => {
@@ -1401,7 +1404,69 @@
         // --- FOOTER ---
         document.getElementById('footer-year').textContent = new Date().getFullYear();
 
+        // --- SWIPE TÁCTIL EN BANNER ---
+        (function() {
+            const slider = document.getElementById('home-banner-slides');
+            if (!slider) return;
+            let touchStartX = 0, touchEndX = 0;
+            slider.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+            slider.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 40) {
+                    const btn = diff > 0
+                        ? document.getElementById('home-banner-next')
+                        : document.getElementById('home-banner-prev');
+                    if (btn) btn.click();
+                }
+            }, { passive: true });
+        })();
+
+        // --- BOTTOM NAV MOBILE: highlight active section ---
+        (function() {
+            const bottomLinks = document.querySelectorAll('.bottom-nav-link');
+            function updateBottomNav(sectionId) {
+                bottomLinks.forEach(l => {
+                    const active = l.dataset.section === sectionId;
+                    l.querySelector('.bnav-icon').classList.toggle('text-dorado-ocre', active);
+                    l.querySelector('.bnav-icon').classList.toggle('text-gray-400', !active);
+                    l.querySelector('.bnav-label').classList.toggle('text-dorado-ocre', active);
+                    l.querySelector('.bnav-label').classList.toggle('text-gray-400', !active);
+                });
+            }
+            // listen for section changes via the existing nav mechanism
+            document.addEventListener('sectionChanged', e => updateBottomNav(e.detail));
+            // init
+            updateBottomNav('inicio');
+        })();
+
     });
     </script>
+
+    <!-- Bottom Navigation Bar (mobile only) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg" style="padding-bottom: env(safe-area-inset-bottom, 0px);">
+        <div class="grid grid-cols-5 h-16">
+            <button onclick="document.querySelector('[href=\'#inicio\']').click()" class="bottom-nav-link flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors" data-section="inicio">
+                <span class="bnav-icon text-dorado-ocre text-xl">🏠</span>
+                <span class="bnav-label text-dorado-ocre text-xs font-semibold">Inicio</span>
+            </button>
+            <button onclick="document.querySelector('[href=\'#avisos\']').click()" class="bottom-nav-link flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors" data-section="avisos">
+                <span class="bnav-icon text-gray-400 text-xl">🔔</span>
+                <span class="bnav-label text-gray-400 text-xs font-semibold">Avisos</span>
+            </button>
+            <button onclick="document.querySelector('[href=\'#recorridas\']').click()" class="bottom-nav-link flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors" data-section="recorridas">
+                <span class="bnav-icon text-gray-400 text-xl">🗺️</span>
+                <span class="bnav-label text-gray-400 text-xs font-semibold">Recorridas</span>
+            </button>
+            <button onclick="document.querySelector('[href=\'#caritas\']').click()" class="bottom-nav-link flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors" data-section="caritas">
+                <span class="bnav-icon text-gray-400 text-xl">🤝</span>
+                <span class="bnav-label text-gray-400 text-xs font-semibold">Cáritas</span>
+            </button>
+            <button onclick="document.querySelector('[href=\'#donaciones\']').click()" class="bottom-nav-link flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors" data-section="donaciones">
+                <span class="bnav-icon text-gray-400 text-xl">💖</span>
+                <span class="bnav-label text-gray-400 text-xs font-semibold">Donar</span>
+            </button>
+        </div>
+    </nav>
 </body>
 </html>
