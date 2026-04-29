@@ -111,9 +111,21 @@
         <!-- Inicio Section -->
         <section id="inicio" class="content-section">
                         <!-- Home Banner (Mobile First) -->
-                        <div id="home-banner" class="relative w-full h-[56vh] md:h-[62vh] overflow-hidden bg-azul-profundo">
+                        <div id="home-banner" class="relative w-full h-[70vh] md:h-[85vh] overflow-hidden bg-azul-profundo">
                                 <div id="home-banner-slides" class="relative w-full h-full"></div>
-                                <div id="home-banner-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20"></div>
+                                <!-- Progress bar -->
+                                <div class="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-20">
+                                    <div id="home-banner-progress" class="h-full bg-dorado-ocre transition-none" style="width:0%"></div>
+                                </div>
+                                <!-- Dots -->
+                                <div id="home-banner-dots" class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-3 z-20"></div>
+                                <!-- Arrows -->
+                                <button id="home-banner-prev" aria-label="Anterior" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-sm transition-all duration-200 border border-white/20">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                                </button>
+                                <button id="home-banner-next" aria-label="Siguiente" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-sm transition-all duration-200 border border-white/20">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                                </button>
                         </div>
 
                         <script src="inventory.js"></script>
@@ -189,18 +201,15 @@
         <!-- Recorridas Parent Section -->
         <section id="recorridas" class="content-section hidden-section py-20 bg-white">
             <!-- Banner Recorridas Solidarias -->
-            <div class="mb-12">
-                <div class="relative rounded-xl overflow-hidden shadow-lg" style="background: linear-gradient(90deg, #2C3E50 0%, #B08D57 100%); min-height: 220px;">
-                    <div class="absolute inset-0 flex flex-col justify-center items-center z-10">
-                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="32" cy="32" r="32" fill="#fff" fill-opacity="0.15"/>
-                            <path d="M32 44c-6-4-12-8-12-14a6 6 0 0 1 12 0 6 6 0 0 1 12 0c0 6-6 10-12 14z" fill="#B08D57"/>
-                            <path d="M26 28a6 6 0 0 1 12 0" stroke="#2C3E50" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        <h2 class="text-4xl md:text-5xl font-bold text-white mt-4 mb-2 drop-shadow-lg">Recorridas Solidarias</h2>
-                        <p class="text-lg md:text-2xl text-white font-semibold drop-shadow-md">Ayudando juntos, llevando esperanza</p>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/30 to-transparent"></div>
+            <div class="relative w-full overflow-hidden shadow-xl mb-12" style="height: 340px;">
+                <img src="./Recorridas_desktop.png" alt="Recorridas Solidarias" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'">
+                <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(44,62,80,0.82) 0%, rgba(176,141,87,0.60) 100%);"></div>
+                <div class="absolute inset-0 flex flex-col justify-center px-8 md:px-20">
+                    <span class="inline-block w-max bg-dorado-ocre/90 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4">
+                        Comunidad en acción
+                    </span>
+                    <h2 class="text-4xl md:text-6xl font-bold text-white mb-3 drop-shadow-lg leading-tight">Recorridas Solidarias</h2>
+                    <p class="text-lg md:text-2xl text-white/90 drop-shadow font-medium">Ayudando juntos, llevando esperanza</p>
                 </div>
             </div>
             <div class="container mx-auto px-6">
@@ -744,77 +753,123 @@
             }
         });
 
-                // --- HOME BANNER (MOBILE FIRST) ---
+                // --- HOME BANNER ---
                 const homeBannerSlides = document.getElementById('home-banner-slides');
-                const homeBannerDots = document.getElementById('home-banner-dots');
+                const homeBannerDots   = document.getElementById('home-banner-dots');
+                const homeBannerPrev   = document.getElementById('home-banner-prev');
+                const homeBannerNext   = document.getElementById('home-banner-next');
+                const homeBannerProgress = document.getElementById('home-banner-progress');
 
                 if (homeBannerSlides && homeBannerDots && homeBannerData.length > 0) {
-                        let activeBannerIndex = 0;
+                    let activeBannerIndex = 0;
+                    let bannerInterval = null;
+                    const AUTOPLAY_MS = 6000;
 
                     function getBannerImage(item) {
                         return window.innerWidth < 768 ? item.imageMobile : item.imageDesktop;
                     }
 
-                        function renderHomeBanner() {
-                                homeBannerSlides.innerHTML = '';
-                                homeBannerDots.innerHTML = '';
+                    function renderHomeBanner() {
+                        homeBannerSlides.innerHTML = '';
+                        homeBannerDots.innerHTML = '';
 
-                                homeBannerData.forEach((item, index) => {
+                        homeBannerData.forEach((item, index) => {
                             const bannerImage = getBannerImage(item);
-                                        const slide = document.createElement('div');
-                                        slide.className = `absolute inset-0 transition-opacity duration-700 ${index === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`;
-                                        slide.dataset.index = String(index);
+                            const slide = document.createElement('div');
+                            slide.className = `absolute inset-0 transition-opacity duration-700 ${index === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`;
+                            slide.dataset.index = String(index);
 
-                                        slide.innerHTML = `
-                                <img src="${bannerImage}" alt="${item.title}" class="absolute inset-0 w-full h-full object-contain" onerror="this.onerror=null;this.src='${item.fallbackImage || './banner-peregrinos.jpeg'}'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/35 to-black/15"></div>
-                                                <div class="absolute inset-0 flex items-end md:items-center">
-                                    <div class="w-[92%] md:w-full max-w-2xl mx-4 md:mx-10 mb-8 md:mb-10 bg-black/30 rounded-lg p-4 md:p-6 backdrop-blur-sm">
-                                                                <p class="text-white/90 text-sm md:text-base mb-2">Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís</p>
-                                        <h2 class="text-white text-2xl md:text-3xl font-bold leading-tight mb-3">Peregrinos de la Esperanza</h2>
-                                        <p class="text-white/90 text-sm md:text-base mb-4">${item.subtitle}</p>
-                                                                <a href="${item.ctaLink}" class="inline-block bg-dorado-ocre text-white px-5 py-2 rounded-full font-semibold hover:bg-opacity-90 transition-colors">${item.ctaText}</a>
-                                                        </div>
-                                                </div>
-                                        `;
+                            slide.innerHTML = `
+                                <img src="${bannerImage}" alt="${item.title}"
+                                     class="absolute inset-0 w-full h-full object-cover"
+                                     onerror="this.onerror=null;this.src='${item.fallbackImage || './banner-peregrinos.jpeg'}'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                                <div class="absolute inset-0 flex items-end">
+                                    <div class="w-full px-6 md:px-16 pb-14 md:pb-20">
+                                        <div class="max-w-2xl">
+                                            <span class="inline-block bg-dorado-ocre/90 text-white text-xs md:text-sm font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-4">
+                                                Comunidad Virgen de la Esperanza
+                                            </span>
+                                            <h2 class="text-white text-3xl md:text-5xl font-bold leading-tight mb-3 drop-shadow-lg">${item.title}</h2>
+                                            <p class="text-white/85 text-base md:text-xl mb-6 drop-shadow">${item.subtitle}</p>
+                                            <a href="${item.ctaLink}"
+                                               class="inline-flex items-center gap-2 bg-white text-azul-profundo px-6 py-3 rounded-full font-bold text-sm md:text-base hover:bg-dorado-ocre hover:text-white transition-all duration-300 shadow-lg">
+                                                ${item.ctaText}
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
 
-                                        const dot = document.createElement('button');
-                                        dot.type = 'button';
-                                        dot.className = `w-3 h-3 rounded-full transition-colors ${index === 0 ? 'bg-white' : 'bg-white/50 hover:bg-white/80'}`;
-                                        dot.setAttribute('aria-label', `Banner ${index + 1}`);
-                                        dot.addEventListener('click', () => showHomeBanner(index));
+                            const dot = document.createElement('button');
+                            dot.type = 'button';
+                            dot.className = `h-1.5 rounded-full transition-all duration-300 ${index === 0 ? 'w-8 bg-white' : 'w-3 bg-white/50 hover:bg-white/80'}`;
+                            dot.setAttribute('aria-label', `Banner ${index + 1}`);
+                            dot.addEventListener('click', () => { showHomeBanner(index); resetAutoplay(); });
 
-                                        homeBannerSlides.appendChild(slide);
-                                        homeBannerDots.appendChild(dot);
-                                });
-                        }
-
-                        function showHomeBanner(index) {
-                                const slides = homeBannerSlides.querySelectorAll('[data-index]');
-                                const dots = homeBannerDots.querySelectorAll('button');
-                                slides.forEach((slide, slideIndex) => {
-                                        const isActive = slideIndex === index;
-                                        slide.classList.toggle('opacity-100', isActive);
-                                        slide.classList.toggle('opacity-0', !isActive);
-                                        slide.classList.toggle('pointer-events-none', !isActive);
-                                });
-                                dots.forEach((dot, dotIndex) => {
-                                        const isActive = dotIndex === index;
-                                        dot.classList.toggle('bg-white', isActive);
-                                        dot.classList.toggle('bg-white/50', !isActive);
-                                });
-                                activeBannerIndex = index;
-                        }
-
-                        renderHomeBanner();
-                        window.addEventListener('resize', () => {
-                            renderHomeBanner();
-                            showHomeBanner(activeBannerIndex);
+                            homeBannerSlides.appendChild(slide);
+                            homeBannerDots.appendChild(dot);
                         });
-                        setInterval(() => {
-                                const nextIndex = (activeBannerIndex + 1) % homeBannerData.length;
-                                showHomeBanner(nextIndex);
-                        }, 6000);
+                    }
+
+                    function showHomeBanner(index) {
+                        const slides = homeBannerSlides.querySelectorAll('[data-index]');
+                        const dots   = homeBannerDots.querySelectorAll('button');
+                        slides.forEach((slide, i) => {
+                            slide.classList.toggle('opacity-100', i === index);
+                            slide.classList.toggle('opacity-0',   i !== index);
+                            slide.classList.toggle('pointer-events-none', i !== index);
+                        });
+                        dots.forEach((dot, i) => {
+                            dot.classList.toggle('w-8',       i === index);
+                            dot.classList.toggle('bg-white',  i === index);
+                            dot.classList.toggle('w-3',       i !== index);
+                            dot.classList.toggle('bg-white/50', i !== index);
+                        });
+                        activeBannerIndex = index;
+                        // animate progress bar
+                        if (homeBannerProgress) {
+                            homeBannerProgress.style.transition = 'none';
+                            homeBannerProgress.style.width = '0%';
+                            requestAnimationFrame(() => {
+                                requestAnimationFrame(() => {
+                                    homeBannerProgress.style.transition = `width ${AUTOPLAY_MS}ms linear`;
+                                    homeBannerProgress.style.width = '100%';
+                                });
+                            });
+                        }
+                    }
+
+                    function resetAutoplay() {
+                        clearInterval(bannerInterval);
+                        bannerInterval = setInterval(() => {
+                            showHomeBanner((activeBannerIndex + 1) % homeBannerData.length);
+                        }, AUTOPLAY_MS);
+                    }
+
+                    if (homeBannerPrev) {
+                        homeBannerPrev.addEventListener('click', () => {
+                            const prev = (activeBannerIndex - 1 + homeBannerData.length) % homeBannerData.length;
+                            showHomeBanner(prev);
+                            resetAutoplay();
+                        });
+                    }
+                    if (homeBannerNext) {
+                        homeBannerNext.addEventListener('click', () => {
+                            showHomeBanner((activeBannerIndex + 1) % homeBannerData.length);
+                            resetAutoplay();
+                        });
+                    }
+
+                    renderHomeBanner();
+                    showHomeBanner(0);
+                    resetAutoplay();
+
+                    window.addEventListener('resize', () => {
+                        renderHomeBanner();
+                        showHomeBanner(activeBannerIndex);
+                    });
                 }
 
 
