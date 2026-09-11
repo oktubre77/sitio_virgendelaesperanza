@@ -585,10 +585,10 @@
                 subtitle: 'Fe, servicio y comunidad en cada paso del camino.',
                 ctaText: 'Ver Avisos',
                 ctaLink: '#avisos',
-                imageMobile: './s1-velas-a.jpeg',
-                imageDesktop: './s1-velas-a.jpeg',
-                fallbackImage: './Lujan_banner.png',
-                objectPosition: 'center 40%'
+                imageMobile: './web-velas-fe.jpeg',
+                imageDesktop: './web-velas-fe.jpeg',
+                fallbackImage: './s1-velas-a.jpeg',
+                objectPosition: 'center 45%'
             },
             {
                 title: 'Tu recorrida salva una vida esta noche',
@@ -605,10 +605,10 @@
                 subtitle: 'Juntos organizamos la esperanza. Ayudanos a ayudar.',
                 ctaText: 'Conocé Cáritas',
                 ctaLink: '#caritas',
-                imageMobile: './banner-caritas-mobile.jpeg',
-                imageDesktop: './caritas-carrusel.png',
-                fallbackImage: './caritas-carrusel.png',
-                objectPosition: 'center center'
+                imageMobile: './web-caritas-alimentos.jpeg',
+                imageDesktop: './web-caritas-alimentos.jpeg',
+                fallbackImage: './banner-recorridas-b.jpeg',
+                objectPosition: 'center 55%'
             }
         ];
 
@@ -786,9 +786,11 @@
                     let activeBannerIndex = 0;
                     let bannerInterval = null;
                     const AUTOPLAY_MS = 6000;
+                    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    let isMobileView = window.innerWidth < 768;
 
                     function getBannerImage(item) {
-                        return window.innerWidth < 768 ? item.imageMobile : item.imageDesktop;
+                        return isMobileView ? item.imageMobile : item.imageDesktop;
                     }
 
                     function renderHomeBanner() {
@@ -805,6 +807,9 @@
                                 <img src="${bannerImage}" alt="${item.title}"
                                      class="absolute inset-0 w-full h-full object-cover"
                                      style="object-position: ${item.objectPosition || 'center center'}"
+                                     loading="${index === 0 ? 'eager' : 'lazy'}"
+                                     fetchpriority="${index === 0 ? 'high' : 'low'}"
+                                     decoding="async"
                                      onerror="this.onerror=null;this.src='${item.fallbackImage || './banner-peregrinos.jpeg'}'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                                 <div class="absolute inset-0 flex items-end">
@@ -843,6 +848,7 @@
                             slide.classList.toggle('opacity-100', i === index);
                             slide.classList.toggle('opacity-0',   i !== index);
                             slide.classList.toggle('pointer-events-none', i !== index);
+                            slide.setAttribute('aria-hidden', i !== index ? 'true' : 'false');
                         });
                         dots.forEach((dot, i) => {
                             dot.classList.toggle('w-8',       i === index);
@@ -864,34 +870,64 @@
                         }
                     }
 
-                    function resetAutoplay() {
+                    function goToNext() { showHomeBanner((activeBannerIndex + 1) % homeBannerData.length); }
+                    function goToPrev() { showHomeBanner((activeBannerIndex - 1 + homeBannerData.length) % homeBannerData.length); }
+
+                    function stopAutoplay() {
                         clearInterval(bannerInterval);
-                        bannerInterval = setInterval(() => {
-                            showHomeBanner((activeBannerIndex + 1) % homeBannerData.length);
-                        }, AUTOPLAY_MS);
+                        bannerInterval = null;
+                    }
+
+                    function resetAutoplay() {
+                        stopAutoplay();
+                        if (prefersReducedMotion || homeBannerData.length < 2) return;
+                        bannerInterval = setInterval(goToNext, AUTOPLAY_MS);
                     }
 
                     if (homeBannerPrev) {
-                        homeBannerPrev.addEventListener('click', () => {
-                            const prev = (activeBannerIndex - 1 + homeBannerData.length) % homeBannerData.length;
-                            showHomeBanner(prev);
-                            resetAutoplay();
-                        });
+                        homeBannerPrev.addEventListener('click', () => { goToPrev(); resetAutoplay(); });
                     }
                     if (homeBannerNext) {
-                        homeBannerNext.addEventListener('click', () => {
-                            showHomeBanner((activeBannerIndex + 1) % homeBannerData.length);
-                            resetAutoplay();
-                        });
+                        homeBannerNext.addEventListener('click', () => { goToNext(); resetAutoplay(); });
                     }
+
+                    // Pausar autoplay al interactuar (mouse/foco) y al ocultar la pestaña
+                    const homeBanner = document.getElementById('home-banner');
+                    if (homeBanner) {
+                        homeBanner.addEventListener('mouseenter', stopAutoplay);
+                        homeBanner.addEventListener('mouseleave', resetAutoplay);
+                        homeBanner.addEventListener('focusin', stopAutoplay);
+                        homeBanner.addEventListener('focusout', resetAutoplay);
+                    }
+                    document.addEventListener('visibilitychange', () => {
+                        if (document.hidden) { stopAutoplay(); } else { resetAutoplay(); }
+                    });
+
+                    // Navegación por teclado
+                    document.addEventListener('keydown', (e) => {
+                        const inicio = document.getElementById('inicio');
+                        if (!inicio || inicio.classList.contains('hidden-section')) return;
+                        if (e.key === 'ArrowRight') { goToNext(); resetAutoplay(); }
+                        else if (e.key === 'ArrowLeft') { goToPrev(); resetAutoplay(); }
+                    });
 
                     renderHomeBanner();
                     showHomeBanner(0);
                     resetAutoplay();
 
+                    // Solo reconstruir si se cruza el breakpoint móvil/desktop (evita rebuilds en cada resize)
+                    let resizeTimer = null;
                     window.addEventListener('resize', () => {
-                        renderHomeBanner();
-                        showHomeBanner(activeBannerIndex);
+                        clearTimeout(resizeTimer);
+                        resizeTimer = setTimeout(() => {
+                            const nowMobile = window.innerWidth < 768;
+                            if (nowMobile !== isMobileView) {
+                                isMobileView = nowMobile;
+                                renderHomeBanner();
+                                showHomeBanner(activeBannerIndex);
+                                resetAutoplay();
+                            }
+                        }, 200);
                     });
                 }
 
