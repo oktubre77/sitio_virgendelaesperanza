@@ -3,7 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís</title>
+    <title>Peregrinos de la Esperanza | Comunidad Virgen de la Esperanza y Santa Clara — Hurlingham</title>
+    <meta name="description" content="Peregrinos de la Esperanza: pastoral de calle en Hurlingham. Acompañamos a personas en situación de calle los miércoles, viernes y domingos a las 21 hs.">
+    <link rel="canonical" href="https://www.parroquiavirgendelaesperanza.site/">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#2C3E50">
+
+    <!-- Open Graph: como se ve el link al compartirlo en WhatsApp, Facebook e Instagram -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Peregrinos de la Esperanza">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:url" content="https://www.parroquiavirgendelaesperanza.site/">
+    <meta property="og:title" content="Peregrinos de la Esperanza — Pastoral de calle en Hurlingham">
+    <meta property="og:description" content="Acompañamos a personas en situación de calle los miércoles, viernes y domingos a las 21 hs. Sumate a las recorridas.">
+    <!-- REEMPLAZAR POR: foto propia de 1200x630 px, menos de 300 KB, con la marca visible. -->
+    <meta property="og:image" content="https://www.parroquiavirgendelaesperanza.site/web-velas-fe.jpeg">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="1080">
+    <meta property="og:image:alt" content="Fieles con velas encendidas durante una celebración.">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Peregrinos de la Esperanza — Pastoral de calle en Hurlingham">
+    <meta name="twitter:description" content="Acompañamos a personas en situación de calle los miércoles, viernes y domingos a las 21 hs. Sumate a las recorridas.">
+    <meta name="twitter:image" content="https://www.parroquiavirgendelaesperanza.site/web-velas-fe.jpeg">
+
+    <!-- Datos estructurados: ayuda a que Google muestre la ficha con direccion y horarios -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Church",
+      "name": "Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís",
+      "alternateName": "Peregrinos de la Esperanza",
+      "url": "https://www.parroquiavirgendelaesperanza.site/",
+      "logo": "https://www.parroquiavirgendelaesperanza.site/icon.png",
+      "image": "https://www.parroquiavirgendelaesperanza.site/web-velas-fe.jpeg",
+      "description": "Comunidad católica de Hurlingham. Pastoral de calle, recorridas solidarias y Cáritas.",
+      "email": "vesperanzahurlingham@gmail.com",
+      "telephone": "+5491121909764",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Arribeños 2466",
+        "addressLocality": "Hurlingham",
+        "addressRegion": "Provincia de Buenos Aires",
+        "addressCountry": "AR"
+      },
+      "sameAs": [
+        "https://www.facebook.com/virgendelaesperanza",
+        "https://www.instagram.com/pquiavirgendelaesperanzaok/",
+        "https://www.instagram.com/peregrinosdelaesperanza2026",
+        "https://www.youtube.com/@pquia.virgendelaesperanza2180"
+      ]
+    }
+    </script>
     <!-- Chosen Palette: Modern Solemnity (Azul Esperanza Profundo, Blanco Hueso, Dorado Ocre Sutil) -->
     <!-- Application Structure Plan: A single-page application (SPA) with dynamically shown/hidden sections for each category (Inicio, Avisos, etc.). Navigation is handled by JS, updating the view without page reloads for a seamless user experience. This structure directly translates the presentation's slides into an interactive web format, prioritizing speed and modern UX. -->
     <!-- Visualization & Content Choices: Landing: JS-powered image carousel. Avisos: Card grid with modals for details. Lectio: Dynamic text content updated via JS date navigation. Donaciones: Interactive buttons and toggles to configure donation amount and type. This avoids page reloads and presents information in digestible, interactive chunks. -->
@@ -81,10 +133,11 @@
                 <span class="text-base md:hidden">Virgen de la Esperanza</span>
                 <span class="hidden md:inline text-xl lg:text-2xl">Comunidad Virgen de la Esperanza y Santa Clara</span>
             </a>
-            <nav class="hidden md:flex space-x-8 items-center">
+            <nav class="hidden md:flex space-x-5 lg:space-x-7 items-center">
                 <a href="#inicio" class="nav-link active">Inicio</a>
                 <a href="#avisos" class="nav-link">Avisos</a>
                 <a href="#vaticano" class="nav-link">Vaticano</a>
+                <a href="#pastoral-calle" class="nav-link">Pastoral de Calle</a>
                 <a href="#recorridas" class="nav-link">Recorridas</a>
                 <a href="#lectio" class="nav-link">Lectio del Día</a>
                 <a href="#caritas" class="nav-link">Cáritas</a>
@@ -101,6 +154,7 @@
             <a href="#inicio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Inicio</a>
             <a href="#avisos" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Avisos</a>
             <a href="#vaticano" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Vaticano</a>
+            <a href="#pastoral-calle" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Pastoral de Calle</a>
             <a href="#recorridas" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Recorridas</a>
             <a href="#lectio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Lectio del Día</a>
             <a href="#caritas" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cáritas</a>
@@ -187,6 +241,45 @@
                     </a>
                 </div>
             </div>
+
+            <!-- Instagram -->
+            <div class="container mx-auto px-4 md:px-6 pb-8 md:pb-16">
+                <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+                    <div class="p-6 md:p-10 text-center">
+                        <p class="text-xs uppercase tracking-widest text-dorado-ocre font-bold mb-2">Seguinos</p>
+                        <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo mb-3">Lo que pasa, pasa en Instagram</h2>
+                        <p class="max-w-2xl mx-auto text-gray-600 mb-6">
+                            Las fotos de cada recorrida, los pedidos urgentes y las novedades de la misión los publicamos ahí primero.
+                        </p>
+                        <a href="https://www.instagram.com/peregrinosdelaesperanza2026" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center gap-2 bg-azul-profundo text-white px-6 py-3 rounded-full font-bold text-sm md:text-base hover:bg-dorado-ocre transition-colors shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg>
+                            @peregrinosdelaesperanza2026
+                        </a>
+                    </div>
+
+                    <!-- =================================================================
+                         FEED AUTOMATICO DE INSTAGRAM (pendiente de activar)
+
+                         Para que aparezcan solas las ultimas publicaciones, sin tocar
+                         codigo cada semana:
+
+                         1. Crear una cuenta gratis en https://behold.so (o lightwidget.com)
+                         2. Conectar la cuenta @peregrinosdelaesperanza2026
+                         3. Copiar el codigo que te dan (una etiqueta script y un contenedor)
+                         4. Pegarlo AQUI ABAJO, reemplazando el bloque #instagram-feed
+
+                         Behold permite 1 feed gratis y no pide tarjeta.
+                         ================================================================= -->
+                    <div id="instagram-feed" class="border-t border-gray-200 bg-crema-suave px-6 py-5 text-center">
+                        <p class="text-sm text-gray-500">
+                            Mientras tanto, entrá a
+                            <a href="https://www.instagram.com/peregrinosdelaesperanza2026" target="_blank" rel="noopener noreferrer" class="text-dorado-ocre font-semibold hover:underline">nuestro Instagram</a>
+                            para ver las últimas publicaciones.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Avisos Section -->
@@ -251,6 +344,185 @@
                         <p class="text-gray-600 text-center">Controla stock y disponibilidad para las recorridas.</p>
                     </a>
                 </div>
+            </div>
+        </section>
+
+        <!-- Pastoral de Calle Section -->
+        <section id="pastoral-calle" class="content-section hidden-section py-10 md:py-20 bg-white">
+            <!-- Encabezado -->
+            <div class="relative w-full overflow-hidden shadow-xl mb-8 md:mb-12" style="height: 220px; min-height: 180px;">
+                <!-- REEMPLAZAR POR: foto propia de una recorrida nocturna, sin rostros identificables. -->
+                <img src="./web-virgen-atrio.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover" style="object-position: center 55%;" loading="lazy" decoding="async" onerror="this.style.display='none'">
+                <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(44,62,80,0.88) 0%, rgba(44,62,80,0.55) 100%);"></div>
+                <div class="absolute inset-0 flex flex-col justify-center px-5 md:px-20">
+                    <span class="inline-block w-max bg-dorado-ocre/90 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-2 md:mb-4">
+                        Peregrinos de la Esperanza
+                    </span>
+                    <h2 class="text-2xl md:text-5xl font-bold text-white mb-1 md:mb-3 drop-shadow-lg leading-tight">Pastoral de Calle</h2>
+                    <p class="text-sm md:text-2xl text-white/90 drop-shadow font-medium">Acompañamos a personas en situación de calle en Hurlingham</p>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 md:px-6">
+
+                <!-- Cita biblica -->
+                <blockquote class="max-w-3xl mx-auto text-center mb-10 md:mb-16">
+                    <p class="font-serif text-lg md:text-2xl text-azul-profundo italic leading-relaxed">
+                        «Porque tuve hambre, y me disteis de comer; tuve sed, y me disteis de beber; fui forastero, y me recogisteis.»
+                    </p>
+                    <cite class="block text-sm md:text-base text-dorado-ocre font-semibold mt-3 not-italic">Mateo 25, 35-36</cite>
+                </blockquote>
+
+                <!-- Franja de horarios -->
+                <div class="bg-azul-profundo text-white rounded-lg shadow-lg p-6 md:p-8 mb-10 md:mb-16">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-dorado-ocre font-bold mb-1">Salimos</p>
+                            <p class="text-lg md:text-2xl font-bold">Miércoles, viernes y domingos</p>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-dorado-ocre font-bold mb-1">Horario</p>
+                            <p class="text-lg md:text-2xl font-bold">21:00 hs</p>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-dorado-ocre font-bold mb-1">Contacto</p>
+                            <p class="text-base md:text-xl font-bold">1121909764 · 1167968151</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Que es -->
+                <div class="max-w-3xl mx-auto mb-12 md:mb-16">
+                    <h3 class="text-xl md:text-3xl font-bold text-azul-profundo mb-4">¿Qué es la Pastoral de Calle?</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Es la salida de nuestra comunidad al encuentro de quienes viven en la calle en Hurlingham y alrededores.
+                        No es un reparto de comida: es una relación que se sostiene en el tiempo. Volvemos a los mismos lugares,
+                        llamamos a las personas por su nombre y escuchamos lo que quieran contarnos.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Llevamos una vianda caliente, algo para tomar y abrigo cuando hace falta. Pero lo que más se necesita,
+                        casi siempre, es tiempo y escucha. Con quienes lo desean compartimos el Evangelio del día y rezamos juntos.
+                        Con quienes no, conversamos igual.
+                    </p>
+                </div>
+
+                <!-- Como es una recorrida -->
+                <h3 class="text-xl md:text-3xl font-bold text-azul-profundo mb-6 text-center">Cómo es una recorrida</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12 md:mb-16">
+                    <div class="bg-crema-suave p-6 rounded-lg shadow-md">
+                        <div class="text-3xl font-bold text-dorado-ocre mb-2">1</div>
+                        <h4 class="font-bold text-azul-profundo mb-2">Preparamos</h4>
+                        <p class="text-gray-600 text-sm">Se cocinan las viandas y se arma lo que se lleva: bebida, algo dulce y abrigo según la época.</p>
+                    </div>
+                    <div class="bg-crema-suave p-6 rounded-lg shadow-md">
+                        <div class="text-3xl font-bold text-dorado-ocre mb-2">2</div>
+                        <h4 class="font-bold text-azul-profundo mb-2">Salimos juntos</h4>
+                        <p class="text-gray-600 text-sm">Nunca se sale solo. El equipo recorre en grupo, a pie y en bici, siempre por los mismos puntos.</p>
+                    </div>
+                    <div class="bg-crema-suave p-6 rounded-lg shadow-md">
+                        <div class="text-3xl font-bold text-dorado-ocre mb-2">3</div>
+                        <h4 class="font-bold text-azul-profundo mb-2">Nos encontramos</h4>
+                        <p class="text-gray-600 text-sm">Saludamos, entregamos la vianda y nos quedamos a conversar. Si la persona quiere, se lee el Evangelio y se reza.</p>
+                    </div>
+                    <div class="bg-crema-suave p-6 rounded-lg shadow-md">
+                        <div class="text-3xl font-bold text-dorado-ocre mb-2">4</div>
+                        <h4 class="font-bold text-azul-profundo mb-2">Registramos</h4>
+                        <p class="text-gray-600 text-sm">Al volver se anota lo que pasó, para que el equipo de la próxima salida sepa cómo sigue cada situación.</p>
+                    </div>
+                </div>
+
+                <!-- Donde vamos -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 md:mb-16">
+                    <div>
+                        <h3 class="text-xl md:text-3xl font-bold text-azul-profundo mb-4">Por dónde pasamos</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex gap-2"><span class="text-dorado-ocre font-bold">›</span> Hospital San Bernardino</li>
+                            <li class="flex gap-2"><span class="text-dorado-ocre font-bold">›</span> Estación Hurlingham y Paseo de los Eucaliptus</li>
+                            <li class="flex gap-2"><span class="text-dorado-ocre font-bold">›</span> Remedios de Escalada</li>
+                            <li class="flex gap-2"><span class="text-dorado-ocre font-bold">›</span> Avenida Arturo Jauretche</li>
+                            <li class="flex gap-2"><span class="text-dorado-ocre font-bold">›</span> Estación Rubén Darío</li>
+                            <li class="flex gap-2"><span class="text-dorado-ocre font-bold">›</span> Avenida Julio Roca</li>
+                            <li class="flex gap-2"><span class="text-dorado-ocre font-bold">›</span> Plaza John Ravenscroft</li>
+                            <li class="flex gap-2"><span class="text-dorado-ocre font-bold">›</span> Centro Cultural Benito Quinquela Martín</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl md:text-3xl font-bold text-azul-profundo mb-4">Qué se necesita</h3>
+                        <p class="text-gray-600 text-sm mb-4">Lo que más falta hoy. Se recibe en la parroquia, Arribeños 2466.</p>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-crema-suave rounded-lg px-4 py-3 text-sm font-semibold text-azul-profundo">🍲 Viandas y alimentos</div>
+                            <div class="bg-crema-suave rounded-lg px-4 py-3 text-sm font-semibold text-azul-profundo">🧥 Abrigo y frazadas</div>
+                            <div class="bg-crema-suave rounded-lg px-4 py-3 text-sm font-semibold text-azul-profundo">👟 Calzado en buen estado</div>
+                            <div class="bg-crema-suave rounded-lg px-4 py-3 text-sm font-semibold text-azul-profundo">☕ Yerba, azúcar y leche</div>
+                            <div class="bg-crema-suave rounded-lg px-4 py-3 text-sm font-semibold text-azul-profundo">🧼 Artículos de higiene</div>
+                            <div class="bg-crema-suave rounded-lg px-4 py-3 text-sm font-semibold text-azul-profundo">🤝 Tu tiempo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sumarse -->
+                <div class="bg-crema-suave rounded-lg shadow-md p-6 md:p-10 mb-12 md:mb-16">
+                    <h3 class="text-xl md:text-3xl font-bold text-azul-profundo mb-4">Quiero sumarme</h3>
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        No hace falta experiencia ni un compromiso de todas las semanas. Se empieza acompañando una salida,
+                        para conocer cómo trabajamos. Si querés, escribinos y coordinamos tu primera recorrida.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://wa.me/5491121909764?text=Hola%2C%20quiero%20sumarme%20a%20la%20Pastoral%20de%20Calle%20de%20Peregrinos%20de%20la%20Esperanza"
+                           target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center gap-2 bg-azul-profundo text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-dorado-ocre transition-colors">
+                            Escribinos por WhatsApp
+                        </a>
+                        <a href="mailto:recorridas.virgendelaesperanza@gmail.com?subject=Quiero%20sumarme%20a%20la%20Pastoral%20de%20Calle"
+                           class="inline-flex items-center justify-center gap-2 bg-white text-azul-profundo border-2 border-azul-profundo px-6 py-3 rounded-full font-bold text-sm hover:bg-azul-profundo hover:text-white transition-colors">
+                            Escribinos por mail
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Vi a alguien en la calle -->
+                <div class="border-l-4 border-dorado-ocre bg-white shadow-md rounded-r-lg p-6 md:p-8 mb-12 md:mb-16">
+                    <h3 class="text-lg md:text-2xl font-bold text-azul-profundo mb-3">Vi a una persona en situación de calle, ¿qué hago?</h3>
+                    <p class="text-gray-700 leading-relaxed mb-3">
+                        Avisanos dónde la viste y, si pudiste hablar, qué necesita. Lo sumamos al recorrido de la próxima salida.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Si la persona está en riesgo —frío extremo, un problema de salud, una urgencia—
+                        llamá al <strong>107 (SAME)</strong> o al <strong>911</strong>, y después contanos.
+                    </p>
+                </div>
+
+                <!-- Cuidados -->
+                <div class="max-w-3xl mx-auto mb-12 md:mb-16">
+                    <h3 class="text-xl md:text-3xl font-bold text-azul-profundo mb-4">Nuestros criterios de cuidado</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex gap-3"><span class="text-dorado-ocre font-bold">•</span> Nunca salimos solos: siempre en equipo.</li>
+                        <li class="flex gap-3"><span class="text-dorado-ocre font-bold">•</span> No sacamos fotos de las personas que acompañamos, ni publicamos sus nombres.</li>
+                        <li class="flex gap-3"><span class="text-dorado-ocre font-bold">•</span> No entregamos dinero. Llevamos comida, abrigo y compañía.</li>
+                        <li class="flex gap-3"><span class="text-dorado-ocre font-bold">•</span> Respetamos el «no». Si alguien no quiere hablar, saludamos y seguimos.</li>
+                        <li class="flex gap-3"><span class="text-dorado-ocre font-bold">•</span> No prometemos lo que no podemos cumplir.</li>
+                    </ul>
+                </div>
+
+                <!-- Cierre -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="#recorridas" class="group block bg-crema-suave p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <div class="text-4xl text-dorado-ocre mb-3">🗺️</div>
+                        <h4 class="text-lg font-bold text-azul-profundo mb-1">Cronograma y bitácoras</h4>
+                        <p class="text-gray-600 text-sm">La organización interna de cada salida.</p>
+                    </a>
+                    <a href="https://link.mercadopago.com.ar/caritascalle" target="_blank" rel="noopener noreferrer" class="group block bg-crema-suave p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <div class="text-4xl text-dorado-ocre mb-3">💖</div>
+                        <h4 class="text-lg font-bold text-azul-profundo mb-1">Colaborar</h4>
+                        <p class="text-gray-600 text-sm">Tu aporte se convierte en viandas y abrigo.</p>
+                    </a>
+                    <a href="https://www.instagram.com/peregrinosdelaesperanza2026" target="_blank" rel="noopener noreferrer" class="group block bg-crema-suave p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <div class="text-4xl text-dorado-ocre mb-3">📷</div>
+                        <h4 class="text-lg font-bold text-azul-profundo mb-1">Seguinos</h4>
+                        <p class="text-gray-600 text-sm">@peregrinosdelaesperanza2026</p>
+                    </a>
+                </div>
+
             </div>
         </section>
 
@@ -363,7 +635,7 @@
                         <div class="flex justify-center mb-6">
                             <img src="./qr-mercadopago.png" alt="Código QR de Mercado Pago para la Parroquia" class="w-80 h-80">
                         </div>
-                        <a href="http://link.mercadopago.com.ar/caritascalle" target="_blank" rel="noopener noreferrer" class="mt-auto inline-block w-full bg-blue-500 text-white py-2 px-4 rounded-lg text-base font-semibold hover:bg-blue-600 transition-transform transform hover:scale-105">
+                        <a href="https://link.mercadopago.com.ar/caritascalle" target="_blank" rel="noopener noreferrer" class="mt-auto inline-block w-full bg-blue-500 text-white py-2 px-4 rounded-lg text-base font-semibold hover:bg-blue-600 transition-transform transform hover:scale-105">
                             Donar a la Parroquia
                         </a>
                     </div>
@@ -499,13 +771,21 @@
                         <li><a href="#inicio" class="text-gray-300 hover:text-dorado-ocre transition">Inicio</a></li>
                         <li><a href="#avisos" class="text-gray-300 hover:text-dorado-ocre transition">Avisos</a></li>
                         <li><a href="#vaticano" class="text-gray-300 hover:text-dorado-ocre transition">Vaticano</a></li>
+                        <li><a href="#pastoral-calle" class="text-gray-300 hover:text-dorado-ocre transition">Pastoral de Calle</a></li>
                         <li><a href="#recorridas" class="text-gray-300 hover:text-dorado-ocre transition">Recorridas</a></li>
                         <li><a href="#lectio" class="text-gray-300 hover:text-dorado-ocre transition">Lectio del Día</a></li>
                         <li><a href="#caritas" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
                         <li><a href="#donaciones" class="text-gray-300 hover:text-dorado-ocre transition">Donaciones</a></li>
+                    </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-bold font-serif mb-4">Síguenos</h3>
+                    <h3 class="text-xl font-bold font-serif mb-4">Seguinos</h3>
+                    <a href="https://www.instagram.com/peregrinosdelaesperanza2026" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 bg-dorado-ocre text-white px-4 py-2 rounded-full font-bold text-sm hover:bg-opacity-90 transition-colors mb-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg>
+                        @peregrinosdelaesperanza2026
+                    </a>
+                    <p class="text-gray-400 text-xs uppercase tracking-widest font-semibold mb-3">Comunidad Virgen de la Esperanza</p>
                     <div class="flex justify-center md:justify-start space-x-4">
                         <a href="https://www.facebook.com/virgendelaesperanza" class="text-gray-300 hover:text-dorado-ocre transition flex items-center gap-1" target="_blank" rel="noopener noreferrer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="blue" class="bi bi-facebook" viewBox="0 0 16 16">
@@ -517,7 +797,7 @@
   <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
 </svg> <b>Instagram</b>
                         </a>
-                        <a href="http://www.youtube.com/@pquia.virgendelaesperanza2180" class="text-gray-300 hover:text-dorado-ocre transition flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.youtube.com/@pquia.virgendelaesperanza2180" class="text-gray-300 hover:text-dorado-ocre transition flex items-center gap-1" target="_blank" rel="noopener noreferrer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-youtube" viewBox="0 0 16 16">
   <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
 </svg> <b>YouTube</b>
@@ -549,65 +829,57 @@
     document.addEventListener('DOMContentLoaded', function () {
         
         // --- DATA ---
-        /*
-        const carouselData = [
-            {
-                image: './banner-peregrinos.jpeg',
-                imageMobile: './banner-peregrinos-mobile.jpeg',
-                title: 'Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís',
-                subtitle: 'Tu Hogar Espiritual.',
-                buttonText: 'Conócenos Más',
-                buttonLink: '#inicio'
-            },
-            {
-                image: './caritas-carrusel.png',
-                imageMobile: './banner-caritas-mobile.jpeg',
-                title: 'Colaborá con Cáritas',
-                subtitle: 'Sigamos organizando la esperanza',
-                buttonText: 'Sumate',
-                buttonLink: '#caritas'
-            },
-            {
-                image: './banner-peregrinos.jpeg',
-                imageMobile: './banner-peregrinos-mobgrama ile.jpeg',
-                title: 'Peregrinos de la Esperanza',
-                subtitle: 'Caminando Juntos en Fe.',
-                buttonText: 'Ver Eventos',
-                buttonLink: '#avisos'
-            }
-        ];*/
-
         const AVISOS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDS3M42YJOsWp8Xl5dAUDF9WMbo3DTJAkncFNefzXU3qx9RDcGVxK_UVoMiP9kfMPCzkIKTW1YLC8O/pub?gid=0&single=true&output=csv'; // Pega aquí el enlace CSV publicado de Google Sheets para avisos
 
+        // ---------------------------------------------------------------------
+        // BANNER DE INICIO
+        // Las tres fotos siguen siendo de stock y estan marcadas con REEMPLAZAR.
+        // Al sacar las fotos propias, respetar:
+        //   - desktop 1920x1080 / movil 1080x1350, menos de 300 KB cada una
+        //   - sin texto quemado en la imagen (el titulo lo pone el sitio)
+        //   - zona inferior izquierda despejada: ahi va el titulo y el boton
+        //   - sin rostros identificables de personas acompanadas en la calle
+        // ---------------------------------------------------------------------
         const homeBannerData = [
             {
-                title: 'Caminamos juntos desde hace años',
-                subtitle: 'Fe, servicio y comunidad en cada paso del camino.',
+                badge: 'Peregrinos de la Esperanza',
+                title: 'Una misión, varias comunidades',
+                subtitle: 'Caminamos juntos la Comunidad Virgen de la Esperanza, Santa Clara de Asís y las comunidades hermanas.',
                 ctaText: 'Ver Avisos',
                 ctaLink: '#avisos',
-                imageMobile: './web-velas-fe.jpeg',
+                alt: 'Fieles con velas encendidas durante una celebración.',
+                // REEMPLAZAR POR: foto propia de la peregrinación a Luján o de la comunidad reunida.
+                imageMobile: './banner-peregrinos-new.jpeg',
                 imageDesktop: './web-velas-fe.jpeg',
                 fallbackImage: './s1-velas-a.jpeg',
                 objectPosition: 'center 45%'
             },
             {
-                title: 'Tu recorrida salva una vida esta noche',
-                subtitle: 'Salimos los miércoles, viernes y domingos. ¿Te sumás?',
+                badge: 'Pastoral de calle',
+                title: 'Salimos a la calle tres veces por semana',
+                subtitle: 'Acompañamos a personas en situación de calle los miércoles, viernes y domingos a las 21 hs.',
                 ctaText: 'Sumate a las Recorridas',
                 ctaLink: '#recorridas',
-                imageMobile: './s2-recorrida-crop.jpeg',
-                imageDesktop: './s2-recorrida-crop.jpeg',
-                fallbackImage: './s2-test-a.jpeg',
-                objectPosition: 'center 35%'
+                alt: 'Vecinos encendiendo velas en el atrio de una iglesia durante la noche.',
+                // REEMPLAZAR POR: foto propia de una recorrida nocturna (termo, viandas, manos que
+                // entregan). NUNCA rostros de las personas acompañadas.
+                imageMobile: './web-virgen-atrio.jpeg',
+                imageDesktop: './web-virgen-atrio.jpeg',
+                fallbackImage: './web-velas-fe.jpeg',
+                objectPosition: 'center 55%'
             },
             {
+                badge: 'Cáritas Morón',
                 title: 'Todos tenemos algo para dar',
-                subtitle: 'Juntos organizamos la esperanza. Ayudanos a ayudar.',
+                subtitle: 'Alimentos, ropero comunitario y acompañamiento. Ayudanos a ayudar.',
                 ctaText: 'Conocé Cáritas',
                 ctaLink: '#caritas',
+                alt: 'Voluntarios preparando cajones con alimentos.',
+                // REEMPLAZAR POR: foto oficial de Cáritas Morón (pedirles el original y autorización
+                // por escrito) o foto propia del ropero comunitario.
                 imageMobile: './web-caritas-alimentos.jpeg',
                 imageDesktop: './web-caritas-alimentos.jpeg',
-                fallbackImage: './banner-recorridas-b.jpeg',
+                fallbackImage: './web-velas-fe.jpeg',
                 objectPosition: 'center 55%'
             }
         ];
@@ -633,6 +905,14 @@
 
         ];
 
+        // ---------------------------------------------------------------------
+        // BITACORAS PUBLICAS
+        // Esta bitacora se publica en una web abierta e indexada por Google.
+        // NO incluir: nombres, apodos, fotos ni descripciones de las personas
+        // acompanadas, ni la esquina o el lugar exacto donde pasan la noche.
+        // Publicar cantidades, zonas generales y que se entrego.
+        // El detalle con nombres va en el registro interno del equipo.
+        // ---------------------------------------------------------------------
         const bitacorasData = [
             {
                 title: 'Peregrinos de la Esperanza',
@@ -642,17 +922,16 @@
                 <p>En la recorrida salimos: Daniela, Cecilia, Alicia (se incorporó hoy), Germán, Ramón (en bici) y Mario. Cocinó Mirtha.</p>
                 <p>Recorrido: Hospital San Bernardino, estación Hurlingham (Paseo de los Eucaliptus), Remedios de Escalada, Av. Jauretche, estación R. Darío, Av. Julio Roca y Plaza John Ravenscroft. Parte del equipo pasó por la biblioteca municipal (Centro Cultural Benito Quinquela Martín) para reencontrarse luego en estación Hurlingham.</p>
                 <p>Se entregaron viandas (sándwiches de milanesa), jugo y gelatina. Con quienes lo desearon se leyó el Evangelio del día y/o se rezó.</p>
-                <p><strong>Personas encontradas:</strong></p>
+                <p><strong>Resumen del acompañamiento:</strong></p>
                 <ul>
-                    <li>Hospital (estacionamiento): José Luis, Lorena, Alejandro.</li>
-                    <li>Hospital (interior): no estaban las personas habituales ni personas nuevas.</li>
-                    <li>Estación Hurlingham / Paseo de los Eucaliptus: Martín, Thalía (se dejó vianda), Max (entrega al final). También contacto con Pedro (“Moisés”).</li>
-                    <li>Remedios de Escalada: sin personas.</li>
-                    <li>Av. Arturo Jauretche: Eliana, Rodrigo, Bastian, Eric (familia proveniente de Pilar).</li>
-                    <li>Centro Cultural Benito Quinquela Martín: Walter, Juan (se dejó vianda en iglesia Sagrado Corazón, según pedido).</li>
-                    <li>Plaza John Ravenscroft: Héctor (esquina I. la Católica y Güemes).</li>
-                    <li>Bolívar y Río Colorado: Susy (se dejó vianda, 2 sándwiches y gelatina).</li>
-                </ul>`
+                    <li>Hospital San Bernardino: 3 personas acompañadas en el sector externo. En el interior no estaban las personas habituales.</li>
+                    <li>Estación Hurlingham y Paseo de los Eucaliptus: 4 personas acompañadas, 2 con entrega de vianda.</li>
+                    <li>Remedios de Escalada: sin personas esa noche.</li>
+                    <li>Av. Arturo Jauretche: una familia de 4 integrantes, recién llegada a la zona.</li>
+                    <li>Centro Cultural Benito Quinquela Martín: 2 personas acompañadas, una con entrega coordinada a través de otra parroquia.</li>
+                    <li>Plaza John Ravenscroft y alrededores: 2 personas acompañadas, con entrega de vianda y algo dulce.</li>
+                </ul>
+                <p class="text-sm text-gray-500 mt-4"><em>Por cuidado de las personas que acompañamos no publicamos sus nombres ni los lugares exactos donde pasan la noche. El detalle queda en el registro interno del equipo.</em></p>`
             }
         ];
         
@@ -804,19 +1083,19 @@
                             slide.dataset.index = String(index);
 
                             slide.innerHTML = `
-                                <img src="${bannerImage}" alt="${item.title}"
+                                <img src="${bannerImage}" alt="${item.alt || ''}"
                                      class="absolute inset-0 w-full h-full object-cover"
                                      style="object-position: ${item.objectPosition || 'center center'}"
                                      loading="${index === 0 ? 'eager' : 'lazy'}"
                                      fetchpriority="${index === 0 ? 'high' : 'low'}"
                                      decoding="async"
-                                     onerror="this.onerror=null;this.src='${item.fallbackImage || './banner-peregrinos.jpeg'}'">
+                                     onerror="this.onerror=null;this.src='${item.fallbackImage || './web-velas-fe.jpeg'}'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                                 <div class="absolute inset-0 flex items-end">
                                     <div class="w-full px-6 md:px-16 pb-14 md:pb-20">
                                         <div class="max-w-2xl">
                                             <span class="inline-block bg-dorado-ocre/90 text-white text-xs md:text-sm font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-4">
-                                                Comunidad Virgen de la Esperanza
+                                                ${item.badge || 'Peregrinos de la Esperanza'}
                                             </span>
                                             <h2 class="text-white text-3xl md:text-5xl font-bold leading-tight mb-3 drop-shadow-lg">${item.title}</h2>
                                             <p class="text-white/85 text-base md:text-xl mb-6 drop-shadow">${item.subtitle}</p>
