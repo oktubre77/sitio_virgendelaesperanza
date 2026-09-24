@@ -4,11 +4,13 @@
 const SHEET_ID = '18p1PD7pWc8dpu3HBIpK5cvym8OIFloRP-61RYH8SHd8';
 const SHEET_GID = '0';
 
-// Nombres de la comunidad
-// Header/menu: versión corta
-const headerName = "Comunidad Esperanza y Santa Clara";
-// Footer/textos institucionales: versión larga
-const footerName = "Comunidad Virgen de la Esperanza y Santa Clara";
+// Nombres de la mision.
+// OJO: hoy estas dos constantes NO se usan en ningun lado. El nombre esta
+// escrito directamente en el HTML del header y del footer de index.html.
+// Header/menu: version corta
+const headerName = "Peregrinos de la Esperanza";
+// Footer/textos institucionales: version larga
+const footerName = "Peregrinos de la Esperanza — Comunidad Virgen de la Esperanza y Santa Clara de Asís";
 
 // URL para leer datos como CSV (NO requiere API Key)
 const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vQiMLu3X3IYy1ioW07zWfkVINkL417flSltqucnme3iCfwYB1-ihYGE-wEpM-5pVW9o-1kFQitwM7UH/pub?gid=1473277691&single=true&output=csv`;
