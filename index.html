@@ -572,20 +572,17 @@
 
         <!-- Lectio del Dia Section -->
         <section id="lectio" class="content-section hidden-section py-20 bg-crema-suave">
-            
-<iframe
-  src="https://evangeli.net/evangelio/widget/web"
-  width="100%"
-  height="600"
-  frameborder="2"
-  scrolling="yes">
-</iframe>
-
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Lectio del Día</h2>
+                    <p class="text-base md:text-lg text-gray-600 mt-2">El Evangelio de hoy y su comentario, desde evangeli.net.</p>
                 </div>
-              
-                    <div id="lectio-content" class="prose max-w-none text-lg leading-relaxed text-gray-700">
-                        <!-- Lectio content will be injected here by JS -->
-                    </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <iframe src="https://evangeli.net/evangelio/widget/web"
+                            title="Evangelio del día y comentario"
+                            class="w-full block border-0"
+                            style="height: 600px;"
+                            loading="lazy"></iframe>
                 </div>
             </div>
         </section>
@@ -907,10 +904,6 @@
                 fullContent: '<p>Las recorridas se realizan los días miércoles, viernes y domingos a las 21 hs.<strong> Tel de contacto:1121909764/1167968151</strong></p>',
                 image: './Recorridas_desktop.png'
             }
-        ];
-
-        const lectioData = [
-
         ];
 
         // ---------------------------------------------------------------------
@@ -1655,39 +1648,8 @@
             });
         }
 
-        /* --- LECTIO ---
-        const lectioDateEl = document.getElementById('lectio-date');
-        const lectioContentEl = document.getElementById('lectio-content');
-        const prevDayBtn = document.getElementById('prev-day');
-        const nextDayBtn = document.getElementById('next-day');
-        let currentLectioIndex = lectioData.findIndex(l => l.date.toDateString() === new Date().toDateString());
-        if (currentLectioIndex === -1) currentLectioIndex = lectioData.length - 1;
-
-        function renderLectio() {
-            const lectio = lectioData[currentLectioIndex];
-            lectioDateEl.textContent = lectio.date.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            lectioContentEl.innerHTML = lectio.content;
-            prevDayBtn.disabled = currentLectioIndex === 0;
-            nextDayBtn.disabled = currentLectioIndex === lectioData.length - 1;
-            prevDayBtn.classList.toggle('opacity-50', prevDayBtn.disabled);
-            nextDayBtn.classList.toggle('opacity-50', nextDayBtn.disabled);
-        }
-        
-        prevDayBtn.addEventListener('click', () => {
-            if (currentLectioIndex > 0) {
-                currentLectioIndex--;
-                renderLectio();
-            }
-        });
-
-        nextDayBtn.addEventListener('click', () => {
-            if (currentLectioIndex < lectioData.length - 1) {
-                currentLectioIndex++;
-                renderLectio();
-            }
-        });
-        
-        renderLectio();*/
+        // La Lectio se sirve con el iframe de evangeli.net, que se actualiza solo.
+        // El render manual anterior quedaba comentado y sin datos: se elimino.
 
         // --- CARITAS ---
         const caritasGrid = document.getElementById('caritas-grid');
