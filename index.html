@@ -266,24 +266,26 @@
                     </div>
 
                     <!-- =================================================================
-                         FEED AUTOMATICO DE INSTAGRAM (pendiente de activar)
+                         FEED AUTOMATICO DE INSTAGRAM (LightWidget, plan gratuito)
 
-                         Para que aparezcan solas las ultimas publicaciones, sin tocar
-                         codigo cada semana:
+                         Se actualiza solo una vez por dia con lo que se publique en
+                         @peregrinosdelaesperanza2026. No hay que tocar codigo.
 
-                         1. Crear una cuenta gratis en https://behold.so (o lightwidget.com)
-                         2. Conectar la cuenta @peregrinosdelaesperanza2026
-                         3. Copiar el codigo que te dan (una etiqueta script y un contenedor)
-                         4. Pegarlo AQUI ABAJO, reemplazando el bloque #instagram-feed
+                         El script lightwidget.js es el que ajusta la altura del iframe:
+                         si se borra, el iframe queda clavado en unos 150px de alto.
 
-                         Behold permite 1 feed gratis y no pide tarjeta.
+                         Para cambiar el diseno de la grilla hay que entrar a
+                         lightwidget.com, regenerar el codigo y reemplazar el src.
+                         Id de este widget: 117780f947f3559590c7dea731aecb49
                          ================================================================= -->
-                    <div id="instagram-feed" class="border-t border-gray-200 bg-crema-suave px-6 py-5 text-center">
-                        <p class="text-sm text-gray-500">
-                            Mientras tanto, entrá a
-                            <a href="https://www.instagram.com/peregrinosdelaesperanza2026" target="_blank" rel="noopener noreferrer" class="text-dorado-ocre font-semibold hover:underline">nuestro Instagram</a>
-                            para ver las últimas publicaciones.
-                        </p>
+                    <div id="instagram-feed" class="border-t border-gray-200 bg-white px-3 py-4 md:px-5 md:py-5">
+                        <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+                        <iframe src="https://lightwidget.com/widgets/117780f947f3559590c7dea731aecb49.html"
+                                title="Últimas publicaciones de @peregrinosdelaesperanza2026 en Instagram"
+                                scrolling="no"
+                                allowtransparency="true"
+                                class="lightwidget-widget"
+                                style="width:100%;border:0;overflow:hidden;"></iframe>
                     </div>
                 </div>
             </div>
