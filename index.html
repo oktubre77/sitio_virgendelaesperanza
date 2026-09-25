@@ -266,28 +266,35 @@
                     </div>
 
                     <!-- =================================================================
-                         FEED AUTOMATICO DE INSTAGRAM (desactivado)
+                         FEED AUTOMATICO DE INSTAGRAM (Behold, plan gratuito)
 
-                         NO reponer el widget de LightWidget gratuito: su plan free
-                         NO funciona sobre HTTPS. En vez del feed renderiza un cartel
-                         propio que dice "Widget add-on required" con un boton
-                         "Upgrade now!", o sea publicidad de LightWidget dentro del
-                         sitio. Este sitio es HTTPS forzado, asi que el plan gratuito
-                         nunca va a servir.
+                         Muestra las ultimas publicaciones de
+                         @peregrinosdelaesperanza2026 y se actualiza solo una vez por
+                         dia. El plan gratuito trae 6 publicaciones y un logo chico de
+                         Behold. Para cambiarlo hay que entrar a app.behold.so.
+                         Feed id: KnxG9WMpweUSUFwBOfXc
 
-                         Widget ya creado por si se decide pagar el add-on (pago unico
-                         por widget, habilita HTTPS): 117780f947f3559590c7dea731aecb49
+                         NO reponer el widget de LightWidget: su plan gratuito NO
+                         funciona sobre HTTPS y, en vez del feed, renderizaba un cartel
+                         propio con un boton "Upgrade now!" dentro de la home. Este
+                         sitio es HTTPS forzado. El widget quedo creado alla por si
+                         alguna vez se paga el add-on: 117780f947f3559590c7dea731aecb49
 
-                         Alternativa sin costo: Behold (behold.so). Su plan gratuito si
-                         funciona sobre HTTPS, pero limita a 6 publicaciones y muestra
-                         un logo chico de Behold.
+                         La guarda __bhldScript evita que el script se cargue dos veces
+                         si algun dia se agrega un segundo feed en otra seccion.
                          ================================================================= -->
-                    <div id="instagram-feed" class="border-t border-gray-200 bg-crema-suave px-6 py-5 text-center">
-                        <p class="text-sm text-gray-500">
-                            Mientras tanto, entrá a
-                            <a href="https://www.instagram.com/peregrinosdelaesperanza2026" target="_blank" rel="noopener noreferrer" class="text-dorado-ocre font-semibold hover:underline">nuestro Instagram</a>
-                            para ver las últimas publicaciones.
-                        </p>
+                    <div id="instagram-feed" class="border-t border-gray-200 bg-white px-3 py-5 md:px-6 md:py-6">
+                        <behold-widget feed-id="KnxG9WMpweUSUFwBOfXc"></behold-widget>
+                        <script>
+                          (() => {
+                            if (window.__bhldScript) return;
+                            window.__bhldScript = true;
+                            const d = document, s = d.createElement("script");
+                            s.type = "module";
+                            s.src = "https://w.behold.so/widget.js";
+                            setTimeout(() => { d.head.append(s); }, 0);
+                          })();
+                        </script>
                     </div>
                 </div>
             </div>
