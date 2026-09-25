@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peregrinos de la Esperanza | Comunidad Virgen de la Esperanza y Santa Clara — Hurlingham</title>
     <meta name="description" content="Peregrinos de la Esperanza: pastoral de calle en Hurlingham. Acompañamos a personas en situación de calle los miércoles, viernes y domingos a las 21 hs.">
-    <link rel="canonical" href="https://www.parroquiavirgendelaesperanza.site/">
+    <link rel="canonical" href="https://www.peregrinosdelaesperanza.org/">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#2C3E50">
 
@@ -13,11 +13,11 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Peregrinos de la Esperanza">
     <meta property="og:locale" content="es_AR">
-    <meta property="og:url" content="https://www.parroquiavirgendelaesperanza.site/">
+    <meta property="og:url" content="https://www.peregrinosdelaesperanza.org/">
     <meta property="og:title" content="Peregrinos de la Esperanza — Pastoral de calle en Hurlingham">
     <meta property="og:description" content="Acompañamos a personas en situación de calle los miércoles, viernes y domingos a las 21 hs. Sumate a las recorridas.">
     <!-- REEMPLAZAR POR: foto propia de 1200x630 px, menos de 300 KB, con la marca visible. -->
-    <meta property="og:image" content="https://www.parroquiavirgendelaesperanza.site/web-velas-fe.jpeg">
+    <meta property="og:image" content="https://www.peregrinosdelaesperanza.org/web-velas-fe.jpeg">
     <meta property="og:image:width" content="1920">
     <meta property="og:image:height" content="1080">
     <meta property="og:image:alt" content="Fieles con velas encendidas durante una celebración.">
@@ -26,7 +26,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Peregrinos de la Esperanza — Pastoral de calle en Hurlingham">
     <meta name="twitter:description" content="Acompañamos a personas en situación de calle los miércoles, viernes y domingos a las 21 hs. Sumate a las recorridas.">
-    <meta name="twitter:image" content="https://www.parroquiavirgendelaesperanza.site/web-velas-fe.jpeg">
+    <meta name="twitter:image" content="https://www.peregrinosdelaesperanza.org/web-velas-fe.jpeg">
 
     <!-- Datos estructurados: ayuda a que Google muestre la ficha con direccion y horarios -->
     <script type="application/ld+json">
@@ -35,9 +35,9 @@
       "@type": "Church",
       "name": "Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís",
       "alternateName": "Peregrinos de la Esperanza",
-      "url": "https://www.parroquiavirgendelaesperanza.site/",
-      "logo": "https://www.parroquiavirgendelaesperanza.site/icon.png",
-      "image": "https://www.parroquiavirgendelaesperanza.site/web-velas-fe.jpeg",
+      "url": "https://www.peregrinosdelaesperanza.org/",
+      "logo": "https://www.peregrinosdelaesperanza.org/icon.png",
+      "image": "https://www.peregrinosdelaesperanza.org/web-velas-fe.jpeg",
       "description": "Comunidad católica de Hurlingham. Pastoral de calle, recorridas solidarias y Cáritas.",
       "email": "vesperanzahurlingham@gmail.com",
       "telephone": "+5491121909764",
@@ -181,10 +181,11 @@
                                 <!-- Dots -->
                                 <div id="home-banner-dots" class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-3 z-20"></div>
                                 <!-- Arrows -->
-                                <button id="home-banner-prev" aria-label="Anterior" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-sm transition-all duration-200 border border-white/20">
+                                <!-- En movil las flechas tapaban el titular: ahi se navega con swipe y dots. -->
+                                <button id="home-banner-prev" aria-label="Anterior" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 hidden md:flex items-center justify-center rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-sm transition-all duration-200 border border-white/20">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
                                 </button>
-                                <button id="home-banner-next" aria-label="Siguiente" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 flex items-center justify-center rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-sm transition-all duration-200 border border-white/20">
+                                <button id="home-banner-next" aria-label="Siguiente" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 hidden md:flex items-center justify-center rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-sm transition-all duration-200 border border-white/20">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                                 </button>
                         </div>
@@ -838,8 +839,17 @@
 
         // ---------------------------------------------------------------------
         // BANNER DE INICIO
-        // Las tres fotos siguen siendo de stock y estan marcadas con REEMPLAZAR.
-        // Al sacar las fotos propias, respetar:
+        //
+        // Cada slide funciona en UNO de dos modos:
+        //
+        //   MODO GRAFICO (el actual): sin foto. Usa 'background' (degradado CSS)
+        //   y 'motif' (dibujo SVG). No descarga ninguna imagen.
+        //
+        //   MODO FOTO: alcanza con descomentar 'imageMobile' e 'imageDesktop'.
+        //   Si 'imageDesktop' existe, el slide usa la foto y deja de usar el
+        //   degradado. No hay que tocar nada mas.
+        //
+        // Cuando lleguen las fotos propias, respetar:
         //   - desktop 1920x1080 / movil 1080x1350, menos de 300 KB cada una
         //   - sin texto quemado en la imagen (el titulo lo pone el sitio)
         //   - zona inferior izquierda despejada: ahi va el titulo y el boton
@@ -852,11 +862,13 @@
                 subtitle: 'Caminamos juntos la Comunidad Virgen de la Esperanza, Santa Clara de Asís y las comunidades hermanas.',
                 ctaText: 'Ver Avisos',
                 ctaLink: '#avisos',
-                alt: 'Fieles con velas encendidas durante una celebración.',
-                // REEMPLAZAR POR: foto propia de la peregrinación a Luján o de la comunidad reunida.
-                imageMobile: './banner-peregrinos-new.jpeg',
-                imageDesktop: './web-velas-fe.jpeg',
-                fallbackImage: './s1-velas-a.jpeg',
+                // Caminos que convergen en el horizonte, con una cruz al fondo.
+                background: 'linear-gradient(135deg, #1d2b38 0%, #2C3E50 55%, #3b556e 100%)',
+                motif: '<svg class="absolute inset-0 w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><g fill="none" stroke="#B08D57" stroke-width="2" opacity="0.30"><path d="M-60 600 C 250 430, 450 360, 600 300"/><path d="M180 600 C 380 450, 520 380, 600 300"/><path d="M420 600 C 520 470, 570 380, 600 300"/><path d="M1260 600 C 950 430, 750 360, 600 300"/><path d="M1020 600 C 820 450, 680 380, 600 300"/><path d="M780 600 C 680 470, 630 380, 600 300"/></g><circle cx="600" cy="300" r="4" fill="#B08D57" opacity="0.7"/><g stroke="#F8F5F0" stroke-width="4" opacity="0.16" stroke-linecap="round"><path d="M600 140 L600 296"/><path d="M552 196 L648 196"/></g></svg>',
+                // MODO FOTO: descomentar estas lineas para volver a usar imagenes.
+                // imageMobile: './banner-peregrinos-new.jpeg',
+                // imageDesktop: './web-velas-fe.jpeg',
+                // alt: 'Fieles con velas encendidas durante una celebración.',
                 objectPosition: 'center 45%'
             },
             {
@@ -865,12 +877,13 @@
                 subtitle: 'Acompañamos a personas en situación de calle los miércoles, viernes y domingos a las 21 hs.',
                 ctaText: 'Sumate a las Recorridas',
                 ctaLink: '#recorridas',
-                alt: 'Vecinos encendiendo velas en el atrio de una iglesia durante la noche.',
-                // REEMPLAZAR POR: foto propia de una recorrida nocturna (termo, viandas, manos que
-                // entregan). NUNCA rostros de las personas acompañadas.
-                imageMobile: './web-virgen-atrio.jpeg',
-                imageDesktop: './web-virgen-atrio.jpeg',
-                fallbackImage: './web-velas-fe.jpeg',
+                // Perfil de ciudad de noche, con ventanas encendidas y una luz calida abajo.
+                background: 'radial-gradient(ellipse 70% 60% at 10% 98%, rgba(224,172,96,0.60) 0%, rgba(176,141,87,0.14) 40%, rgba(176,141,87,0) 68%), linear-gradient(175deg, #0d151d 0%, #14202b 45%, #1e2f3e 100%)',
+                motif: '<svg class="absolute inset-0 w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><g fill="#000000" opacity="0.45"><rect x="0" y="430" width="90" height="170"/><rect x="100" y="470" width="70" height="130"/><rect x="180" y="400" width="110" height="200"/><rect x="300" y="460" width="80" height="140"/><rect x="390" y="420" width="95" height="180"/><rect x="495" y="480" width="70" height="120"/><rect x="575" y="440" width="105" height="160"/><rect x="690" y="410" width="85" height="190"/><rect x="785" y="470" width="90" height="130"/><rect x="885" y="435" width="100" height="165"/><rect x="995" y="465" width="75" height="135"/><rect x="1080" y="425" width="120" height="175"/></g><g fill="#E8C38A" opacity="0.92"><rect x="212" y="425" width="11" height="15"/><rect x="238" y="458" width="11" height="15"/><rect x="418" y="445" width="11" height="15"/><rect x="606" y="466" width="11" height="15"/><rect x="714" y="436" width="11" height="15"/><rect x="912" y="460" width="11" height="15"/><rect x="1112" y="450" width="11" height="15"/><rect x="330" y="492" width="11" height="15"/><rect x="822" y="498" width="11" height="15"/></g></svg>',
+                // MODO FOTO: foto propia de una recorrida nocturna (termo, viandas, manos
+                // que entregan). NUNCA rostros de las personas acompañadas.
+                // imageMobile: './mi-foto-movil.jpeg',
+                // imageDesktop: './mi-foto-desktop.jpeg',
                 objectPosition: 'center 55%'
             },
             {
@@ -879,12 +892,13 @@
                 subtitle: 'Alimentos, ropero comunitario y acompañamiento. Ayudanos a ayudar.',
                 ctaText: 'Conocé Cáritas',
                 ctaLink: '#caritas',
-                alt: 'Voluntarios preparando cajones con alimentos.',
-                // REEMPLAZAR POR: foto oficial de Cáritas Morón (pedirles el original y autorización
-                // por escrito) o foto propia del ropero comunitario.
-                imageMobile: './web-caritas-alimentos.jpeg',
-                imageDesktop: './web-caritas-alimentos.jpeg',
-                fallbackImage: './web-velas-fe.jpeg',
+                // Ondas que se expanden desde un punto: lo que se da, se propaga.
+                background: 'linear-gradient(120deg, #2C3E50 0%, #4a4230 55%, #8a6f45 100%)',
+                motif: '<svg class="absolute inset-0 w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><g stroke="#F8F5F0" stroke-width="2" opacity="0.16"><path d="M120 620 L 420 -20"/><path d="M120 620 L 620 40"/><path d="M120 620 L 820 160"/><path d="M120 620 L 1000 300"/><path d="M120 620 L 1160 440"/></g><g fill="none" stroke="#F8F5F0" stroke-width="2" opacity="0.22"><circle cx="120" cy="620" r="190"/><circle cx="120" cy="620" r="310"/><circle cx="120" cy="620" r="440"/><circle cx="120" cy="620" r="580"/></g></svg>',
+                // MODO FOTO: foto oficial de Cáritas Morón (pedirles el original y la
+                // autorización por escrito) o foto propia del ropero comunitario.
+                // imageMobile: './mi-foto-caritas.jpeg',
+                // imageDesktop: './mi-foto-caritas.jpeg',
                 objectPosition: 'center 55%'
             }
         ];
@@ -1083,15 +1097,29 @@
                             slide.className = `absolute inset-0 transition-opacity duration-700 ${index === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`;
                             slide.dataset.index = String(index);
 
-                            slide.innerHTML = `
-                                <img src="${bannerImage}" alt="${item.alt || ''}"
+                            // Un slide es fotografico si tiene imagen; si no, es grafico.
+                            const usaFoto = Boolean(bannerImage);
+
+                            const fondo = usaFoto
+                                ? `<img src="${bannerImage}" alt="${item.alt || ''}"
                                      class="absolute inset-0 w-full h-full object-cover"
                                      style="object-position: ${item.objectPosition || 'center center'}"
                                      loading="${index === 0 ? 'eager' : 'lazy'}"
                                      fetchpriority="${index === 0 ? 'high' : 'low'}"
                                      decoding="async"
-                                     onerror="this.onerror=null;this.src='${item.fallbackImage || './web-velas-fe.jpeg'}'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                                     onerror="this.onerror=null;this.src='${item.fallbackImage || './web-velas-fe.jpeg'}'">`
+                                : `<div class="absolute inset-0" style="background-image: ${item.background};"></div>
+                                   ${item.motif || ''}`;
+
+                            // Con foto hace falta oscurecer mas para que el texto se lea.
+                            // El fondo grafico ya es oscuro, asi que se vela menos.
+                            const velo = usaFoto
+                                ? 'bg-gradient-to-t from-black/70 via-black/30 to-transparent'
+                                : 'bg-gradient-to-t from-black/50 via-black/10 to-transparent';
+
+                            slide.innerHTML = `
+                                ${fondo}
+                                <div class="absolute inset-0 ${velo}"></div>
                                 <div class="absolute inset-0 flex items-end">
                                     <div class="w-full px-6 md:px-16 pb-14 md:pb-20">
                                         <div class="max-w-2xl">
@@ -1665,47 +1693,14 @@
         });
         
         // --- DONACIONES ---
-        const donateOnceBtn = document.getElementById('donate-once');
-        const donateMonthlyBtn = document.getElementById('donate-monthly');
-        const amountBtns = document.querySelectorAll('.amount-btn');
-        const otherAmountInput = document.getElementById('other-amount');
-        const donationTotalEl = document.getElementById('donation-total');
-        let selectedAmount = 0;
+        // La seccion de donaciones hoy es un QR de Mercado Pago y un boton, sin
+        // selector de montos. El JS que manejaba ese selector (donate-once,
+        // donate-monthly, other-amount, donation-total) quedo huerfano: esos
+        // elementos ya no existen en el HTML, y la primera llamada a
+        // addEventListener sobre null cortaba TODO el resto del script.
+        // Por eso se elimino. Si algun dia vuelve el selector de montos, hay que
+        // reponer el HTML y el JS juntos.
 
-        function updateDonationTotal() {
-            donationTotalEl.textContent = `$${selectedAmount}`;
-        }
-
-        donateOnceBtn.addEventListener('click', () => {
-            donateOnceBtn.classList.replace('bg-gray-200', 'bg-dorado-ocre');
-            donateOnceBtn.classList.replace('text-gray-700', 'text-white');
-            donateMonthlyBtn.classList.replace('bg-dorado-ocre', 'bg-gray-200');
-            donateMonthlyBtn.classList.replace('text-white', 'text-gray-700');
-        });
-
-        donateMonthlyBtn.addEventListener('click', () => {
-            donateMonthlyBtn.classList.replace('bg-gray-200', 'bg-dorado-ocre');
-            donateMonthlyBtn.classList.replace('text-gray-700', 'text-white');
-            donateOnceBtn.classList.replace('bg-dorado-ocre', 'bg-gray-200');
-            donateOnceBtn.classList.replace('text-white', 'text-gray-700');
-        });
-        
-        amountBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                amountBtns.forEach(b => b.classList.remove('bg-dorado-ocre', 'text-white'));
-                btn.classList.add('bg-dorado-ocre', 'text-white');
-                selectedAmount = parseInt(btn.dataset.amount, 10);
-                otherAmountInput.value = '';
-                updateDonationTotal();
-            });
-        });
-        
-        otherAmountInput.addEventListener('input', () => {
-            amountBtns.forEach(b => b.classList.remove('bg-dorado-ocre', 'text-white'));
-            selectedAmount = parseInt(otherAmountInput.value, 10) || 0;
-            updateDonationTotal();
-        });
-        
         // --- FOOTER ---
         document.getElementById('footer-year').textContent = new Date().getFullYear();
 
