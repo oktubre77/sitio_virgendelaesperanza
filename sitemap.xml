@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  El sitio es una sola pagina: las secciones viven detras de fragmentos
-  (#pastoral-calle, #caritas, #avisos...) y Google no indexa fragmentos,
-  asi que NO deben listarse aca. Cuando esas secciones pasen a URLs
-  reales, se agregan como <url> propias.
+  Solo URLs reales. Las secciones que todavia viven detras de fragmentos
+  (#caritas, #avisos, #recorridas...) NO van aca: Google no indexa
+  fragmentos y listarlas seria ruido. A medida que una seccion pase a ser
+  una pagina propia, se agrega como una entrada mas.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -11,5 +11,11 @@
     <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.peregrinosdelaesperanza.org/pastoral-de-calle/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>
