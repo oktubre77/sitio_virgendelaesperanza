@@ -146,7 +146,7 @@
                 <a href="/pastoral-de-calle/" class="nav-link">Pastoral de Calle</a>
                 <a href="#recorridas" class="nav-link">Recorridas</a>
                 <a href="#lectio" class="nav-link">Lectio del Día</a>
-                <a href="#caritas" class="nav-link">Cáritas</a>
+                <a href="/caritas/" class="nav-link">Cáritas</a>
                 <a href="#donaciones" class="nav-link bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Donaciones</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden p-2">
@@ -163,7 +163,7 @@
             <a href="/pastoral-de-calle/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Pastoral de Calle</a>
             <a href="#recorridas" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Recorridas</a>
             <a href="#lectio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Lectio del Día</a>
-            <a href="#caritas" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cáritas</a>
+            <a href="/caritas/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cáritas</a>
             <a href="#donaciones" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Donaciones</a>
         </div>
     </header>
@@ -429,40 +429,6 @@
         </section>
         
         <!-- Caritas Section -->
-        <section id="caritas" class="content-section hidden-section py-10 md:py-20 bg-white">
-            <div class="container mx-auto px-4 md:px-6">
-                <div class="text-center mb-8 md:mb-12">
-                    <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Cáritas en Acción</h2>
-                    <p class="text-base md:text-lg text-gray-600 mt-2">Solidaridad y compromiso en nuestra comunidad.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center mb-10 md:mb-16">
-                    <div class="w-full h-52 md:h-80 rounded-lg overflow-hidden shadow-lg">
-                        <a href="https://caritasmoron.org/" target="_blank" rel="noopener noreferrer">
-                            <img src="./caritas-carrusel.png" alt="Voluntarios de Cáritas" class="w-full h-full object-cover">
-                        </a>
-                    </div>
-                    <div>
-                        <h3 class="text-xl md:text-3xl font-bold text-azul-profundo mb-3 md:mb-4">Extendiendo una Mano Amiga</h3>
-                        <p class="text-gray-700 leading-relaxed">
-                            Cáritas Parroquial es la expresión organizada de la caridad de nuestra comunidad. Buscamos responder a las necesidades de nuestros hermanos más vulnerables, promoviendo la dignidad humana y la justicia social a través de programas concretos y el compromiso voluntario.
-                        </p>
-                    </div>
-                </div>
-                <h3 class="text-xl md:text-3xl font-bold text-center text-azul-profundo mb-6 md:mb-10">Nuestras Áreas de Acción</h3>
-                <div id="caritas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                   <!-- Caritas actions will be injected by JS -->
-                </div>
-
-                <div class="mt-16">
-                    <h3 class="text-3xl font-bold text-center text-azul-profundo mb-3">Noticias de Cáritas</h3>
-                    <p class="text-center text-gray-600 mb-8">Actualización automática desde fuente oficial (con respaldo local si no está disponible).</p>
-                    <div id="caritas-news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Caritas news will be injected by JS -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Donaciones Section -->
        <section id="donaciones" class="content-section hidden-section py-10 md:py-20 bg-crema-suave">
             <div class="container mx-auto px-4 md:px-6">
@@ -620,7 +586,7 @@
                         <li><a href="/pastoral-de-calle/" class="text-gray-300 hover:text-dorado-ocre transition">Pastoral de Calle</a></li>
                         <li><a href="#recorridas" class="text-gray-300 hover:text-dorado-ocre transition">Recorridas</a></li>
                         <li><a href="#lectio" class="text-gray-300 hover:text-dorado-ocre transition">Lectio del Día</a></li>
-                        <li><a href="#caritas" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
+                        <li><a href="/caritas/" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
                         <li><a href="#donaciones" class="text-gray-300 hover:text-dorado-ocre transition">Donaciones</a></li>
                     </ul>
                 </div>
@@ -793,43 +759,12 @@
             }
         ];
         
-        const caritasData = [
-            {
-                icon: '🍲',
-                title: 'Asistencia Alimentaria',
-                description: 'Proveemos bolsones de alimentos y gestionamos un comedor comunitario para asegurar la nutrición básica de familias y personas en situación de vulnerabilidad.'
-            },
-            {
-                icon: '👕',
-                title: 'Ropero Comunitario',
-                description: 'Recolectamos, clasificamos y distribuimos ropa, calzado y abrigo en buen estado para todas las edades, promoviendo la dignidad y el cuidado.'
-            },
-            /*{
-                icon: '📚',
-                title: 'Apoyo Escolar',
-                description: 'Ofrecemos un espacio de acompañamiento educativo para niños y adolescentes, ayudándolos con sus tareas y fomentando el amor por el estudio.'
-            }*/
-        ];
+        // Las areas de accion de Caritas (alimentaria y ropero) pasaron a /caritas/
+        // como HTML estatico. Se eliminaron el arreglo que las definia y el feed de
+        // Caritas Moron: ese feed ademas no trae imagenes en ningun campo, verificado.
 
-        const CARITAS_RSS_URL = 'https://caritasmoron.org/feed/';
-        const CARITAS_RSS_PROXY = 'https://api.rss2json.com/v1/api.json?rss_url=';
         const VATICAN_RSS_URL = 'https://www.vaticannews.va/es.rss.xml';
         const VATICAN_RSS_PROXY = 'https://api.rss2json.com/v1/api.json?rss_url=';
-        const caritasNewsFallback = [
-            {
-                title: 'Cáritas: acompañamiento y misión',
-                date: 'Actualización local',
-                summary: 'Conoce iniciativas, campañas y acciones de servicio comunitario de Cáritas.',
-                link: 'https://caritasmoron.org/'
-            },
-            {
-                title: 'Cómo colaborar con Cáritas',
-                date: 'Actualización local',
-                summary: 'Infórmate sobre donaciones, voluntariado y apoyo a familias en situación de vulnerabilidad.',
-                link: 'https://caritasmoron.org/'
-            }
-        ];
-
         const vaticanNewsFallback = [
             {
                 title: 'Vatican News: información oficial',
@@ -896,8 +831,12 @@
         // Compatibilidad: #pastoral-calle dejo de ser una seccion de esta pagina
         // y paso a ser /pastoral-de-calle/. Los enlaces viejos que ya circulan por
         // WhatsApp tienen que seguir llevando a algun lado.
-        if (window.location.hash === '#pastoral-calle') {
-            window.location.replace('/pastoral-de-calle/');
+        const SECCIONES_MUDADAS = {
+            '#pastoral-calle': '/pastoral-de-calle/',
+            '#caritas': '/caritas/'
+        };
+        if (SECCIONES_MUDADAS[window.location.hash]) {
+            window.location.replace(SECCIONES_MUDADAS[window.location.hash]);
         }
 
         window.addEventListener('hashchange', () => {
@@ -1280,60 +1219,14 @@
             });
         }
 
-        // --- NOTICIAS CARITAS ---
-        const caritasNewsGrid = document.getElementById('caritas-news-grid');
-
+        // formatNewsDate la usa el renderizador de noticias del Vaticano, asi que se
+        // conserva aunque el bloque de noticias de Caritas se haya eliminado.
         function formatNewsDate(value) {
             if (!value) return 'Sin fecha';
             const parsed = new Date(value);
             if (Number.isNaN(parsed.getTime())) return escapeHtml(value);
             return parsed.toLocaleDateString('es-AR', { year: 'numeric', month: '2-digit', day: '2-digit' });
         }
-
-        function renderCaritasNews(newsItems) {
-            if (!caritasNewsGrid) return;
-
-            caritasNewsGrid.innerHTML = '';
-            newsItems.forEach(news => {
-                const card = document.createElement('article');
-                card.className = 'bg-crema-suave rounded-lg shadow-md p-6 flex flex-col';
-                card.innerHTML = `
-                    <p class="text-sm text-gray-500 mb-2">${formatNewsDate(news.date)}</p>
-                    <h4 class="text-xl font-bold text-azul-profundo mb-3">${escapeHtml(news.title)}</h4>
-                    <p class="text-gray-700 mb-5 flex-grow">${escapeHtml(news.summary || '')}</p>
-                    <a href="${news.link}" target="_blank" rel="noopener noreferrer" class="mt-auto self-start bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Leer en fuente oficial</a>
-                `;
-                caritasNewsGrid.appendChild(card);
-            });
-        }
-
-        async function initCaritasNews() {
-            if (!caritasNewsGrid) return;
-
-            try {
-                const response = await fetch(`${CARITAS_RSS_PROXY}${encodeURIComponent(CARITAS_RSS_URL)}`);
-                if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
-
-                const data = await response.json();
-                if (!data || !Array.isArray(data.items) || data.items.length === 0) {
-                    throw new Error('Sin items en feed');
-                }
-
-                const mapped = data.items.slice(0, 3).map(item => ({
-                    title: item.title || 'Noticia Cáritas',
-                    date: item.pubDate || '',
-                    summary: item.description ? item.description.replace(/<[^>]+>/g, ' ').trim().slice(0, 180) : '',
-                    link: item.link || 'https://caritasmoron.org/'
-                }));
-
-                renderCaritasNews(mapped);
-            } catch (error) {
-                console.error('No se pudieron cargar noticias automáticas de Cáritas:', error);
-                renderCaritasNews(caritasNewsFallback);
-            }
-        }
-
-        initCaritasNews();
 
         // --- NOTICIAS VATICANO ---
         const vaticanNewsGrid = document.getElementById('vatican-news-grid');
@@ -1347,12 +1240,20 @@
             vaticanNewsGrid.innerHTML = '';
             newsItems.forEach(news => {
                 const card = document.createElement('article');
-                card.className = 'bg-white rounded-lg shadow-md p-6 flex flex-col';
+                card.className = 'bg-white rounded-lg shadow-md overflow-hidden flex flex-col';
+                // Si la noticia no trae imagen (por ejemplo las de respaldo local),
+                // la tarjeta se arma igual, solo que sin foto.
+                const foto = news.image
+                    ? `<img src="${news.image}" alt="" class="w-full h-44 object-cover bg-gray-100" loading="lazy" decoding="async" onerror="this.remove()">`
+                    : '';
                 card.innerHTML = `
-                    <p class="text-sm text-gray-500 mb-2">${formatNewsDate(news.date)}</p>
-                    <h4 class="text-xl font-bold text-azul-profundo mb-3">${escapeHtml(news.title)}</h4>
-                    <p class="text-gray-700 mb-5 flex-grow">${escapeHtml(news.summary || '')}</p>
-                    <a href="${news.link}" target="_blank" rel="noopener noreferrer" class="mt-auto self-start bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Leer en fuente oficial</a>
+                    ${foto}
+                    <div class="p-6 flex flex-col flex-grow">
+                        <p class="text-sm text-gray-500 mb-2">${formatNewsDate(news.date)}</p>
+                        <h4 class="text-xl font-bold text-azul-profundo mb-3">${escapeHtml(news.title)}</h4>
+                        <p class="text-gray-700 mb-5 flex-grow">${escapeHtml(news.summary || '')}</p>
+                        <a href="${news.link}" target="_blank" rel="noopener noreferrer" class="mt-auto self-start bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Leer en fuente oficial</a>
+                    </div>
                 `;
                 vaticanNewsGrid.appendChild(card);
             });
@@ -1384,7 +1285,12 @@
                     title: item.title || 'Noticia Vaticano',
                     date: item.pubDate || '',
                     summary: item.description ? item.description.replace(/<[^>]+>/g, ' ').trim().slice(0, 180) : '',
-                    link: item.link || 'https://www.vaticannews.va/es.html'
+                    link: item.link || 'https://www.vaticannews.va/es.html',
+                    // La imagen viene en enclosure.link, NO en thumbnail: el proxy deja
+                    // thumbnail vacio para este feed. Verificado: los 10 items del RSS
+                    // del Vaticano traen enclosure.link y responden HTTP 200.
+                    // (El feed de Caritas Moron no trae imagenes en ningun campo.)
+                    image: (item.enclosure && item.enclosure.link) ? item.enclosure.link : ''
                 }));
 
                 renderVaticanNews(mapped);
@@ -1535,18 +1441,14 @@
         // El render manual anterior quedaba comentado y sin datos: se elimino.
 
         // --- CARITAS ---
-        const caritasGrid = document.getElementById('caritas-grid');
-        caritasData.forEach(action => {
-            const card = document.createElement('div');
-            card.className = 'bg-crema-suave p-8 rounded-lg shadow-md text-center';
-            card.innerHTML = `
-                <div class="text-6xl mb-4">${action.icon}</div>
-                <h4 class="text-2xl font-bold text-azul-profundo mb-3">${action.title}</h4>
-                <p class="text-gray-700">${action.description}</p>
-            `;
-            caritasGrid.appendChild(card);
-        });
-        
+        // Caritas paso a ser su propia pagina (/caritas/), con las areas de accion
+        // escritas directamente en el HTML. Se elimino el render que llenaba esa
+        // grilla: el contenedor ya no existe, y agregarle hijos a un elemento nulo
+        // cortaba la ejecucion de todo el script posterior, igual que paso con el
+        // selector de montos de Donaciones.
+        // (Sin nombres de variables literales en este comentario: confunden a grep
+        // y a cualquier verificacion que cuente referencias huerfanas.)
+
         // --- DONACIONES ---
         // La seccion de donaciones hoy es un QR de Mercado Pago y un boton, sin
         // selector de montos. El JS que manejaba ese selector (donate-once,
