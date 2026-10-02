@@ -331,6 +331,28 @@
                 <div id="vatican-news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Vatican news will be injected here by JS -->
                 </div>
+
+                <!-- =================================================================
+                     WIDGET OFICIAL DE VATICAN NEWS
+
+                     Lo genera el propio Vaticano en vaticannews.va/widget/embed.html
+                     (configurador interactivo: idioma, tamano de fuente y velocidad
+                     del carrusel de videos). Trae videos cortos y el ticker de
+                     ultimas noticias, y se actualiza solo.
+
+                     Va DEBAJO de nuestras tarjetas a proposito: primero lo propio,
+                     ya maquetado con los colores del sitio, y despues lo de ellos.
+
+                     Para cambiar el tamano de letra, el atributo es fontSize.
+                     ================================================================= -->
+                <div class="mt-12 md:mt-16">
+                    <h3 class="text-xl md:text-2xl font-bold text-azul-profundo mb-2">Videos y novedades de Vatican News</h3>
+                    <p class="text-gray-600 mb-6">Contenido oficial de la Santa Sede, actualizado automáticamente.</p>
+                    <div class="bg-white rounded-lg shadow-md p-3 md:p-5 overflow-x-auto">
+                        <vaticannews-widget lang="es" fontSize="14" carouselVideoAuto="true" carouselVideoTime="medium"></vaticannews-widget>
+                    </div>
+                </div>
+                <script src="https://www.vaticannews.va/widget.js"></script>
             </div>
         </section>
 
