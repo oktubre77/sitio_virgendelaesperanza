@@ -150,9 +150,9 @@
         <span class="text-azul-profundo font-semibold">Pastoral de Calle</span>
     </nav>
 
-    <main>
+    <main class="pb-16 md:pb-0">
 <!-- Pastoral de Calle Section -->
-        <section class="py-10 md:py-20 bg-white">
+        <section class="pb-10 md:pb-20 bg-white">
             <!-- Encabezado -->
             <div class="relative w-full overflow-hidden shadow-xl mb-8 md:mb-12" style="height: 220px; min-height: 180px;">
                 <!-- REEMPLAZAR POR: foto propia de una recorrida nocturna, sin rostros identificables. -->
@@ -410,28 +410,28 @@
     </a>
 
     <!-- Bottom Navigation Bar (mobile only) -->
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg" style="padding-bottom: env(safe-area-inset-bottom, 0px);">
+        <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg" style="padding-bottom: env(safe-area-inset-bottom, 0px);">
         <div class="grid grid-cols-5 h-16">
-            <button onclick="document.querySelector('[href=\'#inicio\']').click()" class="bottom-nav-link flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors" data-section="inicio">
-                <span class="bnav-icon text-dorado-ocre text-xl">🏠</span>
-                <span class="bnav-label text-dorado-ocre text-xs font-semibold">Inicio</span>
-            </button>
-            <button onclick="document.querySelector('[href=\'#avisos\']').click()" class="bottom-nav-link flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors" data-section="avisos">
-                <span class="bnav-icon text-gray-400 text-xl">🔔</span>
-                <span class="bnav-label text-gray-400 text-xs font-semibold">Avisos</span>
-            </button>
-            <button onclick="document.querySelector('[href=\'#recorridas\']').click()" class="bottom-nav-link flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors" data-section="recorridas">
-                <span class="bnav-icon text-gray-400 text-xl">🗺️</span>
-                <span class="bnav-label text-gray-400 text-xs font-semibold">Recorridas</span>
-            </button>
-            <button onclick="document.querySelector('[href=\'#caritas\']').click()" class="bottom-nav-link flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors" data-section="caritas">
-                <span class="bnav-icon text-gray-400 text-xl">🤝</span>
-                <span class="bnav-label text-gray-400 text-xs font-semibold">Cáritas</span>
-            </button>
-            <button onclick="document.querySelector('[href=\'#donaciones\']').click()" class="bottom-nav-link flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors" data-section="donaciones">
-                <span class="bnav-icon text-gray-400 text-xl">💖</span>
-                <span class="bnav-label text-gray-400 text-xs font-semibold">Donar</span>
-            </button>
+            <a href="/#inicio" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">🏠</span>
+                <span class="text-gray-400 text-xs font-semibold">Inicio</span>
+            </a>
+            <a href="/#avisos" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">🔔</span>
+                <span class="text-gray-400 text-xs font-semibold">Avisos</span>
+            </a>
+            <a href="/#recorridas" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">🗺️</span>
+                <span class="text-gray-400 text-xs font-semibold">Recorridas</span>
+            </a>
+            <a href="/#caritas" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">🤝</span>
+                <span class="text-gray-400 text-xs font-semibold">Cáritas</span>
+            </a>
+            <a href="/#donaciones" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">💖</span>
+                <span class="text-gray-400 text-xs font-semibold">Donar</span>
+            </a>
         </div>
     </nav>
 
