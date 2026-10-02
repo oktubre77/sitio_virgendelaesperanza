@@ -1,0 +1,8 @@
+# Peregrinos de la Esperanza
+# Mision de la Comunidad Virgen de la Esperanza, Santa Clara de Asis
+# y las comunidades hermanas - Hurlingham, Buenos Aires
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.peregrinosdelaesperanza.org/sitemap.xml
