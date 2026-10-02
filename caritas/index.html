@@ -221,6 +221,25 @@
                     </a>
                 </div>
 
+                <!-- Enlace a las novedades de Caritas Moron.
+                     A proposito NO se replica su feed: tiene 3 notas, la mas nueva de
+                     hace semanas, y cero imagenes (verificado sobre el XML crudo, no
+                     a traves del proxy). Replicarlo exigiria JavaScript en una pagina
+                     que hoy es HTML estatico puro, Google veria un contenedor vacio,
+                     y las tarjetas de solo texto quedarian peor que este enlace. -->
+                <div class="border-l-4 border-dorado-ocre bg-white shadow-md rounded-r-lg p-6 md:p-8 mb-12 md:mb-16">
+                    <h2 class="text-xl md:text-2xl font-bold text-azul-profundo mb-3">Novedades de Cáritas Morón</h2>
+                    <p class="text-gray-700 leading-relaxed mb-5">
+                        Campañas, jornadas y novedades de toda la diócesis se publican en el sitio de Cáritas Morón,
+                        la organización de la que formamos parte.
+                    </p>
+                    <a href="https://caritasmoron.org/novedades/" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 bg-azul-profundo text-white px-5 py-3 rounded-full font-bold text-sm hover:bg-dorado-ocre transition-colors">
+                        Ver las novedades
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <a href="/pastoral-de-calle/" class="group block bg-crema-suave p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <div class="text-4xl text-dorado-ocre mb-3">🌙</div>

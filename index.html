@@ -695,7 +695,21 @@
         //   - zona inferior izquierda despejada: ahi va el titulo y el boton
         //   - sin rostros identificables de personas acompanadas en la calle
         // ---------------------------------------------------------------------
-        const homeBannerData = [
+        const homeBannerTodos = [
+            {
+                // SLIDE CON VENCIMIENTO: desaparece solo el 2026-10-04.
+                // Datos verificados en peregrinacionlujan.org.ar. No publican horario
+                // ni lugar de salida, asi que no figuran: el boton lleva a la fuente.
+                badge: 'Sábado 3 de octubre',
+                title: '52ª Peregrinación Juvenil a Luján',
+                subtitle: '«Madre, danos amor para caminar con esperanza». Caminamos juntos hacia la Basílica.',
+                ctaText: 'Información oficial',
+                ctaLink: 'https://peregrinacionlujan.org.ar/',
+                hasta: '2026-10-04',
+                background: 'linear-gradient(135deg, #15314f 0%, #2C3E50 45%, #4a7fb5 100%)',
+                motif: '<svg class="absolute inset-0 w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><g fill="none" stroke="#F8F5F0" stroke-width="2" opacity="0.22"><path d="M-40 600 C 300 460, 500 380, 600 330"/><path d="M240 600 C 430 470, 540 390, 600 330"/><path d="M960 600 C 770 470, 660 390, 600 330"/><path d="M1240 600 C 900 460, 700 380, 600 330"/></g><g fill="#F8F5F0" opacity="0.18"><rect x="556" y="250" width="88" height="80"/><rect x="528" y="214" width="26" height="116"/><rect x="646" y="214" width="26" height="116"/><path d="M541 178 L554 214 L528 214 Z"/><path d="M659 178 L672 214 L646 214 Z"/><path d="M600 226 L556 250 L644 250 Z"/></g><g stroke="#F8F5F0" stroke-width="3" opacity="0.32" stroke-linecap="round"><path d="M600 150 L600 184"/><path d="M587 163 L613 163"/></g></svg>',
+                objectPosition: 'center 50%'
+            },
             {
                 badge: 'Peregrinos de la Esperanza',
                 title: 'Una misión, varias comunidades',
@@ -745,6 +759,15 @@
                 objectPosition: 'center 55%'
             }
         ];
+
+        // Los slides con 'hasta' se descuelgan solos cuando pasa esa fecha, sin que
+        // nadie tenga que acordarse. Este sitio ya tuvo avisos de marzo publicados en
+        // octubre: un banner que anuncia algo de manana envejece muy mal.
+        // Fecha LOCAL, no UTC: toISOString() daria la fecha de Greenwich y en
+        // Argentina (UTC-3) el slide se descolgaria a las 21 del mismo dia del
+        // evento, con la peregrinacion todavia en curso.
+        const hoyISO = new Date().toLocaleDateString('en-CA');
+        const homeBannerData = homeBannerTodos.filter(s => !s.hasta || s.hasta > hoyISO);
 
         const avisosFallbackData = [
             {
@@ -956,7 +979,7 @@
                                             </span>
                                             <h2 class="text-white text-3xl md:text-5xl font-bold leading-tight mb-3 drop-shadow-lg">${item.title}</h2>
                                             <p class="text-white/85 text-base md:text-xl mb-6 drop-shadow">${item.subtitle}</p>
-                                            <a href="${item.ctaLink}"
+                                            <a href="${item.ctaLink}"${String(item.ctaLink).startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}
                                                class="inline-flex items-center gap-2 bg-white text-azul-profundo px-6 py-3 rounded-full font-bold text-sm md:text-base hover:bg-dorado-ocre hover:text-white transition-all duration-300 shadow-lg">
                                                 ${item.ctaText}
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
