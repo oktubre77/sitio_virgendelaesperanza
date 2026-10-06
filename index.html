@@ -56,6 +56,30 @@
       ]
     }
     </script>
+    <!-- WebSite: liga el dominio con el nombre de la mision. Era la unica pagina
+         del sitio sin este bloque, siendo la mas importante; las cuatro subpaginas
+         ya lo tienen.
+         NO lleva SearchAction, que es lo habitual en un WebSite: esa propiedad
+         declara un buscador interno y este sitio no tiene uno. Declararlo seria
+         prometerle a Google algo que no existe.
+         Tampoco lleva BreadcrumbList: las migas describen un camino, y en la
+         portada ese camino tiene un solo paso. En las subpaginas si corresponde,
+         y ahi ya esta. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Peregrinos de la Esperanza",
+      "alternateName": "Misión de las comunidades de Hurlingham",
+      "url": "https://www.peregrinosdelaesperanza.org/",
+      "inLanguage": "es-AR",
+      "publisher": {
+        "@type": "Church",
+        "name": "Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís",
+        "url": "https://www.peregrinosdelaesperanza.org/"
+      }
+    }
+    </script>
     <!-- Chosen Palette: Modern Solemnity (Azul Esperanza Profundo, Blanco Hueso, Dorado Ocre Sutil) -->
     <!-- Application Structure Plan: A single-page application (SPA) with dynamically shown/hidden sections for each category (Inicio, Avisos, etc.). Navigation is handled by JS, updating the view without page reloads for a seamless user experience. This structure directly translates the presentation's slides into an interactive web format, prioritizing speed and modern UX. -->
     <!-- Visualization & Content Choices: Landing: JS-powered image carousel. Avisos: Card grid with modals for details. Lectio: Dynamic text content updated via JS date navigation. Donaciones: Interactive buttons and toggles to configure donation amount and type. This avoids page reloads and presents information in digestible, interactive chunks. -->
