@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recorridas: cronograma, bitácoras e inventario | Peregrinos de la Esperanza</title>
+    <meta name="description" content="Espacio de trabajo del equipo de recorridas: cronograma mensual, bitácoras de las salidas e inventario de insumos.">
+    <link rel="canonical" href="https://www.peregrinosdelaesperanza.org/recorridas/">
+    <!-- noindex: cronograma de voluntarios e inventario no son contenido publico. -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#2C3E50">
+    <link rel="icon" href="/icon.png" type="image/png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Open Sans', sans-serif; background-color: #F8F5F0; }
+        h1, h2, h3, .font-serif { font-family: 'Lora', serif; }
+        .bg-azul-profundo { background-color: #2C3E50; }
+        .text-azul-profundo { color: #2C3E50; }
+        .bg-dorado-ocre { background-color: #B08D57; }
+        .text-dorado-ocre { color: #B08D57; }
+        .border-dorado-ocre { border-color: #B08D57; }
+        .bg-crema-suave { background-color: #F8F5F0; }
+        .nav-link { position: relative; padding-bottom: 4px; transition: color .3s; }
+        .nav-link:hover, .nav-link.active { color: #B08D57; }
+        .nav-link.active::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background-color: #B08D57; }
+        .modal { transition: opacity .3s ease, visibility .3s ease; }
+        .modal-content { transition: transform .3s ease; }
+    </style>
+</head>
+<body class="antialiased">
+
+<header id="header" class="bg-azul-profundo text-white shadow-lg sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2.5 md:gap-3 font-bold font-serif tracking-wider leading-tight">
+                <img src="/icon.png" alt="" aria-hidden="true" width="48" height="48"
+                     class="w-10 h-10 md:w-12 md:h-12 rounded-full shrink-0">
+                <span class="text-base md:hidden">Peregrinos de la Esperanza</span>
+                <span class="hidden md:flex md:flex-col leading-tight">
+                    <span class="text-xl lg:text-2xl">Peregrinos de la Esperanza</span>
+                    <span class="text-xs font-normal tracking-normal text-white/70" style="font-family: 'Open Sans', sans-serif;">Misión de las comunidades de Hurlingham</span>
+                </span>
+            </a>
+            <nav class="hidden md:flex space-x-5 lg:space-x-7 items-center">
+                <a href="/#inicio" class="nav-link">Inicio</a>
+                <a href="/#avisos" class="nav-link">Avisos</a>
+                <a href="/#vaticano" class="nav-link">Vaticano</a>
+                <a href="/pastoral-de-calle/" class="nav-link">Pastoral de Calle</a>
+                <a href="/recorridas/" class="nav-link active" aria-current="page">Recorridas</a>
+                <a href="/#lectio" class="nav-link">Lectio del Día</a>
+                <a href="/caritas/" class="nav-link">Cáritas</a>
+                <a href="/#donaciones" class="nav-link bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Donaciones</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden p-2" aria-label="Abrir menú">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-azul-profundo">
+            <a href="/#inicio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Inicio</a>
+            <a href="/#avisos" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Avisos</a>
+            <a href="/#vaticano" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Vaticano</a>
+            <a href="/pastoral-de-calle/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Pastoral de Calle</a>
+            <a href="/recorridas/" class="block py-3 px-6 text-center bg-gray-700" aria-current="page">Recorridas</a>
+            <a href="/#lectio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Lectio del Día</a>
+            <a href="/caritas/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cáritas</a>
+            <a href="/carlo-acutis/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">San Carlo Acutis</a>
+            <a href="/san-francisco-de-asis/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">San Francisco de Asís</a>
+            <a href="/#donaciones" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Donaciones</a>
+        </div>
+    </header>
+
+    <nav aria-label="Migas de pan" class="container mx-auto px-4 md:px-6 pt-4 text-sm text-gray-500">
+        <a href="/" class="hover:text-dorado-ocre">Inicio</a>
+        <span class="mx-1">›</span>
+        <a href="/pastoral-de-calle/" class="hover:text-dorado-ocre">Pastoral de Calle</a>
+        <span class="mx-1">›</span>
+        <span class="text-azul-profundo font-semibold">Recorridas</span>
+    </nav>
+
+    <main class="pb-16 md:pb-0">
+<section id="recorridas" class="py-10 md:py-20 bg-white">
+            <!-- Banner Recorridas Solidarias -->
+            <div class="relative w-full overflow-hidden shadow-xl mb-8 md:mb-12" style="height: 200px; min-height: 160px;" class="md:style-340">
+                <img src="/Recorridas_desktop.png" alt="Recorridas Solidarias" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'">
+                <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(44,62,80,0.82) 0%, rgba(176,141,87,0.60) 100%);"></div>
+                <div class="absolute inset-0 flex flex-col justify-center px-5 md:px-20">
+                    <span class="inline-block w-max bg-dorado-ocre/90 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-2 md:mb-4">
+                        Comunidad en acción
+                    </span>
+                    <h1 class="text-2xl md:text-6xl font-bold text-white mb-1 md:mb-3 drop-shadow-lg leading-tight">Recorridas Solidarias</h1>
+                    <p class="text-sm md:text-2xl text-white/90 drop-shadow font-medium">Ayudando juntos, llevando esperanza</p>
+                </div>
+            </div>
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Recorridas</h2>
+                    <p class="text-base md:text-lg text-gray-600 mt-2">Gestiona cronograma, bitácoras e inventario en un solo lugar.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <a href="#cronograma" class="group block bg-crema-suave p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">🗓️</div>
+                        <h3 class="text-2xl font-bold text-azul-profundo mb-2 text-center">Cronograma</h3>
+                        <p class="text-gray-600 text-center">Organiza integrantes por día y mes de recorrida.</p>
+                    </a>
+                    <a href="#bitacoras" class="group block bg-crema-suave p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">📘</div>
+                        <h3 class="text-2xl font-bold text-azul-profundo mb-2 text-center">Bitácoras</h3>
+                        <p class="text-gray-600 text-center">Consulta y registra el detalle pastoral de cada salida.</p>
+                    </a>
+                    <a href="#inventario" class="group block bg-crema-suave p-8 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-5xl text-dorado-ocre mb-4 flex justify-center">📦</div>
+                        <h3 class="text-2xl font-bold text-azul-profundo mb-2 text-center">Inventario</h3>
+                        <p class="text-gray-600 text-center">Controla stock y disponibilidad para las recorridas.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cronograma Section -->
+        <section id="cronograma" class="py-10 md:py-20 bg-crema-suave">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Cronograma de Recorridas 2026</h2>
+                    <p class="text-lg text-gray-600 mt-2">Calendario mensual editable para miércoles, viernes y domingo.</p>
+                </div>
+
+                <div class="max-w-sm mx-auto mb-6">
+                    <label for="cronograma-month" class="block text-sm font-semibold text-gray-700 mb-2">Seleccionar mes</label>
+                    <select id="cronograma-month" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-dorado-ocre bg-white"></select>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-4 md:p-6 overflow-x-auto">
+                    <div class="min-w-[980px]">
+                        <h3 id="cronograma-title" class="text-2xl font-bold text-azul-profundo mb-4"></h3>
+                        <div id="cronograma-weekdays" class="grid grid-cols-7 gap-2 mb-2"></div>
+                        <div id="cronograma-grid" class="grid grid-cols-7 gap-2"></div>
+                    </div>
+                </div>
+
+                <p class="text-sm text-gray-500 mt-4 text-center">Los nombres se guardan en este navegador. Días no habilitados quedan solo informativos.</p>
+            </div>
+        </section>
+
+        <!-- Bitacoras Section -->
+        <section id="bitacoras" class="py-10 md:py-20 bg-white">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-8 md:mb-12">
+                    <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Bitácora de Recorridas</h2>
+                    <p class="text-base md:text-lg text-gray-600 mt-2">Registro de salidas, equipos y acompañamiento pastoral.</p>
+                </div>
+                <div id="bitacoras-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Bitácoras will be injected here by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Agregar después de la sección donaciones, antes de ubicacion -->
+
+<!-- Inventario Section -->
+<section id="inventario" class="py-10 md:py-20 bg-white">
+
+    <!-- Voluntarios Section -->
+    <div class="container mx-auto px-4 md:px-6">
+        <div class="text-center mb-8 md:mb-12">
+            <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Gestión de Inventario</h2>
+            <p class="text-base md:text-lg text-gray-600 mt-2">Control de stock de Cáritas</p>
+        </div>
+
+        <!-- Panel de Inventario -->
+        <div id="inventory-panel">
+            <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <p class="text-blue-800 text-center">
+                    🔒 <strong>Edición segura:</strong> este panel es de consulta. Para modificar el stock, usa 
+                    <strong>Google Sheets</strong> con cuentas autorizadas.
+                </p>
+            </div>
+            <!-- Barra de herramientas -->
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-3">
+                <div class="flex items-center gap-3">
+                    <input type="text" id="search-product" placeholder="🔍 Buscar producto..." 
+                           onkeyup="filterProducts()"
+                           class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-dorado-ocre text-sm md:text-base">
+                    <button onclick="loadInventory()" 
+                            class="bg-azul-profundo text-white px-3 py-3 rounded-lg hover:bg-opacity-90 whitespace-nowrap text-sm">
+                        🔄 Actualizar
+                    </button>
+                </div>
+                <button onclick="openGoogleSheet()" 
+                        class="w-full md:w-auto bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700 text-sm">
+                    📊 Abrir en Google Sheets
+                </button>
+            </div>
+
+            <div class="mb-6 p-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700 flex flex-wrap justify-between gap-2">
+                <p><strong>Última actualización:</strong> <span id="inventory-last-update">Pendiente de carga</span></p>
+                <p><strong>Criterio de estado:</strong> Sin Stock = 0 | Bajo = 1 a 5 | OK = mayor a 5</p>
+            </div>
+
+            <!-- Resumen -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
+                <div class="bg-blue-100 p-4 rounded-lg text-center">
+                    <p class="text-3xl font-bold text-blue-700" id="total-items">0</p>
+                    <p class="text-gray-600">Total Productos</p>
+                </div>
+                <div class="bg-green-100 p-4 rounded-lg text-center">
+                    <p class="text-3xl font-bold text-green-700" id="total-stock">0</p>
+                    <p class="text-gray-600">Unidades Totales</p>
+                </div>
+                <div class="bg-yellow-100 p-4 rounded-lg text-center">
+                    <p class="text-3xl font-bold text-yellow-700" id="low-stock">0</p>
+                    <p class="text-gray-600">Stock Bajo (≤5)</p>
+                </div>
+                <div class="bg-red-100 p-4 rounded-lg text-center">
+                    <p class="text-3xl font-bold text-red-700" id="out-of-stock">0</p>
+                    <p class="text-gray-600">Sin Stock</p>
+                </div>
+            </div>
+            
+            <!-- Tabla de Productos -->
+            <div class="overflow-x-auto bg-white rounded-lg shadow-md">
+                <table class="w-full">
+                    <thead class="bg-azul-profundo text-white">
+                        <tr>
+                            <th class="p-4 text-left">Producto</th>
+                            <th class="p-4 text-center">Inventario Total</th>
+                            <th class="p-4 text-left hidden md:table-cell">Descripción</th>
+                            <th class="p-4 text-center">A Retirar</th>
+                            <th class="p-4 text-center">Stock Final</th>
+                            <th class="p-4 text-center">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventory-table">
+                        <tr>
+                            <td colspan="6" class="p-8 text-center text-gray-500">
+                                <div class="animate-pulse">Cargando inventario...</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Leyenda -->
+            <div class="mt-6 flex flex-wrap gap-4 justify-center text-sm">
+                <span class="flex items-center gap-2">
+                    <span class="w-4 h-4 bg-green-200 rounded"></span> Stock OK
+                </span>
+                <span class="flex items-center gap-2">
+                    <span class="w-4 h-4 bg-yellow-200 rounded"></span> Stock Bajo (≤5)
+                </span>
+                <span class="flex items-center gap-2">
+                    <span class="w-4 h-4 bg-red-200 rounded"></span> Sin Stock
+                </span>
+            </div>
+
+            <!-- Nota -->
+            <div class="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <p class="text-blue-800 text-center">
+                    💡 <strong>Nota:</strong> Para modificar el inventario, usa el botón "Abrir en Google Sheets" 
+                    y edita directamente la planilla con permisos autorizados. Luego presiona "Actualizar" para ver los cambios.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <section class="py-10 bg-crema-suave">
+            <div class="container mx-auto px-4 md:px-6 text-center">
+                <p class="text-gray-600 mb-4">¿Querés saber qué es la pastoral de calle, cómo es una recorrida o cómo sumarte?</p>
+                <a href="/pastoral-de-calle/" class="inline-block bg-azul-profundo text-white px-6 py-3 rounded-full hover:bg-opacity-90 transition-colors">Pastoral de Calle</a>
+            </div>
+        </section>
+    </main>
+
+<!-- Modal -->
+    <div id="modal" class="modal fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 z-50 opacity-0 invisible">
+        <div id="modal-content" class="modal-content bg-white rounded-lg shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95">
+            <div class="sticky top-0 bg-white p-4 border-b flex justify-between items-center">
+                <h3 id="modal-title" class="text-2xl font-bold text-azul-profundo"></h3>
+                <button id="modal-close" class="text-3xl text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <div id="modal-body" class="p-6">
+                <!-- Modal content goes here -->
+            </div>
+        </div>
+    </div>
+
+<footer class="bg-azul-profundo text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <div>
+                    <h3 class="text-xl font-bold font-serif mb-1">Peregrinos de la Esperanza</h3>
+                    <p class="text-gray-400 text-xs uppercase tracking-widest font-semibold mb-3">Misión de las comunidades de Hurlingham</p>
+                    <ul class="text-gray-300 text-sm space-y-1 mb-4">
+                        <li>Parroquia Virgen de la Esperanza</li>
+                        <li>Capilla Santa Clara</li>
+                        <li>Parroquia San Pablo Apóstol</li>
+                        <li>Medalla Milagrosa</li>
+                        <li>Parroquia Sagrado Corazón de Jesús</li>
+                    </ul>
+                    <p class="text-gray-300">Arribeños 2466, Hurlingham, Provincia de Buenos Aires, Argentina</p>
+                    <p class="text-gray-300 mt-2">contacto@parroquia.org</p>
+                    <p class="text-gray-300 mt-2">vesperanzahurlingham@gmail.com</p>
+                    <!-- Enlace a la sede diocesana. Ademas de ser util para el visitante,
+                         un enlace saliente a un sitio local con autoridad ayuda, y abre la
+                         puerta a pedirles el reciproco, que es lo que mas rinde. -->
+                    <p class="mt-4">
+                        <a href="https://catedraldemoron.org.ar/" target="_blank" rel="noopener noreferrer"
+                           class="text-gray-400 hover:text-dorado-ocre transition text-sm">
+                            Diócesis de Morón · Catedral de Morón ↗
+                        </a>
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold font-serif mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/#inicio" class="text-gray-300 hover:text-dorado-ocre transition">Inicio</a></li>
+                        <li><a href="/#avisos" class="text-gray-300 hover:text-dorado-ocre transition">Avisos</a></li>
+                        <li><a href="/#vaticano" class="text-gray-300 hover:text-dorado-ocre transition">Vaticano</a></li>
+                        <li><a href="/pastoral-de-calle/" class="text-gray-300 hover:text-dorado-ocre transition">Pastoral de Calle</a></li>
+                        <li><a href="/recorridas/" class="text-gray-300 hover:text-dorado-ocre transition">Recorridas</a></li>
+                        <li><a href="/#lectio" class="text-gray-300 hover:text-dorado-ocre transition">Lectio del Día</a></li>
+                        <li><a href="/caritas/" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
+                        <li><a href="/carlo-acutis/" class="text-gray-300 hover:text-dorado-ocre transition">San Carlo Acutis</a></li>
+                        <li><a href="/san-francisco-de-asis/" class="text-gray-300 hover:text-dorado-ocre transition">San Francisco de Asís</a></li>
+                        <li><a href="/#donaciones" class="text-gray-300 hover:text-dorado-ocre transition">Donaciones</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold font-serif mb-4">Seguinos</h3>
+                    <a href="https://www.instagram.com/peregrinosdelaesperanza2026" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 bg-dorado-ocre text-white px-4 py-2 rounded-full font-bold text-sm hover:bg-opacity-90 transition-colors mb-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg>
+                        @peregrinosdelaesperanza2026
+                    </a>
+                    <p class="text-gray-400 text-xs uppercase tracking-widest font-semibold mb-3">Comunidad Virgen de la Esperanza</p>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="https://www.facebook.com/virgendelaesperanza" class="text-gray-300 hover:text-dorado-ocre transition flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="blue" class="bi bi-facebook" viewBox="0 0 16 16">
+  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+</svg><b>Facebook</b>
+                        </a>
+                        <a href="https://www.instagram.com/pquiavirgendelaesperanzaok/" class="text-gray-300 hover:text-dorado-ocre transition flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+</svg> <b>Instagram</b>
+                        </a>
+                        <a href="https://www.youtube.com/@pquia.virgendelaesperanza2180" class="text-gray-300 hover:text-dorado-ocre transition flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-youtube" viewBox="0 0 16 16">
+  <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
+</svg> <b>YouTube</b>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
+                <p>&copy; <span id="footer-year"></span> Peregrinos de la Esperanza — Comunidad Virgen de la Esperanza y Santa Clara de Asís.</p>
+            </div>
+        </div>
+    </footer>
+
+<!-- Botones flotantes -->
+    <!-- WhatsApp -->
+    <a href="https://wa.me/5491121909764?text=Hola%2C%20me%20comunico%20desde%20el%20sitio%20web%20de%20Peregrinos%20de%20la%20Esperanza" target="_blank" rel="noopener noreferrer"
+       aria-label="Contactar por WhatsApp"
+       class="fixed bottom-24 right-4 md:bottom-8 md:right-6 z-50 w-14 h-14 flex items-center justify-center rounded-full shadow-xl transition-transform hover:scale-110 active:scale-95"
+       style="background-color: #25D366;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+        </svg>
+    </a>
+    <!-- Donar flotante (solo desktop) -->
+    <a href="/#donaciones"
+       aria-label="Hacer una donación"
+       class="hidden md:flex fixed bottom-8 right-24 z-50 items-center gap-2 bg-dorado-ocre text-white px-5 py-3 rounded-full shadow-xl font-bold text-sm hover:bg-opacity-90 transition-all hover:scale-105 active:scale-95">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+        </svg>
+        Donar ahora
+    </a>
+
+    <!-- Bottom Navigation Bar (mobile only) -->
+        <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg" style="padding-bottom: env(safe-area-inset-bottom, 0px);">
+        <div class="grid grid-cols-5 h-16">
+            <a href="/#inicio" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">🏠</span>
+                <span class="text-gray-400 text-xs font-semibold">Inicio</span>
+            </a>
+            <a href="/#avisos" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">🔔</span>
+                <span class="text-gray-400 text-xs font-semibold">Avisos</span>
+            </a>
+            <a href="/recorridas/" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">🗺️</span>
+                <span class="text-gray-400 text-xs font-semibold">Recorridas</span>
+            </a>
+            <a href="/#caritas" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">🤝</span>
+                <span class="text-gray-400 text-xs font-semibold">Cáritas</span>
+            </a>
+            <a href="/#donaciones" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">💖</span>
+                <span class="text-gray-400 text-xs font-semibold">Donar</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="/inventory.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const modalClose = document.getElementById('modal-close');
+
+        // El tercer parametro es opcional: las bitacoras siguen llamando con dos
+        // argumentos y se comportan igual que siempre.
+        function openModal(title, content, imagen) {
+            modalTitle.textContent = title;
+            // Un folleto es una imagen vertical con el texto adentro: aca se muestra
+            // ENTERO, sin recortar, y se puede abrir aparte para agrandarlo.
+            const foto = (imagen && String(imagen).trim())
+                ? `<a href="${String(imagen).trim()}" target="_blank" rel="noopener noreferrer" title="Abrir la imagen en tamaño completo">
+                       <img src="${String(imagen).trim()}" alt="" class="w-full h-auto rounded-lg mb-5 bg-crema-suave" loading="lazy"
+                            onerror="this.closest('a').remove()">
+                   </a>`
+                : '';
+            modalBody.innerHTML = foto + content;
+            modal.classList.remove('opacity-0', 'invisible');
+            modalContent.classList.remove('scale-95');
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('invisible');
+            }, 300);
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+// ---------------------------------------------------------------------
+        // BITACORAS PUBLICAS
+        // Esta bitacora se publica en una web abierta e indexada por Google.
+        // NO incluir: nombres, apodos, fotos ni descripciones de las personas
+        // acompanadas, ni la esquina o el lugar exacto donde pasan la noche.
+        // Publicar cantidades, zonas generales y que se entrego.
+        // El detalle con nombres va en el registro interno del equipo.
+        // ---------------------------------------------------------------------
+        const bitacorasData = [
+            {
+                title: 'Peregrinos de la Esperanza',
+                date: 'Miércoles 25/02/2026',
+                summary: 'Participaron Daniela, Cecilia, Alicia, Germán, Ramón y Mario. Se entregaron viandas, jugo y gelatina.',
+                fullContent: `<p><strong>Bitácora de la recorrida del miércoles 25 de febrero 2026.</strong></p>
+                <p>En la recorrida salimos: Daniela, Cecilia, Alicia (se incorporó hoy), Germán, Ramón (en bici) y Mario. Cocinó Mirtha.</p>
+                <p>Recorrido: Hospital San Bernardino, estación Hurlingham (Paseo de los Eucaliptus), Remedios de Escalada, Av. Jauretche, estación R. Darío, Av. Julio Roca y Plaza John Ravenscroft. Parte del equipo pasó por la biblioteca municipal (Centro Cultural Benito Quinquela Martín) para reencontrarse luego en estación Hurlingham.</p>
+                <p>Se entregaron viandas (sándwiches de milanesa), jugo y gelatina. Con quienes lo desearon se leyó el Evangelio del día y/o se rezó.</p>
+                <p><strong>Resumen del acompañamiento:</strong></p>
+                <ul>
+                    <li>Hospital San Bernardino: 3 personas acompañadas en el sector externo. En el interior no estaban las personas habituales.</li>
+                    <li>Estación Hurlingham y Paseo de los Eucaliptus: 4 personas acompañadas, 2 con entrega de vianda.</li>
+                    <li>Remedios de Escalada: sin personas esa noche.</li>
+                    <li>Av. Arturo Jauretche: una familia de 4 integrantes, recién llegada a la zona.</li>
+                    <li>Centro Cultural Benito Quinquela Martín: 2 personas acompañadas, una con entrega coordinada a través de otra parroquia.</li>
+                    <li>Plaza John Ravenscroft y alrededores: 2 personas acompañadas, con entrega de vianda y algo dulce.</li>
+                </ul>
+                <p class="text-sm text-gray-500 mt-4"><em>Por cuidado de las personas que acompañamos no publicamos sus nombres ni los lugares exactos donde pasan la noche. El detalle queda en el registro interno del equipo.</em></p>`
+            }
+        ];
+
+        // --- BITACORAS ---
+        const bitacorasGrid = document.getElementById('bitacoras-grid');
+        if (bitacorasGrid) {
+            bitacorasData.forEach(entry => {
+                const card = document.createElement('div');
+                card.className = 'bg-crema-suave rounded-lg shadow-md overflow-hidden flex flex-col p-6';
+                card.innerHTML = `
+                    <p class="text-sm text-gray-500 mb-2">${escapeHtml(entry.date)}</p>
+                    <h3 class="text-2xl font-bold text-azul-profundo mb-3">${escapeHtml(entry.title)}</h3>
+                    <p class="text-gray-700 mb-4 flex-grow">${escapeHtml(entry.summary)}</p>
+                    <button class="mt-auto self-start bg-dorado-ocre text-white px-5 py-2 rounded-full hover:bg-opacity-90 transition-colors">Ver detalle</button>
+                `;
+                card.querySelector('button').addEventListener('click', () => openModal(entry.title, entry.fullContent));
+                bitacorasGrid.appendChild(card);
+            });
+        }
+
+        // --- CRONOGRAMA RECORRIDAS 2026 ---
+        const cronogramaMonth = document.getElementById('cronograma-month');
+        const cronogramaTitle = document.getElementById('cronograma-title');
+        const cronogramaWeekdays = document.getElementById('cronograma-weekdays');
+        const cronogramaGrid = document.getElementById('cronograma-grid');
+
+        if (cronogramaMonth && cronogramaTitle && cronogramaWeekdays && cronogramaGrid) {
+            const CRONOGRAMA_YEAR = 2026;
+            const CRONOGRAMA_STORAGE_KEY = 'cronograma_recorridas_2026';
+            const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            const DIAS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const DIAS_EDITABLES = new Set([0, 3, 5]);
+
+            function cargarCronogramaGuardado() {
+                try {
+                    const raw = localStorage.getItem(CRONOGRAMA_STORAGE_KEY);
+                    const parsed = raw ? JSON.parse(raw) : {};
+                    return parsed && typeof parsed === 'object' ? parsed : {};
+                } catch {
+                    return {};
+                }
+            }
+
+            function guardarCronograma(data) {
+                localStorage.setItem(CRONOGRAMA_STORAGE_KEY, JSON.stringify(data));
+            }
+
+            function keyFecha(monthIndex, day) {
+                return `${CRONOGRAMA_YEAR}-${String(monthIndex + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            }
+
+            function inicializarMeses() {
+                cronogramaMonth.innerHTML = '';
+                MESES.forEach((mes, index) => {
+                    const option = document.createElement('option');
+                    option.value = String(index);
+                    option.textContent = `${mes} ${CRONOGRAMA_YEAR}`;
+                    cronogramaMonth.appendChild(option);
+                });
+                cronogramaMonth.value = '2';
+            }
+
+            function renderDiasCabecera() {
+                cronogramaWeekdays.innerHTML = '';
+                DIAS.forEach(dia => {
+                    const item = document.createElement('div');
+                    item.className = 'text-center font-semibold text-azul-profundo p-2';
+                    item.textContent = dia;
+                    cronogramaWeekdays.appendChild(item);
+                });
+            }
+
+            function celdaVacia() {
+                const empty = document.createElement('div');
+                empty.className = 'rounded-lg p-2 min-h-[135px] border border-transparent';
+                return empty;
+            }
+
+            function renderMes(monthIndex) {
+                const guardado = cargarCronogramaGuardado();
+                cronogramaTitle.textContent = `${MESES[monthIndex]} ${CRONOGRAMA_YEAR}`;
+                cronogramaGrid.innerHTML = '';
+
+                const firstDay = new Date(CRONOGRAMA_YEAR, monthIndex, 1).getDay();
+                const totalDays = new Date(CRONOGRAMA_YEAR, monthIndex + 1, 0).getDate();
+
+                for (let i = 0; i < firstDay; i++) {
+                    cronogramaGrid.appendChild(celdaVacia());
+                }
+
+                for (let day = 1; day <= totalDays; day++) {
+                    const date = new Date(CRONOGRAMA_YEAR, monthIndex, day);
+                    const dayOfWeek = date.getDay();
+                    const editable = DIAS_EDITABLES.has(dayOfWeek);
+                    const key = keyFecha(monthIndex, day);
+
+                    const cell = document.createElement('div');
+                    cell.className = `rounded-lg p-2 min-h-[135px] border ${editable ? 'border-blue-300 bg-blue-50' : 'border-gray-200 bg-gray-50'} flex flex-col`;
+
+                    const fecha = document.createElement('p');
+                    fecha.className = 'font-bold text-azul-profundo';
+                    fecha.textContent = String(day);
+
+                    const nombreDia = document.createElement('p');
+                    nombreDia.className = 'text-xs text-gray-500 mb-2';
+                    nombreDia.textContent = DIAS[dayOfWeek];
+
+                    cell.appendChild(fecha);
+                    cell.appendChild(nombreDia);
+
+                    if (editable) {
+                        const textarea = document.createElement('textarea');
+                        textarea.className = 'w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:border-dorado-ocre min-h-[62px]';
+                        textarea.placeholder = 'Nombres';
+                        textarea.value = guardado[key] || '';
+
+                        const button = document.createElement('button');
+                        button.type = 'button';
+                        button.className = 'mt-2 bg-dorado-ocre text-white px-3 py-1 rounded-md text-sm hover:bg-opacity-90';
+                        button.textContent = 'Guardar';
+
+                        button.addEventListener('click', () => {
+                            const actualizado = cargarCronogramaGuardado();
+                            actualizado[key] = textarea.value.trim();
+                            guardarCronograma(actualizado);
+                            button.textContent = 'Guardado ✓';
+                            setTimeout(() => {
+                                button.textContent = 'Guardar';
+                            }, 1200);
+                        });
+
+                        cell.appendChild(textarea);
+                        cell.appendChild(button);
+                    } else {
+                        const texto = document.createElement('p');
+                        texto.className = 'text-xs text-gray-400 mt-auto';
+                        texto.textContent = 'Sin carga';
+                        cell.appendChild(texto);
+                    }
+
+                    cronogramaGrid.appendChild(cell);
+                }
+            }
+
+            inicializarMeses();
+            renderDiasCabecera();
+            renderMes(Number(cronogramaMonth.value));
+
+            cronogramaMonth.addEventListener('change', (event) => {
+                renderMes(Number(event.target.value));
+            });
+        }
+
+        const anioPie = document.getElementById('footer-year');
+        if (anioPie) anioPie.textContent = new Date().getFullYear();
+
+        const botonMenu = document.getElementById('mobile-menu-button');
+        const menuMovil = document.getElementById('mobile-menu');
+        if (botonMenu && menuMovil) {
+            botonMenu.addEventListener('click', () => menuMovil.classList.toggle('hidden'));
+        }
+    });
+    </script>
+</body>
+</html>

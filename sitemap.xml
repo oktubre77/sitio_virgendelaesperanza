@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Solo URLs reales. Las secciones que todavia viven detras de fragmentos
-  (#caritas, #avisos, #recorridas...) NO van aca: Google no indexa
+  (#avisos, #lectio...) NO van aca: Google no indexa
   fragmentos y listarlas seria ruido. A medida que una seccion pase a ser
   una pagina propia, se agrega como una entrada mas.
+
+  /recorridas/ es la excepcion: es una pagina real, pero va con noindex
+  porque son cronograma de voluntarios e inventario, no contenido publico.
+  Por eso tampoco figura aca.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
