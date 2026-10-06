@@ -680,6 +680,14 @@
         // pantalla.
         const avisosFallbackData = [
             {
+                title: 'Conociendo a León XIV: presentación de su primera encíclica',
+                date: 'Viernes 9 de octubre - 18 hs',
+                content: 'Presentación de «Magnifica Humanitas» en el Centro Cultural Leopoldo Marechal. Entrada libre y gratuita.',
+                fullContent: '<p><em>«Ningún sistema de cálculo, por sofisticado que sea, genera un corazón que se entrega, ni una conciencia capaz de discernir el bien».</em></p><p>Presentación de <strong>Magnifica Humanitas</strong>, la primera encíclica del Papa León XIV. Una voz necesaria en tiempos de cambio.</p><p><strong>Exponen:</strong> Sabrina Marino, teóloga, investigadora y docente universitaria; y Eduardo Farrell, sacerdote de la Diócesis de Merlo-Moreno.</p><p><strong>Centro Cultural Leopoldo Marechal</strong>, avenida Vergara 2396, Villa Tesei. Entrada libre y gratuita.</p><p>Organizan el Obispado de Morón y Cáritas Morón.</p>',
+                image: '/avisos/charla-leon-xiv.jpeg',
+                hasta: '2026-10-09'
+            },
+            {
                 title: 'Fiestas Patronales de Nuestra Señora de los Desamparados',
                 date: 'Domingo 11 de octubre - 11:30 hs',
                 content: 'Misa con nuestro Obispo Alejandro, procesión y festejo comunitario.',
@@ -1126,6 +1134,16 @@
         }
 
         function renderAvisos(avisos) {
+            // Los avisos cargados a mano no pasaban por ningun filtro de fecha: ese
+            // control vivia solo en parseAvisosCsv, que atiende la planilla. Como la
+            // planilla esta desconectada, cada aviso escrito aca quedaba publicado
+            // para siempre. Este sitio ya tuvo avisos de marzo visibles en octubre.
+            // La fecha es INCLUSIVA: con hasta = 2026-10-09 el aviso se ve todo el 9
+            // y desaparece el 10. Fecha LOCAL, no UTC: toISOString() daria la fecha
+            // de Greenwich y en Argentina lo descolgaria a las 21 del mismo dia.
+            const hoyAvisos = new Date().toLocaleDateString('en-CA');
+            avisos = avisos.filter(a => !a.hasta || a.hasta >= hoyAvisos);
+
             avisosGrid.innerHTML = '';
 
             avisos.forEach(aviso => {
