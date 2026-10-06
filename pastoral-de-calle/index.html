@@ -105,10 +105,11 @@
 </head>
 <body class="antialiased">
 
-    <!-- Header -->
-    <header id="header" class="bg-azul-profundo text-white shadow-lg sticky top-0 z-50 transition-all duration-300">
+<header id="header" class="bg-azul-profundo text-white shadow-lg sticky top-0 z-50 transition-all duration-300">
         <div class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
-            <a href="/" class="font-bold font-serif tracking-wider leading-tight">
+            <a href="/" class="flex items-center gap-2.5 md:gap-3 font-bold font-serif tracking-wider leading-tight">
+                <img src="/icon.png" alt="" aria-hidden="true" width="48" height="48"
+                     class="w-10 h-10 md:w-12 md:h-12 rounded-full shrink-0">
                 <span class="text-base md:hidden">Peregrinos de la Esperanza</span>
                 <span class="hidden md:flex md:flex-col leading-tight">
                     <span class="text-xl lg:text-2xl">Peregrinos de la Esperanza</span>
@@ -122,7 +123,7 @@
                 <a href="/pastoral-de-calle/" class="nav-link active" aria-current="page">Pastoral de Calle</a>
                 <a href="/#recorridas" class="nav-link">Recorridas</a>
                 <a href="/#lectio" class="nav-link">Lectio del Día</a>
-                <a href="/#caritas" class="nav-link">Cáritas</a>
+                <a href="/caritas/" class="nav-link">Cáritas</a>
                 <a href="/#donaciones" class="nav-link bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Donaciones</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden p-2" aria-label="Abrir menú">
@@ -138,7 +139,9 @@
             <a href="/pastoral-de-calle/" class="block py-3 px-6 text-center bg-gray-700" aria-current="page">Pastoral de Calle</a>
             <a href="/#recorridas" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Recorridas</a>
             <a href="/#lectio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Lectio del Día</a>
-            <a href="/#caritas" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cáritas</a>
+            <a href="/caritas/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cáritas</a>
+            <a href="/carlo-acutis/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">San Carlo Acutis</a>
+            <a href="/san-francisco-de-asis/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">San Francisco de Asís</a>
             <a href="/#donaciones" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Donaciones</a>
         </div>
     </header>
@@ -342,6 +345,15 @@
                     <p class="text-gray-300">Arribeños 2466, Hurlingham, Provincia de Buenos Aires, Argentina</p>
                     <p class="text-gray-300 mt-2">contacto@parroquia.org</p>
                     <p class="text-gray-300 mt-2">vesperanzahurlingham@gmail.com</p>
+                    <!-- Enlace a la sede diocesana. Ademas de ser util para el visitante,
+                         un enlace saliente a un sitio local con autoridad ayuda, y abre la
+                         puerta a pedirles el reciproco, que es lo que mas rinde. -->
+                    <p class="mt-4">
+                        <a href="https://catedraldemoron.org.ar/" target="_blank" rel="noopener noreferrer"
+                           class="text-gray-400 hover:text-dorado-ocre transition text-sm">
+                            Diócesis de Morón · Catedral de Morón ↗
+                        </a>
+                    </p>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold font-serif mb-4">Enlaces Rápidos</h3>
@@ -349,10 +361,12 @@
                         <li><a href="/#inicio" class="text-gray-300 hover:text-dorado-ocre transition">Inicio</a></li>
                         <li><a href="/#avisos" class="text-gray-300 hover:text-dorado-ocre transition">Avisos</a></li>
                         <li><a href="/#vaticano" class="text-gray-300 hover:text-dorado-ocre transition">Vaticano</a></li>
-                        <li><a href="/#pastoral-calle" class="text-gray-300 hover:text-dorado-ocre transition">Pastoral de Calle</a></li>
+                        <li><a href="/pastoral-de-calle/" class="text-gray-300 hover:text-dorado-ocre transition">Pastoral de Calle</a></li>
                         <li><a href="/#recorridas" class="text-gray-300 hover:text-dorado-ocre transition">Recorridas</a></li>
                         <li><a href="/#lectio" class="text-gray-300 hover:text-dorado-ocre transition">Lectio del Día</a></li>
-                        <li><a href="/#caritas" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
+                        <li><a href="/caritas/" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
+                        <li><a href="/carlo-acutis/" class="text-gray-300 hover:text-dorado-ocre transition">San Carlo Acutis</a></li>
+                        <li><a href="/san-francisco-de-asis/" class="text-gray-300 hover:text-dorado-ocre transition">San Francisco de Asís</a></li>
                         <li><a href="/#donaciones" class="text-gray-300 hover:text-dorado-ocre transition">Donaciones</a></li>
                     </ul>
                 </div>
