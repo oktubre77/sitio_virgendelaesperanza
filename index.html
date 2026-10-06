@@ -621,6 +621,7 @@
                         <li><a href="#recorridas" class="text-gray-300 hover:text-dorado-ocre transition">Recorridas</a></li>
                         <li><a href="#lectio" class="text-gray-300 hover:text-dorado-ocre transition">Lectio del Día</a></li>
                         <li><a href="/caritas/" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
+                        <li><a href="/carlo-acutis/" class="text-gray-300 hover:text-dorado-ocre transition">San Carlo Acutis</a></li>
                         <li><a href="#donaciones" class="text-gray-300 hover:text-dorado-ocre transition">Donaciones</a></li>
                     </ul>
                 </div>
@@ -696,6 +697,20 @@
         //   - sin rostros identificables de personas acompanadas en la calle
         // ---------------------------------------------------------------------
         const homeBannerTodos = [
+            {
+                // SLIDE CON VENCIMIENTO: su fiesta es el 12 de octubre, asi que se
+                // descuelga solo el 13. Es la PRIMERA fiesta desde la canonizacion,
+                // el 7 de septiembre de 2025.
+                badge: 'Domingo 12 de octubre',
+                title: 'San Carlo Acutis, su primera fiesta',
+                subtitle: 'Tenía 15 años, catalogó los milagros eucarísticos y usó internet para evangelizar.',
+                ctaText: 'Conocé su historia',
+                ctaLink: '/carlo-acutis/',
+                hasta: '2026-10-13',
+                background: 'radial-gradient(circle at 72% 42%, rgba(224,196,122,0.34) 0%, rgba(224,196,122,0) 46%), linear-gradient(135deg, #1b2a3a 0%, #2C3E50 55%, #3d4a5c 100%)',
+                motif: '<svg class="absolute inset-0 w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><g stroke="#F8F5F0" stroke-width="2" opacity="0.18" stroke-linecap="round"><path d="M970 250 L1110 250"/><path d="M955 195 L1077 125"/><path d="M915 155 L985 33"/><path d="M860 140 L860 0"/><path d="M805 155 L735 33"/><path d="M765 195 L643 125"/><path d="M750 250 L610 250"/><path d="M765 305 L643 375"/><path d="M805 345 L735 467"/><path d="M860 360 L860 500"/><path d="M915 345 L985 467"/><path d="M955 305 L1077 375"/></g><circle cx="860" cy="250" r="64" fill="none" stroke="#F8F5F0" stroke-width="3" opacity="0.42"/><circle cx="860" cy="250" r="98" fill="none" stroke="#B08D57" stroke-width="2" opacity="0.34"/><circle cx="860" cy="250" r="142" fill="none" stroke="#B08D57" stroke-width="2" opacity="0.2"/></svg>',
+                objectPosition: 'center 50%'
+            },
             {
                 // SLIDE CON VENCIMIENTO: desaparece solo el 2026-10-04.
                 // Datos verificados en peregrinacionlujan.org.ar. No publican horario
