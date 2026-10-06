@@ -331,10 +331,23 @@
             </div>
         </section>
 <section id="recorridas" class="py-10 md:py-20 bg-white">
-            <!-- Banner Recorridas Solidarias -->
-            <div class="relative w-full overflow-hidden shadow-xl mb-8 md:mb-12" style="height: 200px; min-height: 160px;" class="md:style-340">
-                <img src="/Recorridas_desktop.png" alt="Recorridas Solidarias" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'">
-                <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(44,62,80,0.82) 0%, rgba(176,141,87,0.60) 100%);"></div>
+            <!-- Banner Recorridas Solidarias
+                 Antes esto cargaba Recorridas_desktop.png: 1,25 MB para una franja de
+                 200px en la que se veia un 12% de la imagen, tapado ademas por este
+                 mismo degradado. Y lo que habia debajo no era una foto sino un folleto
+                 entero, que todavia publicitaba el dominio viejo.
+                 Se reemplaza por el degradado con motivo SVG que ya usan los banners
+                 del inicio: pesa cero bytes y habla el mismo idioma visual.
+                 El motivo es el perfil de ciudad de noche con ventanas encendidas, el
+                 mismo del slide de Pastoral de Calle: las recorridas son a las 21 hs.
+                 preserveAspectRatio es xMidYMax (no xMidYMid) para que en una franja
+                 baja queden a la vista los edificios y no el cielo vacio.
+                 Nota: el div tenia DOS atributos class; el navegador ignoraba el
+                 segundo, y "md:style-340" no era una clase real. La altura pasa a
+                 Tailwind. -->
+            <div class="relative w-full overflow-hidden shadow-xl mb-8 md:mb-12 h-[200px] md:h-[340px]"
+                 style="background: radial-gradient(ellipse 70% 60% at 12% 100%, rgba(224,172,96,0.55) 0%, rgba(176,141,87,0.12) 42%, rgba(176,141,87,0) 70%), linear-gradient(135deg, #0d151d 0%, #2C3E50 55%, #3b556e 100%);">
+                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><g fill="#000000" opacity="0.45"><rect x="0" y="430" width="90" height="170"/><rect x="100" y="470" width="70" height="130"/><rect x="180" y="400" width="110" height="200"/><rect x="300" y="460" width="80" height="140"/><rect x="390" y="420" width="95" height="180"/><rect x="495" y="480" width="70" height="120"/><rect x="575" y="440" width="105" height="160"/><rect x="690" y="410" width="85" height="190"/><rect x="785" y="470" width="90" height="130"/><rect x="885" y="435" width="100" height="165"/><rect x="995" y="465" width="75" height="135"/><rect x="1080" y="425" width="120" height="175"/></g><g fill="#E8C38A" opacity="0.42"><rect x="212" y="425" width="11" height="15"/><rect x="238" y="458" width="11" height="15"/><rect x="418" y="445" width="11" height="15"/><rect x="606" y="466" width="11" height="15"/><rect x="714" y="436" width="11" height="15"/><rect x="912" y="460" width="11" height="15"/><rect x="1112" y="450" width="11" height="15"/><rect x="330" y="492" width="11" height="15"/><rect x="822" y="498" width="11" height="15"/></g></svg>
                 <div class="absolute inset-0 flex flex-col justify-center px-5 md:px-20">
                     <span class="inline-block w-max bg-dorado-ocre/90 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-2 md:mb-4">
                         Comunidad en acción
@@ -389,7 +402,10 @@
                     </div>
                 </div>
 
-                <p class="text-sm text-gray-500 mt-4 text-center">Los nombres se guardan en este navegador. Días no habilitados quedan solo informativos.</p>
+                <!-- El texto lo escribe el JS: cambia segun de donde vengan los datos
+                     (planilla compartida o este navegador). Dejarlo fijo seria mentir
+                     en uno de los dos casos. -->
+                <p id="cronograma-origen" class="text-sm text-gray-500 mt-4 text-center">Días no habilitados quedan solo informativos.</p>
             </div>
         </section>
 
@@ -773,6 +789,87 @@ const modal = document.getElementById('modal');
         if (cronogramaMonth && cronogramaTitle && cronogramaWeekdays && cronogramaGrid) {
             const CRONOGRAMA_YEAR = 2026;
             const CRONOGRAMA_STORAGE_KEY = 'cronograma_recorridas_2026';
+
+            // PLANILLA COMPARTIDA
+            // El cronograma guardaba solo en localStorage: lo que cargaba un
+            // voluntario en su telefono no lo veia nadie mas y se perdia al limpiar
+            // el navegador. Parecia una herramienta compartida y no lo era.
+            //
+            // Mientras esta constante este vacia, sigue funcionando como antes
+            // (editable, guardado en este navegador) y la pagina lo aclara abajo del
+            // calendario. Al pegar la URL, pasa a leer de la planilla y las celdas
+            // quedan de SOLO LECTURA: se carga en la planilla, como el inventario.
+            //
+            // Para conectarla, en la planilla:
+            //   Archivo > Compartir > Publicar en la Web > elegir la hoja >
+            //   formato CSV > Publicar, y pegar aca la URL que entrega.
+            // La hoja necesita dos columnas con estos encabezados:
+            //   fecha        -> 2026-10-08  (tambien acepta 08/10/2026)
+            //   integrantes  -> los nombres, texto libre
+            const CRONOGRAMA_CSV_URL = '';
+
+            // null = no hay planilla conectada (o fallo): se usa el navegador.
+            let cronogramaRemoto = null;
+
+            function parseCronogramaCsv(texto) {
+                const filas = String(texto).split(/\r?\n/).filter(l => l.trim());
+                if (!filas.length) return {};
+
+                const partir = (linea) => {
+                    const campos = [];
+                    let actual = '', entreComillas = false;
+                    for (const ch of linea) {
+                        if (ch === '"') entreComillas = !entreComillas;
+                        else if (ch === ',' && !entreComillas) { campos.push(actual.trim()); actual = ''; }
+                        else actual += ch;
+                    }
+                    campos.push(actual.trim());
+                    return campos;
+                };
+
+                const encabezados = partir(filas[0]).map(h => h.toLowerCase().replace(/\s+/g, ''));
+                const iFecha = encabezados.findIndex(h => h.startsWith('fecha'));
+                const iGente = encabezados.findIndex(h => h.startsWith('integrante') || h.startsWith('nombre'));
+                if (iFecha < 0 || iGente < 0) {
+                    console.error('La planilla del cronograma necesita las columnas "fecha" e "integrantes".');
+                    return {};
+                }
+
+                const datos = {};
+                for (let i = 1; i < filas.length; i++) {
+                    const c = partir(filas[i]);
+                    let fecha = (c[iFecha] || '').trim();
+                    const gente = (c[iGente] || '').trim();
+                    if (!fecha || !gente) continue;
+                    // Google Sheets suele exportar dd/mm/aaaa segun la configuracion
+                    // regional de la planilla: se acepta y se normaliza.
+                    const barras = fecha.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+                    if (barras) fecha = `${barras[3]}-${barras[2].padStart(2, '0')}-${barras[1].padStart(2, '0')}`;
+                    if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha)) continue;
+                    datos[fecha] = gente;
+                }
+                return datos;
+            }
+
+            async function cargarPlanilla() {
+                if (!CRONOGRAMA_CSV_URL) return null;
+                try {
+                    const respuesta = await fetch(CRONOGRAMA_CSV_URL);
+                    if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
+                    return parseCronogramaCsv(await respuesta.text());
+                } catch (error) {
+                    console.error('No se pudo leer la planilla del cronograma:', error);
+                    return null;
+                }
+            }
+
+            function actualizarOrigen() {
+                const nota = document.getElementById('cronograma-origen');
+                if (!nota) return;
+                nota.textContent = cronogramaRemoto
+                    ? 'Los nombres se cargan en la planilla compartida del equipo. Días no habilitados quedan solo informativos.'
+                    : 'Los nombres se guardan solo en este navegador: no los ve el resto del equipo. Días no habilitados quedan solo informativos.';
+            }
             const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
             const DIAS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
             const DIAS_EDITABLES = new Set([0, 3, 5]);
@@ -823,7 +920,10 @@ const modal = document.getElementById('modal');
             }
 
             function renderMes(monthIndex) {
-                const guardado = cargarCronogramaGuardado();
+                // Con planilla conectada los datos vienen de ahi y las celdas son de
+                // solo lectura; sin planilla, del navegador y se pueden editar.
+                const desdePlanilla = cronogramaRemoto !== null;
+                const guardado = desdePlanilla ? cronogramaRemoto : cargarCronogramaGuardado();
                 cronogramaTitle.textContent = `${MESES[monthIndex]} ${CRONOGRAMA_YEAR}`;
                 cronogramaGrid.innerHTML = '';
 
@@ -854,7 +954,17 @@ const modal = document.getElementById('modal');
                     cell.appendChild(fecha);
                     cell.appendChild(nombreDia);
 
-                    if (editable) {
+                    if (editable && desdePlanilla) {
+                        const nombres = document.createElement('p');
+                        if (guardado[key]) {
+                            nombres.className = 'text-sm text-gray-700 whitespace-pre-line';
+                            nombres.textContent = guardado[key];
+                        } else {
+                            nombres.className = 'text-sm text-gray-400 italic mt-auto';
+                            nombres.textContent = 'Sin asignar';
+                        }
+                        cell.appendChild(nombres);
+                    } else if (editable) {
                         const textarea = document.createElement('textarea');
                         textarea.className = 'w-full border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:border-dorado-ocre min-h-[62px]';
                         textarea.placeholder = 'Nombres';
@@ -890,10 +1000,20 @@ const modal = document.getElementById('modal');
 
             inicializarMeses();
             renderDiasCabecera();
+            actualizarOrigen();
+            // Se dibuja ya con lo que haya en el navegador, para que el calendario
+            // aparezca enseguida; si hay planilla, se vuelve a dibujar con sus datos.
             renderMes(Number(cronogramaMonth.value));
 
             cronogramaMonth.addEventListener('change', (event) => {
                 renderMes(Number(event.target.value));
+            });
+
+            cargarPlanilla().then(datos => {
+                if (!datos) return;          // sin planilla o fallo: queda el navegador
+                cronogramaRemoto = datos;
+                actualizarOrigen();
+                renderMes(Number(cronogramaMonth.value));
             });
         }
     });
