@@ -1099,9 +1099,18 @@
         const modalBody = document.getElementById('modal-body');
         const modalClose = document.getElementById('modal-close');
 
-        function openModal(title, content) {
+        // El tercer parametro es opcional: las bitacoras siguen llamando con dos
+        // argumentos y se comportan igual que siempre.
+        function openModal(title, content, imagen) {
             modalTitle.textContent = title;
-            modalBody.innerHTML = content;
+            // Un folleto es una imagen vertical con el texto adentro: aca se muestra
+            // ENTERO, sin recortar, y se puede abrir aparte para agrandarlo.
+            const foto = (imagen && String(imagen).trim())
+                ? `<a href="${String(imagen).trim()}" target="_blank" rel="noopener noreferrer" title="Abrir la imagen en tamaño completo">
+                       <img src="${String(imagen).trim()}" alt="" class="w-full h-auto rounded-lg mb-5 bg-crema-suave" loading="lazy">
+                   </a>`
+                : '';
+            modalBody.innerHTML = foto + content;
             modal.classList.remove('opacity-0', 'invisible');
             modalContent.classList.remove('scale-95');
         }
@@ -1182,6 +1191,14 @@
             const idxFull = getIndex('detalle', 'fullcontent', 'detallehtml');
             const idxImage = getIndex('imagen', 'image');
             const idxStatus = getIndex('estado', 'status');
+            // Columna opcional de vencimiento. Si la planilla no la tiene, getIndex
+            // devuelve -1 y no se filtra nada: funciona igual que antes.
+            // Formato esperado: AAAA-MM-DD (por ejemplo 2026-10-12).
+            const idxHasta = getIndex('hasta', 'vence', 'vencimiento', 'validohasta');
+
+            // Fecha LOCAL, no UTC: con toISOString un aviso se caeria a las 21 del
+            // mismo dia del evento, en Argentina.
+            const hoyLocal = new Date().toLocaleDateString('en-CA');
 
             const data = [];
 
@@ -1192,6 +1209,14 @@
 
                 const status = idxStatus >= 0 ? (cols[idxStatus] || '').trim().toLowerCase() : 'publicado';
                 if (status && status !== 'publicado') continue;
+
+                // Vencimiento: el aviso se descuelga solo cuando pasa esa fecha, sin
+                // que nadie tenga que acordarse de volver a la planilla.
+                // La fecha es INCLUSIVA: con hasta = 2026-10-12 el aviso se ve todo
+                // el 12 y desaparece el 13. Si fuera exclusiva, un aviso se caeria
+                // justo el dia del evento, que es cuando mas se lo necesita.
+                const hasta = idxHasta >= 0 ? (cols[idxHasta] || '').trim() : '';
+                if (hasta && hasta < hoyLocal) continue;
 
                 const fullRaw = idxFull >= 0 ? (cols[idxFull] || '').trim() : '';
                 const safeDetail = escapeHtml(fullRaw).replace(/\n/g, '<br>');
@@ -1222,7 +1247,10 @@
                 const safeContent = escapeHtml(aviso.content || '');
 
                 card.innerHTML = `
-                    <img src="${imageSrc}" alt="${safeTitle}" onerror="this.onerror=null;this.src='${fallbackImage}'" class="w-full h-48 object-cover">
+                    <img src="${imageSrc}" alt="${safeTitle}"
+                         onerror="this.onerror=null;this.src='${fallbackImage}'"
+                         onload="if(this.naturalHeight>this.naturalWidth)this.classList.replace('object-cover','object-contain')"
+                         class="w-full h-56 object-cover bg-crema-suave">
                     <div class="p-6 flex flex-col flex-grow">
                         <p class="text-sm text-gray-500 mb-2">${safeDate}</p>
                         <h3 class="text-2xl font-bold text-azul-profundo mb-3">${safeTitle}</h3>
@@ -1231,7 +1259,9 @@
                     </div>
                 `;
 
-                card.querySelector('button').addEventListener('click', () => openModal(aviso.title, aviso.fullContent));
+                // Se pasa aviso.image y no imageSrc a proposito: si el aviso no trae
+                // folleto, el modal no debe mostrar la imagen de respaldo.
+                card.querySelector('button').addEventListener('click', () => openModal(aviso.title, aviso.fullContent, aviso.image));
                 avisosGrid.appendChild(card);
             });
         }
