@@ -2,6 +2,16 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/recorridas",
+      "destination": "/pastoral-de-calle/#recorridas",
+      "permanent": true
+    },
+    {
+      "source": "/recorridas/:path*",
+      "destination": "/pastoral-de-calle/#recorridas",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.parroquiavirgendelaesperanza.site" }],
       "destination": "https://www.peregrinosdelaesperanza.org/:path*",
