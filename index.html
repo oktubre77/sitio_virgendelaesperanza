@@ -1107,7 +1107,8 @@
             // ENTERO, sin recortar, y se puede abrir aparte para agrandarlo.
             const foto = (imagen && String(imagen).trim())
                 ? `<a href="${String(imagen).trim()}" target="_blank" rel="noopener noreferrer" title="Abrir la imagen en tamaño completo">
-                       <img src="${String(imagen).trim()}" alt="" class="w-full h-auto rounded-lg mb-5 bg-crema-suave" loading="lazy">
+                       <img src="${String(imagen).trim()}" alt="" class="w-full h-auto rounded-lg mb-5 bg-crema-suave" loading="lazy"
+                            onerror="this.closest('a').remove()">
                    </a>`
                 : '';
             modalBody.innerHTML = foto + content;
