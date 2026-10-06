@@ -121,7 +121,6 @@
                 <a href="/#avisos" class="nav-link">Avisos</a>
                 <a href="/#vaticano" class="nav-link">Vaticano</a>
                 <a href="/pastoral-de-calle/" class="nav-link active" aria-current="page">Pastoral de Calle</a>
-                <a href="/pastoral-de-calle/#recorridas" class="nav-link">Recorridas</a>
                 <a href="/#lectio" class="nav-link">Lectio del Día</a>
                 <a href="/caritas/" class="nav-link">Cáritas</a>
                 <a href="/#donaciones" class="nav-link bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Donaciones</a>
@@ -137,7 +136,6 @@
             <a href="/#avisos" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Avisos</a>
             <a href="/#vaticano" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Vaticano</a>
             <a href="/pastoral-de-calle/" class="block py-3 px-6 text-center bg-gray-700" aria-current="page">Pastoral de Calle</a>
-            <a href="/pastoral-de-calle/#recorridas" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Recorridas</a>
             <a href="/#lectio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Lectio del Día</a>
             <a href="/caritas/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cáritas</a>
             <a href="/carlo-acutis/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">San Carlo Acutis</a>
@@ -714,8 +712,16 @@ const modal = document.getElementById('modal');
 // ---------------------------------------------------------------------
         // BITACORAS PUBLICAS
         // Esta bitacora se publica en una web abierta e indexada por Google.
-        // NO incluir: nombres, apodos, fotos ni descripciones de las personas
-        // acompanadas, ni la esquina o el lugar exacto donde pasan la noche.
+        //
+        // NO incluir, de las personas acompanadas: nombres, apodos, fotos ni
+        // descripciones, ni la esquina o el lugar exacto donde pasan la noche.
+        //
+        // NO incluir tampoco los nombres de los voluntarios. Son datos de
+        // personas reales en una pagina publica, y no aportan nada a quien lee
+        // de afuera: alcanza con cuantos salieron. (El cronograma si guarda
+        // nombres, pero viven en el localStorage del navegador de cada uno y
+        // nunca llegan al HTML, asi que ahi no hay exposicion.)
+        //
         // Publicar cantidades, zonas generales y que se entrego.
         // El detalle con nombres va en el registro interno del equipo.
         // ---------------------------------------------------------------------
@@ -723,9 +729,9 @@ const modal = document.getElementById('modal');
             {
                 title: 'Peregrinos de la Esperanza',
                 date: 'Miércoles 25/02/2026',
-                summary: 'Participaron Daniela, Cecilia, Alicia, Germán, Ramón y Mario. Se entregaron viandas, jugo y gelatina.',
+                summary: 'Salimos seis integrantes del equipo. Se entregaron viandas, jugo y gelatina.',
                 fullContent: `<p><strong>Bitácora de la recorrida del miércoles 25 de febrero 2026.</strong></p>
-                <p>En la recorrida salimos: Daniela, Cecilia, Alicia (se incorporó hoy), Germán, Ramón (en bici) y Mario. Cocinó Mirtha.</p>
+                <p>Salimos seis integrantes del equipo: una persona se sumaba por primera vez y otra acompañó en bicicleta. La comida la preparó una voluntaria de la comunidad.</p>
                 <p>Recorrido: Hospital San Bernardino, estación Hurlingham (Paseo de los Eucaliptus), Remedios de Escalada, Av. Jauretche, estación R. Darío, Av. Julio Roca y Plaza John Ravenscroft. Parte del equipo pasó por la biblioteca municipal (Centro Cultural Benito Quinquela Martín) para reencontrarse luego en estación Hurlingham.</p>
                 <p>Se entregaron viandas (sándwiches de milanesa), jugo y gelatina. Con quienes lo desearon se leyó el Evangelio del día y/o se rezó.</p>
                 <p><strong>Resumen del acompañamiento:</strong></p>
