@@ -133,9 +133,9 @@
                 <img src="icon.png" alt="" aria-hidden="true" width="48" height="48"
                      class="w-10 h-10 md:w-12 md:h-12 rounded-full shrink-0">
                 <span class="text-base md:hidden">Peregrinos de la Esperanza</span>
-                <!-- TODO: cuando este confirmada la lista de comunidades de la mision,
-                     reemplazar el subtitulo generico por los nombres. Nombrar solo a
-                     algunas es peor que dejarlo generico. -->
+                <!-- La lista completa de las cinco comunidades esta en el pie: aca no
+                     entra sin romper el encabezado, y nombrar solo a algunas seria
+                     peor que el generico. -->
                 <span class="hidden md:flex md:flex-col leading-tight">
                     <span class="text-xl lg:text-2xl">Peregrinos de la Esperanza</span>
                     <span class="text-xs font-normal tracking-normal text-white/70" style="font-family: 'Open Sans', sans-serif;">Misión de las comunidades de Hurlingham</span>
@@ -470,15 +470,25 @@
             <div class="container mx-auto px-4 md:px-6">
                 <div class="text-center mb-8 md:mb-12">
                     <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Lectio del Día</h2>
-                    <p class="text-base md:text-lg text-gray-600 mt-2">El Evangelio de hoy y su comentario, desde evangeli.net.</p>
+                    <p class="text-base md:text-lg text-gray-600 mt-2">Las lecturas de hoy, desde Vatican News.</p>
                 </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <iframe src="https://evangeli.net/evangelio/widget/web"
-                            title="Evangelio del día y comentario"
-                            class="w-full block border-0"
-                            style="height: 600px;"
-                            loading="lazy"></iframe>
-                </div>
+                <article class="bg-white rounded-lg shadow-md max-w-3xl mx-auto overflow-hidden">
+                    <div class="bg-azul-profundo text-white px-6 py-4">
+                        <p id="lectio-fecha" class="text-sm text-white/70"></p>
+                        <h3 id="lectio-titulo" class="text-xl font-bold font-serif">Palabra del día</h3>
+                    </div>
+                    <!-- space-y-4: Tailwind quita los margenes por defecto de <p>, y el
+                         feed trae una decena de parrafos seguidos. Sin esto las lecturas
+                         quedan como un solo muro de texto, sin respiro entre una y otra. -->
+                    <div id="lectio-contenido" class="px-6 py-6 text-gray-700 leading-relaxed space-y-4">
+                        <p class="text-gray-500">Buscando las lecturas de hoy…</p>
+                    </div>
+                    <div class="px-6 pb-6">
+                        <a id="lectio-fuente" href="https://www.vaticannews.va/es/evangelio-de-hoy.html"
+                           target="_blank" rel="noopener noreferrer"
+                           class="inline-block bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Leer en Vatican News</a>
+                    </div>
+                </article>
             </div>
         </section>
         
@@ -625,8 +635,14 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
                 <div>
                     <h3 class="text-xl font-bold font-serif mb-1">Peregrinos de la Esperanza</h3>
-                    <!-- TODO: idem header, reemplazar por la lista de comunidades. -->
-                    <p class="text-gray-400 text-xs uppercase tracking-widest font-semibold mb-4">Misión de las comunidades de Hurlingham</p>
+                    <p class="text-gray-400 text-xs uppercase tracking-widest font-semibold mb-3">Misión de las comunidades de Hurlingham</p>
+                    <ul class="text-gray-300 text-sm space-y-1 mb-4">
+                        <li>Parroquia Virgen de la Esperanza</li>
+                        <li>Capilla Santa Clara</li>
+                        <li>Parroquia San Pablo Apóstol</li>
+                        <li>Medalla Milagrosa</li>
+                        <li>Parroquia Sagrado Corazón de Jesús</li>
+                    </ul>
                     <p class="text-gray-300">Arribeños 2466, Hurlingham, Provincia de Buenos Aires, Argentina</p>
                     <p class="text-gray-300 mt-2">contacto@parroquia.org</p>
                     <p class="text-gray-300 mt-2">vesperanzahurlingham@gmail.com</p>
@@ -786,7 +802,7 @@
             {
                 badge: 'Peregrinos de la Esperanza',
                 title: 'Una misión, varias comunidades',
-                subtitle: 'Caminamos juntos la Comunidad Virgen de la Esperanza, Santa Clara de Asís y las comunidades hermanas.',
+                subtitle: 'Virgen de la Esperanza, Santa Clara, San Pablo Apóstol, Medalla Milagrosa y Sagrado Corazón de Jesús, caminando juntas.',
                 ctaText: 'Ver Avisos',
                 ctaLink: '#avisos',
                 // Caminos que convergen en el horizonte, con una cruz al fondo.
@@ -1476,6 +1492,79 @@
 
         initVaticanNews();
 
+        // --- LECTIO DEL DIA ---
+        // Se arma en el sitio en vez de incrustar un iframe: lo que vive adentro de
+        // un iframe es invisible para Google, asi que esta seccion no aportaba una
+        // sola palabra a la busqueda. Fuente: el RSS de Vatican News, el mismo proxy
+        // que ya usan las noticias.
+        //
+        // CUIDADO CON LA FECHA, son dos trampas distintas:
+        //  1. El feed publica el dia siguiente la noche anterior, asi que items[0]
+        //     suele ser el de MANANA. Hay que elegir por fecha, no por posicion.
+        //  2. La fecha confiable esta en el link (.../2026/10/06.html). pubDate
+        //     viene en UTC y en Argentina (UTC-3) cae un dia antes.
+        // Por lo mismo la fecha se arma con new Date(anio, mes-1, dia), que es local:
+        // new Date('2026-10-05') se interpreta como medianoche UTC y se mostraria 04.
+        const LECTIO_RSS_URL = 'https://www.vaticannews.va/es/evangelio-de-hoy.rss.xml';
+
+        function fechaDelLectio(item) {
+            const m = (item.link || '').match(/\/(\d{4})\/(\d{2})\/(\d{2})\.html/);
+            return m ? `${m[1]}-${m[2]}-${m[3]}` : '';
+        }
+
+        function fechaLegible(iso) {
+            const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+            if (!m) return '';
+            const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+            return d.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' });
+        }
+
+        // El feed trae solo <p>, verificado sobre los 15 items. Igual se descarta
+        // cualquier otra etiqueta: es contenido de un tercero entrando al documento.
+        function limpiarLectio(html) {
+            return String(html).replace(/<(?!\/?p\b)[^>]*>/gi, '').trim();
+        }
+
+        async function initLectio() {
+            const caja = document.getElementById('lectio-contenido');
+            const elFecha = document.getElementById('lectio-fecha');
+            const elTitulo = document.getElementById('lectio-titulo');
+            const elFuente = document.getElementById('lectio-fuente');
+            if (!caja) return;
+
+            try {
+                const respuesta = await fetch(`${VATICAN_RSS_PROXY}${encodeURIComponent(LECTIO_RSS_URL)}`);
+                if (!respuesta.ok) throw new Error(`Error HTTP ${respuesta.status}`);
+
+                const data = await respuesta.json();
+                if (!data || !Array.isArray(data.items) || data.items.length === 0) {
+                    throw new Error('Sin items en el feed de lecturas');
+                }
+
+                const hoy = new Date().toLocaleDateString('en-CA');
+                const fechados = data.items.filter(i => fechaDelLectio(i));
+                // El de hoy; si todavia no salio, el mas reciente que ya paso.
+                const elegido = fechados.find(i => fechaDelLectio(i) === hoy)
+                    || fechados.filter(i => fechaDelLectio(i) < hoy)
+                               .sort((a, b) => fechaDelLectio(b).localeCompare(fechaDelLectio(a)))[0]
+                    || data.items[0];
+
+                const cuerpo = limpiarLectio(elegido.description || elegido.content || '');
+                if (!cuerpo) throw new Error('El item no trae texto');
+
+                caja.innerHTML = cuerpo;
+                if (elTitulo) elTitulo.textContent = elegido.title || 'Palabra del día';
+                if (elFecha) elFecha.textContent = fechaLegible(fechaDelLectio(elegido));
+                if (elFuente && elegido.link) elFuente.href = elegido.link;
+            } catch (error) {
+                console.error('No se pudieron cargar las lecturas del día:', error);
+                caja.innerHTML = '<p class="text-gray-600">No pudimos cargar las lecturas de hoy en este momento. Podés leerlas directamente en Vatican News, con el botón de abajo.</p>';
+                if (elFecha) elFecha.textContent = '';
+            }
+        }
+
+        initLectio();
+
         // --- CRONOGRAMA RECORRIDAS 2026 ---
         const cronogramaMonth = document.getElementById('cronograma-month');
         const cronogramaTitle = document.getElementById('cronograma-title');
@@ -1609,8 +1698,9 @@
             });
         }
 
-        // La Lectio se sirve con el iframe de evangeli.net, que se actualiza solo.
-        // El render manual anterior quedaba comentado y sin datos: se elimino.
+        // La Lectio se arma mas arriba, en el bloque LECTIO DEL DIA, con el RSS de
+        // Vatican News. Antes era un iframe de evangeli.net: se reemplazo porque el
+        // contenido de un iframe no lo ve el buscador.
 
         // --- CARITAS ---
         // Caritas paso a ser su propia pagina (/caritas/), con las areas de accion
