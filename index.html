@@ -164,6 +164,8 @@
             <a href="#recorridas" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Recorridas</a>
             <a href="#lectio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Lectio del Día</a>
             <a href="/caritas/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cáritas</a>
+            <a href="/carlo-acutis/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">San Carlo Acutis</a>
+            <a href="/san-francisco-de-asis/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">San Francisco de Asís</a>
             <a href="#donaciones" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Donaciones</a>
         </div>
     </header>
@@ -233,7 +235,10 @@
                     </div>
                 </div>
                 <!-- Quick Access Cards -->
-                <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+                <!-- Seis accesos, en dos filas de tres en escritorio. Las paginas de
+                     los santos no entran en el menu superior (ya tiene 8 items), asi
+                     que esta es su via de entrada visible desde el inicio. -->
+                <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
                     <a href="#avisos" class="group block bg-white p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 active:scale-95">
                         <div class="text-4xl md:text-5xl mb-3 md:mb-4 flex justify-center">🔔</div>
                         <h3 class="text-base md:text-2xl font-bold text-azul-profundo mb-1 md:mb-2">Avisos</h3>
@@ -244,10 +249,23 @@
                         <h3 class="text-base md:text-2xl font-bold text-azul-profundo mb-1 md:mb-2">Recorridas</h3>
                         <p class="text-gray-600 text-xs md:text-base hidden md:block">Accede al cronograma, bitácoras e inventario en un solo lugar.</p>
                     </a>
-                    <a href="#caritas" class="group block bg-white p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 active:scale-95">
+                    <!-- Apuntaba a #caritas, una seccion que ya no existe: el clic no
+                         hacia nada. El mapa de redirecciones solo corre al cargar la
+                         pagina, no al cambiar el hash desde adentro. -->
+                    <a href="/caritas/" class="group block bg-white p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 active:scale-95">
                         <div class="text-4xl md:text-5xl mb-3 md:mb-4 flex justify-center">🤝</div>
                         <h3 class="text-base md:text-2xl font-bold text-azul-profundo mb-1 md:mb-2">Cáritas</h3>
                         <p class="text-gray-600 text-xs md:text-base hidden md:block">Descubre cómo puedes ayudar y ser parte de nuestra acción solidaria.</p>
+                    </a>
+                    <a href="/carlo-acutis/" class="group block bg-white p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 active:scale-95">
+                        <div class="text-4xl md:text-5xl mb-3 md:mb-4 flex justify-center">✨</div>
+                        <h3 class="text-base md:text-2xl font-bold text-azul-profundo mb-1 md:mb-2">San Carlo Acutis</h3>
+                        <p class="text-gray-600 text-xs md:text-base hidden md:block">El santo de quince años que catalogó los milagros eucarísticos.</p>
+                    </a>
+                    <a href="/san-francisco-de-asis/" class="group block bg-white p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 active:scale-95">
+                        <div class="text-4xl md:text-5xl mb-3 md:mb-4 flex justify-center">🕊️</div>
+                        <h3 class="text-base md:text-2xl font-bold text-azul-profundo mb-1 md:mb-2">San Francisco de Asís</h3>
+                        <p class="text-gray-600 text-xs md:text-base hidden md:block">A 800 años de su muerte, y el origen de Santa Clara.</p>
                     </a>
                     <a href="#donaciones" class="group block bg-white p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 active:scale-95">
                         <div class="text-4xl md:text-5xl mb-3 md:mb-4 flex justify-center">💖</div>
@@ -677,7 +695,16 @@
     document.addEventListener('DOMContentLoaded', function () {
         
         // --- DATA ---
-        const AVISOS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQDS3M42YJOsWp8Xl5dAUDF9WMbo3DTJAkncFNefzXU3qx9RDcGVxK_UVoMiP9kfMPCzkIKTW1YLC8O/pub?gid=0&single=true&output=csv'; // Pega aquí el enlace CSV publicado de Google Sheets para avisos
+        // AVISOS: cargados directo en el codigo, abajo en avisosFallbackData.
+        //
+        // initAvisos() solo usa esos datos si esta constante esta vacia o falla la
+        // descarga. Mientras tenga la URL, la planilla manda. Por eso, para cargar
+        // los avisos a mano hay que vaciarla, no alcanza con editar el arreglo.
+        //
+        // Toda la maquinaria del CSV queda intacta: para volver a la planilla,
+        // pegar de nuevo la URL aca y listo. La de antes era:
+        // https://docs.google.com/spreadsheets/d/e/2PACX-1vQDS3M42YJOsWp8Xl5dAUDF9WMbo3DTJAkncFNefzXU3qx9RDcGVxK_UVoMiP9kfMPCzkIKTW1YLC8O/pub?gid=0&single=true&output=csv
+        const AVISOS_CSV_URL = '';
 
         // ---------------------------------------------------------------------
         // BANNER DE INICIO
@@ -785,20 +812,31 @@
         const hoyISO = new Date().toLocaleDateString('en-CA');
         const homeBannerData = homeBannerTodos.filter(s => !s.hasta || s.hasta > hoyISO);
 
+        // Los folletos llegan por el canal de WhatsApp de las comunidades y se cargan
+        // aca a mano. El folleto va en 'image'; el texto se transcribe igual, porque
+        // el texto dentro de una imagen es invisible para Google y para un lector de
+        // pantalla.
         const avisosFallbackData = [
             {
-                title: 'Misa Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís',
-                date: 'Miércoles y Domingos',
-                content: 'Te invitamos a la Misa los dias Domingos a las 19 hs.',
-                fullContent: '<p>Te invitamos a la Misa de la Comunidad Virgen de la Esperanza y Comunidad Santa Clara de Asís</p>',
-                image: './Misas.png' // Asegúrate que este es el nombre de tu archivo de imagen
+                title: 'Fiestas Patronales de Nuestra Señora de los Desamparados',
+                date: 'Domingo 11 de octubre - 11:30 hs',
+                content: 'Misa con nuestro Obispo Alejandro, procesión y festejo comunitario.',
+                fullContent: '<p>«De la mano de María llevamos la alegría del Evangelio y la Paz a cada corazón de nuestro Barrio». Misa a las 11:30 con nuestro Obispo Alejandro, procesión y un festejo para compartir en comunidad. Habrá buffet. Recordá traer tus vasos.</p><p><strong>En Mar del Plata y Torres.</strong></p>',
+                image: '/avisos/patronales-desamparados.jpeg'
             },
             {
-                title: 'Recorridas',
-                date: 'Dias Miercoles, Viernes y Domingos',
-                content: 'Las recorridas se realizan los días miércoles, viernes y domingos a las 21 hs.',
-                fullContent: '<p>Las recorridas se realizan los días miércoles, viernes y domingos a las 21 hs.<strong> Tel de contacto:1121909764/1167968151</strong></p>',
-                image: './Recorridas_desktop.png'
+                title: 'Misas de la semana en la Parroquia San Carlos Borromeo',
+                date: 'Del domingo 4 al viernes 9 de octubre',
+                content: 'San Francisco de Asís, Sor Faustina, Nuestra Señora del Rosario y San Héctor Valdivieso Sáenz.',
+                fullContent: '<p>San Francisco de Asís: misa 9 hs en la parroquia y 11 hs en la capilla.</p><p>Sor Faustina, lunes 5: misa 15 hs en la capilla.</p><p>Nuestra Señora del Rosario, miércoles 7: misa 19 hs.</p><p>San Héctor Valdivieso Sáenz, viernes 9: misa 19 hs.</p><p>Transmisión en vivo por YouTube y Facebook.</p>',
+                image: '/avisos/misas-san-carlos-borromeo.jpeg'
+            },
+            {
+                title: 'Grupo de Autoayuda San Juan Bautista - Adicciones',
+                date: 'Lunes, miércoles y viernes de 20 a 23 hs',
+                content: 'Un espacio confidencial y gratuito para quien quiera dar el primer paso.',
+                fullContent: '<p>«Tu recuperación comienza hoy. El primer paso es pedir ayuda y aquí te acompañamos».</p><p>Nos reunimos los lunes, miércoles y viernes de 20:00 a 23:00 en <strong>Nizan y Manuela Pedraza</strong>, esquina Plaza Las Malvinas. Confidencial y gratuito.</p><p>Contactos: Gastón 1134217673 · Martín 1154709891.</p>',
+                image: '/avisos/grupo-autoayuda-adicciones.jpeg'
             }
         ];
 
