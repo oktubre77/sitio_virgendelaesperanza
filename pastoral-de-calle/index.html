@@ -411,6 +411,33 @@
                                 Cómo llegar
                             </a>
                         </article>
+                        <!-- Jornada de un solo dia: data-hasta la descuelga sola al dia siguiente
+                             (fecha inclusiva, hora local, igual que los avisos). -->
+                        <article data-hasta="2026-10-17" class="bg-crema-suave rounded-lg shadow-md p-6">
+                            <h3 class="text-lg font-bold text-azul-profundo mb-1">Atención primaria de salud gratuita y solidaria</h3>
+                            <p class="text-xs font-semibold uppercase tracking-wide text-dorado-ocre mb-3">Jornada · Sábado 17 de octubre, 10 a 13 hs · San Justo</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                Para personas en situación de calle y vulnerabilidad social. Medicina clínica, cardiología, pediatría,
+                                ginecología, nutrición, kinesiología, podología y coaching.
+                            </p>
+                            <p class="text-gray-700 text-sm mb-2">
+                                <span class="font-semibold">📍 Dirección:</span> Parroquia Santuario Sagrado Corazón de Jesús (Casa Salesiana), Mons. Rodolfo Bufano 320, San Justo
+                            </p>
+                            <p class="text-gray-700 text-sm mb-4">
+                                <span class="font-semibold">📝 Inscripción previa:</span> solo por mensaje de WhatsApp al 11-7677-9218, con nombre completo, DNI y edad.
+                            </p>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="https://wa.me/5491176779218" target="_blank" rel="noopener noreferrer"
+                                   class="inline-flex items-center justify-center gap-2 bg-azul-profundo text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-dorado-ocre transition-colors">
+                                    Inscribirse por WhatsApp
+                                </a>
+                                <a href="https://www.google.com/maps/search/?api=1&amp;query=Mons.+Rodolfo+Bufano+320%2C+San+Justo"
+                                   target="_blank" rel="noopener noreferrer"
+                                   class="inline-flex items-center justify-center gap-2 bg-white text-azul-profundo border-2 border-azul-profundo px-5 py-2 rounded-full font-bold text-sm hover:bg-azul-profundo hover:text-white transition-colors">
+                                    Cómo llegar
+                                </a>
+                            </div>
+                        </article>
                     </div>
                 </div>
                 <div class="max-w-3xl mx-auto mb-12 md:mb-16">
@@ -1125,6 +1152,16 @@ const modal = document.getElementById('modal');
             } finally {
                 boton.disabled = false;
             }
+        });
+    })();
+    </script>
+    <script>
+    // Tarjetas con fecha (data-hasta): se ocultan solas cuando pasa el evento.
+    // Fecha INCLUSIVA y LOCAL: con toISOString() se caerian a las 21 del mismo dia en Argentina.
+    (function () {
+        const hoy = new Date().toLocaleDateString('en-CA');
+        document.querySelectorAll('[data-hasta]').forEach(function (el) {
+            if (el.dataset.hasta < hoy) el.remove();
         });
     })();
     </script>
