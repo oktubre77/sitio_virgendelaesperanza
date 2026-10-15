@@ -16,17 +16,17 @@
   "redirects": [
     {
       "source": "/recorridas",
-      "destination": "/pastoral-de-calle/#recorridas",
+      "destination": "/pastoral-de-calle/",
       "permanent": true
     },
     {
       "source": "/recorridas/",
-      "destination": "/pastoral-de-calle/#recorridas",
+      "destination": "/pastoral-de-calle/",
       "permanent": true
     },
     {
       "source": "/recorridas/:path*",
-      "destination": "/pastoral-de-calle/#recorridas",
+      "destination": "/pastoral-de-calle/",
       "permanent": true
     },
     {
