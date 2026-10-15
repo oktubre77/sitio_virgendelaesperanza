@@ -266,10 +266,10 @@
                         <h3 class="text-base md:text-2xl font-bold text-azul-profundo mb-1 md:mb-2">Avisos</h3>
                         <p class="text-gray-600 text-xs md:text-base hidden md:block">Mantente al día con las últimas noticias y eventos de la parroquia.</p>
                     </a>
-                    <a href="/pastoral-de-calle/#recorridas" class="group block bg-white p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 active:scale-95">
+                    <a href="/pastoral-de-calle/" class="group block bg-white p-4 md:p-8 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 md:hover:-translate-y-2 transition-all duration-300 active:scale-95">
                         <div class="text-4xl md:text-5xl mb-3 md:mb-4 flex justify-center">🗺️</div>
-                        <h3 class="text-base md:text-2xl font-bold text-azul-profundo mb-1 md:mb-2">Recorridas</h3>
-                        <p class="text-gray-600 text-xs md:text-base hidden md:block">Accede al cronograma, bitácoras e inventario en un solo lugar.</p>
+                        <h3 class="text-base md:text-2xl font-bold text-azul-profundo mb-1 md:mb-2">Pastoral de Calle</h3>
+                        <p class="text-gray-600 text-xs md:text-base hidden md:block">Acompañamos a personas en situación de calle en Hurlingham. Sumate.</p>
                     </a>
                     <!-- Apuntaba a #caritas, una seccion que ya no existe: el clic no
                          hacia nada. El mapa de redirecciones solo corre al cargar la
@@ -503,7 +503,6 @@
                         <li><a href="#avisos" class="text-gray-300 hover:text-dorado-ocre transition">Avisos</a></li>
                         <li><a href="#vaticano" class="text-gray-300 hover:text-dorado-ocre transition">Vaticano</a></li>
                         <li><a href="/pastoral-de-calle/" class="text-gray-300 hover:text-dorado-ocre transition">Pastoral de Calle</a></li>
-                        <li><a href="/pastoral-de-calle/#recorridas" class="text-gray-300 hover:text-dorado-ocre transition">Recorridas</a></li>
                         <li><a href="#lectio" class="text-gray-300 hover:text-dorado-ocre transition">Lectio del Día</a></li>
                         <li><a href="/caritas/" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
                         <li><a href="/carlo-acutis/" class="text-gray-300 hover:text-dorado-ocre transition">San Carlo Acutis</a></li>
@@ -931,10 +930,12 @@
         const SECCIONES_MUDADAS = {
             '#pastoral-calle': '/pastoral-de-calle/',
             '#caritas': '/caritas/',
-            '#recorridas': '/pastoral-de-calle/#recorridas',
-            '#cronograma': '/pastoral-de-calle/#cronograma',
-            '#bitacoras': '/pastoral-de-calle/#bitacoras',
-            '#inventario': '/pastoral-de-calle/#inventario'
+            // Recorridas, cronograma, bitacoras e inventario estan ocultos por
+            // ahora en /pastoral-de-calle/: los enlaces viejos van al inicio de esa pagina.
+            '#recorridas': '/pastoral-de-calle/',
+            '#cronograma': '/pastoral-de-calle/',
+            '#bitacoras': '/pastoral-de-calle/',
+            '#inventario': '/pastoral-de-calle/'
         };
         if (SECCIONES_MUDADAS[window.location.hash]) {
             window.location.replace(SECCIONES_MUDADAS[window.location.hash]);
@@ -1600,9 +1601,9 @@
                 <span class="bnav-icon text-gray-400 text-xl">🔔</span>
                 <span class="bnav-label text-gray-400 text-xs font-semibold">Avisos</span>
             </button>
-            <a href="/pastoral-de-calle/#recorridas" class="bottom-nav-link flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+            <a href="/pastoral-de-calle/" class="bottom-nav-link flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
                 <span class="bnav-icon text-gray-400 text-xl">🗺️</span>
-                <span class="bnav-label text-gray-400 text-xs font-semibold">Recorridas</span>
+                <span class="bnav-label text-gray-400 text-xs font-semibold">Pastoral</span>
             </a>
             <button onclick="document.querySelector('[href=\'#caritas\']').click()" class="bottom-nav-link flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors" data-section="caritas">
                 <span class="bnav-icon text-gray-400 text-xl">🤝</span>

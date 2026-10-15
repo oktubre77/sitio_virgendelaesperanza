@@ -451,8 +451,10 @@
                         <li class="flex gap-3"><span class="text-dorado-ocre font-bold">•</span> No prometemos lo que no podemos cumplir.</li>
                     </ul>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <a href="#cronograma" class="group block bg-crema-suave p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <!-- Mientras Cronograma y Bitacora esten ocultos, esta tarjeta tambien:
+                     al volver a mostrarlos, quitar "hidden" (atributo y clase, volver a "block") y volver a md:grid-cols-3. -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <a href="#cronograma" hidden class="group hidden bg-crema-suave p-6 rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <div class="text-4xl text-dorado-ocre mb-3">🗺️</div>
                         <h3 class="text-lg font-bold text-azul-profundo mb-1">Cronograma y bitácoras</h3>
                         <p class="text-gray-600 text-sm">La organización interna de cada salida.</p>
@@ -470,7 +472,13 @@
                 </div>
             </div>
         </section>
-<section id="recorridas" class="py-10 md:py-20 bg-white">
+<!-- OCULTO POR AHORA: Recorridas, Cronograma, Bitacora e Inventario.
+     El contenido sigue aca, solo no se muestra. Para volver a mostrarlo,
+     quitar el atributo "hidden" de las cuatro <section> (recorridas,
+     cronograma, bitacoras, inventario) y volver a apuntar los enlaces
+     "Pastoral" del pie y la barra inferior a /pastoral-de-calle/#recorridas.
+     Ojo: oculto no es privado, el codigo sigue publico. -->
+<section id="recorridas" hidden class="py-10 md:py-20 bg-white">
             <div class="relative w-full overflow-hidden shadow-xl mb-8 md:mb-12 h-[200px] md:h-[340px]"
                  style="background: radial-gradient(ellipse 70% 60% at 12% 100%, rgba(224,172,96,0.55) 0%, rgba(176,141,87,0.12) 42%, rgba(176,141,87,0) 70%), linear-gradient(135deg, #0d151d 0%, #2C3E50 55%, #3b556e 100%);">
                 <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"><g fill="#000000" opacity="0.45"><rect x="0" y="430" width="90" height="170"/><rect x="100" y="470" width="70" height="130"/><rect x="180" y="400" width="110" height="200"/><rect x="300" y="460" width="80" height="140"/><rect x="390" y="420" width="95" height="180"/><rect x="495" y="480" width="70" height="120"/><rect x="575" y="440" width="105" height="160"/><rect x="690" y="410" width="85" height="190"/><rect x="785" y="470" width="90" height="130"/><rect x="885" y="435" width="100" height="165"/><rect x="995" y="465" width="75" height="135"/><rect x="1080" y="425" width="120" height="175"/></g><g fill="#E8C38A" opacity="0.42"><rect x="212" y="425" width="11" height="15"/><rect x="238" y="458" width="11" height="15"/><rect x="418" y="445" width="11" height="15"/><rect x="606" y="466" width="11" height="15"/><rect x="714" y="436" width="11" height="15"/><rect x="912" y="460" width="11" height="15"/><rect x="1112" y="450" width="11" height="15"/><rect x="330" y="492" width="11" height="15"/><rect x="822" y="498" width="11" height="15"/></g></svg>
@@ -506,7 +514,7 @@
                 </div>
             </div>
         </section>
-        <section id="cronograma" class="py-10 md:py-20 bg-crema-suave">
+        <section id="cronograma" hidden class="py-10 md:py-20 bg-crema-suave">
             <div class="container mx-auto px-4 md:px-6">
                 <div class="text-center mb-8 md:mb-12">
                     <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Cronograma de Recorridas 2026</h2>
@@ -526,7 +534,7 @@
                 <p id="cronograma-origen" class="text-sm text-gray-500 mt-4 text-center">Días no habilitados quedan solo informativos.</p>
             </div>
         </section>
-        <section id="bitacoras" class="py-10 md:py-20 bg-white">
+        <section id="bitacoras" hidden class="py-10 md:py-20 bg-white">
             <div class="container mx-auto px-4 md:px-6">
                 <div class="text-center mb-8 md:mb-12">
                     <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Bitácora de Recorridas</h2>
@@ -536,7 +544,7 @@
                 </div>
             </div>
         </section>
-<section id="inventario" class="py-10 md:py-20 bg-white">
+<section id="inventario" hidden class="py-10 md:py-20 bg-white">
     <div class="container mx-auto px-4 md:px-6">
         <div class="text-center mb-8 md:mb-12">
             <h2 class="text-2xl md:text-4xl font-bold text-azul-profundo">Gestión de Inventario</h2>
@@ -677,7 +685,6 @@
                         <li><a href="/#avisos" class="text-gray-300 hover:text-dorado-ocre transition">Avisos</a></li>
                         <li><a href="/#vaticano" class="text-gray-300 hover:text-dorado-ocre transition">Vaticano</a></li>
                         <li><a href="/pastoral-de-calle/" class="text-gray-300 hover:text-dorado-ocre transition">Pastoral de Calle</a></li>
-                        <li><a href="/pastoral-de-calle/#recorridas" class="text-gray-300 hover:text-dorado-ocre transition">Recorridas</a></li>
                         <li><a href="/#lectio" class="text-gray-300 hover:text-dorado-ocre transition">Lectio del Día</a></li>
                         <li><a href="/caritas/" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
                         <li><a href="/carlo-acutis/" class="text-gray-300 hover:text-dorado-ocre transition">San Carlo Acutis</a></li>
@@ -750,9 +757,9 @@
                 <span class="text-gray-400 text-xl">🔔</span>
                 <span class="text-gray-400 text-xs font-semibold">Avisos</span>
             </a>
-            <a href="/pastoral-de-calle/#recorridas" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+            <a href="/pastoral-de-calle/" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
                 <span class="text-gray-400 text-xl">🗺️</span>
-                <span class="text-gray-400 text-xs font-semibold">Recorridas</span>
+                <span class="text-gray-400 text-xs font-semibold">Pastoral</span>
             </a>
             <a href="/#caritas" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
                 <span class="text-gray-400 text-xl">🤝</span>
