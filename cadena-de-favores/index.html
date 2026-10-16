@@ -131,7 +131,7 @@
                     <p class="mt-6">
                         <!-- Canal de WhatsApp: reemplazar el href por el enlace del canal.
                              Mientras no sea un enlace https, el botón se muestra desactivado. -->
-                        <a id="cf-canal" href="[PEGAR ENLACE AQUÍ]" target="_blank" rel="noopener noreferrer" class="font-bold underline underline-offset-4" style="color:#14284B">Seguir las novedades de la cadena →</a>
+                        <a id="cf-canal" href="https://whatsapp.com/channel/0029VbE0nmq3bbV7YJQQRb0q" target="_blank" rel="noopener noreferrer" class="font-bold underline underline-offset-4" style="color:#14284B">Seguir las novedades de la cadena →</a>
                     </p>
                     <p id="cf-canal-pronto" class="hidden text-sm mt-3 opacity-80">El canal de WhatsApp está por abrir.</p>
                 </div>
@@ -196,8 +196,35 @@
             <div class="container mx-auto px-4 md:px-6 max-w-3xl text-center">
                 <h2 class="text-2xl md:text-3xl mb-4">¿Querés empezar una cadena?</h2>
                 <p class="text-lg leading-relaxed mb-8">Entrá a <strong>peregrinosdelaesperanza.org/cadena-de-favores</strong> sin ningún número: ese es el eslabón N.º 1. Ayudá a alguien y pasale el enlace.</p>
-                <a href="[PEGAR ENLACE AQUÍ]" target="_blank" rel="noopener noreferrer" class="cf-boton cf-boton-wa cf-canal-link">Seguir las novedades de la cadena</a>
+                <a href="https://whatsapp.com/channel/0029VbE0nmq3bbV7YJQQRb0q" target="_blank" rel="noopener noreferrer" class="cf-boton cf-boton-wa cf-canal-link">Seguir las novedades de la cadena</a>
                 <p id="cf-canal-pronto" class="hidden text-sm mt-3 opacity-80">El canal de WhatsApp está por abrir.</p>
+            </div>
+        </section>
+        <!-- Comentarios: se publican solo después de que alguien de la misión los aprueba. -->
+        <section id="comentarios" class="bg-white py-12 md:py-20">
+            <div class="container mx-auto px-4 md:px-6 max-w-3xl">
+                <h2 class="text-2xl md:text-4xl text-center mb-3">Cómo pasaron la cadena</h2>
+                <p class="text-center text-lg mb-10 max-w-2xl mx-auto">Lo que cuentan quienes ya fueron un eslabón.</p>
+
+                <div id="cf-lista" class="space-y-4 mb-12" aria-live="polite">
+                    <p id="cf-lista-vacia" class="text-center opacity-70">Todavía no hay comentarios publicados. ¡Podés ser el primero!</p>
+                </div>
+
+                <form id="cf-form" class="cf-bg-crema rounded-xl p-5 md:p-8" novalidate>
+                    <h3 class="text-xl md:text-2xl mb-2">Contá cómo pasaste la cadena</h3>
+                    <p class="text-sm mb-5 leading-relaxed">Para cuidar a quien ayudaste, <strong>no pongas su nombre, su foto ni dónde vive o duerme</strong>. Cada comentario se lee antes de publicarse.</p>
+                    <label class="block font-medium mb-1" for="cf-texto">Tu comentario</label>
+                    <textarea id="cf-texto" name="texto" rows="4" maxlength="500" required class="w-full rounded-lg border border-gray-300 p-3 mb-1 bg-white" placeholder="Por ejemplo: le llevé la compra a una vecina que estaba enferma."></textarea>
+                    <p class="text-xs text-right opacity-70 mb-4"><span id="cf-contador">0</span>/500</p>
+                    <label class="block font-medium mb-1" for="cf-nombre">Tu nombre <span class="font-normal opacity-70">(opcional)</span></label>
+                    <input id="cf-nombre" name="nombre" type="text" maxlength="40" autocomplete="given-name" class="w-full rounded-lg border border-gray-300 p-3 mb-5 bg-white" placeholder="Si lo dejás vacío, sale como anónimo">
+                    <!-- Campo trampa para robots: las personas no lo ven. -->
+                    <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+                        <label>No completar <input type="text" name="web" tabindex="-1" autocomplete="off"></label>
+                    </div>
+                    <button type="submit" class="cf-boton cf-boton-wa w-full sm:w-auto">Enviar comentario</button>
+                    <p id="cf-form-msj" class="mt-4 font-medium" role="status"></p>
+                </form>
             </div>
         </section>
     </main>
@@ -399,6 +426,63 @@
                 catch (err) { window.prompt('Copiá el enlace:', enlace); return; }
                 copiar.textContent = '¡Copiado!';
                 setTimeout(() => { copiar.textContent = 'Copiar enlace'; }, 2000);
+            });
+
+            // Comentarios aprobados y formulario.
+            const lista = document.getElementById('cf-lista');
+            function tarjetaComentario(k) {
+                const art = document.createElement('article');
+                art.className = 'cf-bg-crema rounded-xl p-5';
+                const t = document.createElement('p');
+                t.className = 'leading-relaxed whitespace-pre-line mb-3';
+                t.textContent = k.texto;
+                const pie = document.createElement('p');
+                pie.className = 'text-sm cf-text-dorado font-bold';
+                const partes = [k.nombre || 'Anónimo'];
+                if (k.eslabon) partes.push('Eslabón N.º ' + k.eslabon);
+                if (k.fecha) partes.push(new Date(k.fecha).toLocaleDateString('es-AR', { day: 'numeric', month: 'long' }));
+                pie.textContent = partes.join(' · ');
+                art.append(t, pie);
+                return art;
+            }
+            fetch('/api/comentarios')
+                .then(r => r.json())
+                .then(d => {
+                    if (!Array.isArray(d.comentarios) || !d.comentarios.length) return;
+                    document.getElementById('cf-lista-vacia').remove();
+                    d.comentarios.forEach(k => lista.appendChild(tarjetaComentario(k)));
+                })
+                .catch(() => {});
+
+            const form = document.getElementById('cf-form');
+            const campoTexto = document.getElementById('cf-texto');
+            const msj = document.getElementById('cf-form-msj');
+            campoTexto.addEventListener('input', () => { document.getElementById('cf-contador').textContent = campoTexto.value.length; });
+            form.addEventListener('submit', async ev => {
+                ev.preventDefault();
+                if (campoTexto.value.trim().length < 3) { msj.textContent = 'Escribí un poco más.'; campoTexto.focus(); return; }
+                const boton = form.querySelector('button[type=submit]');
+                boton.disabled = true; msj.textContent = 'Enviando…';
+                const errores = {
+                    limite: 'Ya enviaste varios comentarios. Probá de nuevo en un rato.',
+                    'cola-llena': 'Hay muchos comentarios esperando revisión. Probá de nuevo en unos días.',
+                };
+                try {
+                    const r = await fetch('/api/comentarios', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ texto: campoTexto.value, nombre: form.nombre.value, web: form.web.value, c }),
+                    });
+                    const d = await r.json().catch(() => ({}));
+                    if (!r.ok) throw new Error(errores[d.error] || 'No se pudo enviar. Probá de nuevo más tarde.');
+                    form.reset();
+                    document.getElementById('cf-contador').textContent = '0';
+                    msj.textContent = '¡Gracias! Lo vamos a leer y, si está todo bien, lo publicamos.';
+                } catch (err) {
+                    msj.textContent = err.message;
+                } finally {
+                    boton.disabled = false;
+                }
             });
         })();
     </script>

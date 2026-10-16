@@ -4,5 +4,6 @@
 
 User-agent: *
 Allow: /
+Disallow: /cadena-de-favores/moderar.html
 
 Sitemap: https://www.peregrinosdelaesperanza.org/sitemap.xml

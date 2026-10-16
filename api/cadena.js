@@ -10,7 +10,7 @@
 // la integración: KV_REST_API_URL / KV_REST_API_TOKEN, o sus equivalentes
 // UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN.
 
-const crypto = require('crypto');
+const { configuracion, variablesVistas, claveIp } = require('./_redis');
 
 const TOKEN = /^[A-Za-z0-9]{6,16}$/;
 const LIMITE_POR_HORA = 30; // eslabones nuevos por IP por hora
@@ -52,38 +52,7 @@ return { n, nuevo,
   tonumber(redis.call('GET', 'cf:cadenas') or '0') }
 `;
 
-// Busca los datos de conexión. Vercel puede agregarle un prefijo a los nombres
-// (por ejemplo STORAGE_KV_REST_API_URL), así que se aceptan con o sin prefijo.
-function configuracion(env = process.env) {
-  const nombres = Object.keys(env);
-  for (const [sufUrl, sufToken] of [['KV_REST_API_URL', 'KV_REST_API_TOKEN'], ['UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN']]) {
-    for (const n of nombres) {
-      if (!n.endsWith(sufUrl) || !env[n]) continue;
-      const token = env[n.slice(0, -sufUrl.length) + sufToken];
-      if (token) return { url: env[n].replace(/\/$/, ''), token };
-    }
-  }
-  // Solo hay una dirección redis(s)://default:<token>@<host>.upstash.io:6379:
-  // en Upstash, la API REST está en https://<host> y usa la misma clave.
-  for (const n of nombres) {
-    if (!/(REDIS_URL|KV_URL)$/.test(n) || !env[n]) continue;
-    try {
-      const u = new URL(env[n]);
-      if (/^rediss?:$/.test(u.protocol) && u.hostname.endsWith('.upstash.io') && u.password) {
-        return { url: 'https://' + u.hostname, token: decodeURIComponent(u.password) };
-      }
-    } catch (e) { /* no es una URL */ }
-  }
-  return null;
-}
-
-// Para diagnosticar: solo los NOMBRES de las variables relacionadas, nunca sus valores.
-function variablesVistas(env = process.env) {
-  return Object.keys(env).filter(n => /KV|REDIS|UPSTASH/.test(n)).sort();
-}
-
 module.exports = handler;
-module.exports.configuracion = configuracion;
 
 async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
@@ -102,8 +71,7 @@ async function handler(req, res) {
   }
 
   // La IP se guarda solo como hash, una hora, para frenar abusos.
-  const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'x';
-  const claveLimite = 'cf:rl:' + crypto.createHash('sha256').update('cadena:' + ip).digest('hex').slice(0, 24);
+  const claveLimite = claveIp(req, 'cf:rl:');
 
   try {
     const r = await fetch(db.url, {
