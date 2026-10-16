@@ -11,9 +11,22 @@ const { publico } = require('./comentarios');
 const ID = /^[a-f0-9]{12}$/;
 const INTENTOS_FALLIDOS_POR_HORA = 10;
 
+// La clave de moderación. Se tolera que el nombre tenga espacios o minúsculas
+// por error al cargarlo en Vercel.
+function claveConfigurada(env = process.env) {
+  if (env.CADENA_CLAVE) return env.CADENA_CLAVE.trim();
+  const n = Object.keys(env).find(k => k.trim().toUpperCase() === 'CADENA_CLAVE' && env[k]);
+  return n ? env[n].trim() : '';
+}
+
+// Para diagnosticar: solo los NOMBRES de variables parecidas, nunca sus valores.
+function variablesParecidas(env = process.env) {
+  return Object.keys(env).filter(k => /CLAVE|CADENA/i.test(k)).sort();
+}
+
 function claveCorrecta(req) {
-  const esperada = process.env.CADENA_CLAVE || '';
-  const dada = String(req.headers.authorization || '').replace(/^Bearer\s+/i, '');
+  const esperada = claveConfigurada();
+  const dada = String(req.headers.authorization || '').replace(/^Bearer\s+/i, '').trim();
   if (!esperada || !dada) return false;
   const a = crypto.createHash('sha256').update(esperada).digest();
   const b = crypto.createHash('sha256').update(dada).digest();
@@ -24,7 +37,9 @@ module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   const db = configuracion();
   if (!db) return res.status(503).json({ error: 'sin-base' });
-  if (!process.env.CADENA_CLAVE) return res.status(503).json({ error: 'sin-clave' });
+  if (!claveConfigurada()) {
+    return res.status(503).json({ error: 'sin-clave', variables: variablesParecidas(), entorno: process.env.VERCEL_ENV || '' });
+  }
 
   try {
     // Frena a quien prueba claves al azar.
@@ -77,3 +92,5 @@ module.exports = async function handler(req, res) {
     return res.status(502).json({ error: 'base' });
   }
 };
+
+module.exports.claveConfigurada = claveConfigurada;
