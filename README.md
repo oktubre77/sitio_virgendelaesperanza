@@ -45,3 +45,23 @@ La lectura automática usa estos nombres de columnas (sin importar mayúsculas):
 - `estado`
 
 Si no hay URL configurada o falla la carga remota, el sitio usa los avisos locales de respaldo.
+
+## Cadena de favores (`/cadena-de-favores/`)
+
+Cada enlace de la cadena tiene un código propio (`c`) y el del eslabón anterior (`p`).
+La primera vez que alguien abre un enlace, la función `api/cadena.js` lo guarda con
+número = anterior + 1. Así el número no se puede trucar y la página muestra los totales:
+veces que se pasó, eslabón más lejano y cadenas empezadas.
+
+### Conectar la base de datos (una sola vez)
+1. En Vercel, abrir el proyecto → pestaña **Storage** → **Create Database** → **Upstash for Redis** (plan gratuito).
+2. Conectarla a este proyecto. Vercel crea solas las variables `KV_REST_API_URL` y `KV_REST_API_TOKEN`.
+3. Volver a desplegar (Deployments → Redeploy).
+
+Mientras la base no esté conectada, la página igual funciona: muestra el número que viene
+en el enlace (`e`) y no muestra los totales.
+
+### Qué se guarda
+- `cf:l:<código>`: número de eslabón, código anterior y fecha.
+- `cf:total`, `cf:max`, `cf:cadenas`: los totales.
+- `cf:rl:<hash>`: límite de 30 eslabones nuevos por hora por conexión (la IP se guarda solo como hash y se borra a la hora).

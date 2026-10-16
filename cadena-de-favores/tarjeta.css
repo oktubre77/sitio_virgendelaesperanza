@@ -1,0 +1,151 @@
+/* Tarjeta "Cadena de favores".
+   Todo se mide en em: el tamaño de letra de .cf-tarjeta define el tamaño
+   de la tarjeta entera (30em x 42.3em, proporción A6). En pantalla se achica
+   para entrar en el celular; al imprimir se fija en milímetros. */
+
+.cf-tarjeta {
+    --crema: #F7F1E3;
+    --azul: #14284B;
+    --dorado: #B8862B;
+    font-size: min(3.5mm, calc((100vw - 32px) / 30));
+    width: 30em;
+    height: 42.3em;
+    box-sizing: border-box;
+    padding: 1.1em;
+    background: var(--crema);
+    color: var(--azul);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    position: relative;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+.cf-tarjeta *, .cf-tarjeta *::before, .cf-tarjeta *::after { box-sizing: border-box; }
+
+.cf-marco {
+    height: 100%;
+    border: 0.08em solid var(--dorado);
+    outline: 0.04em solid var(--dorado);
+    outline-offset: -0.45em;
+    padding: 2em 2.1em 1.6em;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.cf-etiqueta {
+    font-size: 0.82em;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin: 0 0 1.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8em;
+}
+.cf-etiqueta::before, .cf-etiqueta::after {
+    content: '';
+    width: 2.2em;
+    height: 0.09em;
+    background: var(--dorado);
+}
+
+.cf-titulo {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 2.05em;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.55em;
+    color: var(--azul);
+}
+
+.cf-subtitulo {
+    font-size: 1.04em;
+    line-height: 1.45;
+    margin: 0 0 1.2em;
+}
+
+.cf-versiculo {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 1.04em;
+    line-height: 1.4;
+    margin: 0 0 1.3em;
+    padding: 0 0.6em;
+}
+.cf-versiculo cite {
+    display: block;
+    font-style: normal;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.8em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--dorado);
+    margin-top: 0.35em;
+}
+
+.cf-eslabon {
+    border: 0.1em solid var(--azul);
+    border-radius: 0.5em;
+    padding: 0.8em 1em 0.75em;
+    background: rgba(255, 255, 255, 0.55);
+}
+.cf-eslabon-numero {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.55em;
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.3em;
+}
+/* Espacio para escribir el número a mano. */
+.cf-eslabon-valor {
+    display: inline-block;
+    min-width: 2.6em;
+    border-bottom: 0.06em solid var(--dorado);
+    color: var(--dorado);
+    line-height: 1.1;
+}
+.cf-eslabon-ayuda {
+    font-size: 0.8em;
+    line-height: 1.35;
+    margin: 0.45em 0 0;
+}
+
+.cf-pie {
+    margin-top: auto;
+    padding-top: 1.1em;
+    border-top: 0.06em solid rgba(184, 134, 43, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    text-align: left;
+}
+.cf-qr {
+    width: 6.4em;
+    height: 6.4em;
+    flex-shrink: 0;
+    background: #fff;
+    padding: 0.45em;
+    border-radius: 0.3em;
+}
+.cf-qr img, .cf-qr svg { display: block; width: 100%; height: 100%; }
+.cf-pie-texto { margin: 0; font-size: 0.95em; line-height: 1.35; }
+.cf-pie-texto strong {
+    display: block;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.12em;
+}
+.cf-pie-url {
+    display: block;
+    margin-top: 0.25em;
+    color: var(--dorado);
+    font-weight: 700;
+    font-size: 0.92em;
+    word-break: break-all;
+}
