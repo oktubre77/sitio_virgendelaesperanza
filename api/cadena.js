@@ -52,13 +52,40 @@ return { n, nuevo,
   tonumber(redis.call('GET', 'cf:cadenas') or '0') }
 `;
 
-function configuracion() {
-  const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
-  return url && token ? { url: url.replace(/\/$/, ''), token } : null;
+// Busca los datos de conexión. Vercel puede agregarle un prefijo a los nombres
+// (por ejemplo STORAGE_KV_REST_API_URL), así que se aceptan con o sin prefijo.
+function configuracion(env = process.env) {
+  const nombres = Object.keys(env);
+  for (const [sufUrl, sufToken] of [['KV_REST_API_URL', 'KV_REST_API_TOKEN'], ['UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN']]) {
+    for (const n of nombres) {
+      if (!n.endsWith(sufUrl) || !env[n]) continue;
+      const token = env[n.slice(0, -sufUrl.length) + sufToken];
+      if (token) return { url: env[n].replace(/\/$/, ''), token };
+    }
+  }
+  // Solo hay una dirección redis(s)://default:<token>@<host>.upstash.io:6379:
+  // en Upstash, la API REST está en https://<host> y usa la misma clave.
+  for (const n of nombres) {
+    if (!/(REDIS_URL|KV_URL)$/.test(n) || !env[n]) continue;
+    try {
+      const u = new URL(env[n]);
+      if (/^rediss?:$/.test(u.protocol) && u.hostname.endsWith('.upstash.io') && u.password) {
+        return { url: 'https://' + u.hostname, token: decodeURIComponent(u.password) };
+      }
+    } catch (e) { /* no es una URL */ }
+  }
+  return null;
 }
 
-module.exports = async function handler(req, res) {
+// Para diagnosticar: solo los NOMBRES de las variables relacionadas, nunca sus valores.
+function variablesVistas(env = process.env) {
+  return Object.keys(env).filter(n => /KV|REDIS|UPSTASH/.test(n)).sort();
+}
+
+module.exports = handler;
+module.exports.configuracion = configuracion;
+
+async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET');
@@ -66,7 +93,7 @@ module.exports = async function handler(req, res) {
   }
 
   const db = configuracion();
-  if (!db) return res.status(503).json({ error: 'sin-base' });
+  if (!db) return res.status(503).json({ error: 'sin-base', variables: variablesVistas() });
 
   const c = String(req.query.c || '');
   const p = String(req.query.p || '');
@@ -93,4 +120,4 @@ module.exports = async function handler(req, res) {
     console.error('cadena:', err.message);
     return res.status(502).json({ error: 'base' });
   }
-};
+}
