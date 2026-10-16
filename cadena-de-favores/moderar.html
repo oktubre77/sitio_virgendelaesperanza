@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderar comentarios · Cadena de favores</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+    <style>
+        :root { --crema: #F7F1E3; --azul: #14284B; --dorado: #B8862B; }
+        * { box-sizing: border-box; }
+        body { margin: 0; background: var(--crema); color: var(--azul); font-family: 'DM Sans', system-ui, sans-serif; }
+        main { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; }
+        h1 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 1.7rem; margin: 0 0 4px; }
+        .sub { margin: 0 0 24px; opacity: .8; }
+        .caja { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(20,40,75,.12); }
+        label { display: block; font-weight: 500; margin-bottom: 6px; }
+        input[type=password] { width: 100%; font: inherit; padding: 12px; border: 1px solid #c9c2b2; border-radius: 8px; margin-bottom: 12px; }
+        button { font: inherit; font-weight: 700; border: 0; border-radius: 999px; padding: 10px 18px; cursor: pointer; }
+        button:disabled { opacity: .5; cursor: default; }
+        .primario { background: var(--azul); color: #fff; }
+        .aprobar { background: #1f6f43; color: #fff; }
+        .rechazar { background: #fff; color: #9b2c2c; border: 2px solid #9b2c2c; }
+        .pestanas { display: flex; gap: 8px; margin: 0 0 16px; }
+        .pestanas button { background: #fff; color: var(--azul); border: 2px solid var(--azul); }
+        .pestanas button[aria-selected="true"] { background: var(--azul); color: #fff; }
+        .item { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(20,40,75,.12); }
+        .item p.texto { white-space: pre-line; line-height: 1.5; margin: 0 0 10px; }
+        .meta { font-size: .85rem; color: var(--dorado); font-weight: 700; margin: 0 0 12px; }
+        .acciones { display: flex; gap: 8px; flex-wrap: wrap; }
+        .msj { min-height: 1.4em; font-weight: 500; }
+        .barra { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .enlace { background: none; color: var(--azul); text-decoration: underline; padding: 0; font-weight: 500; }
+        a { color: var(--azul); }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Moderar comentarios</h1>
+    <p class="sub">Cadena de favores · <a href="/cadena-de-favores/#comentarios">ver la página</a></p>
+
+    <form id="entrar" class="caja">
+        <label for="clave">Clave</label>
+        <input id="clave" type="password" autocomplete="current-password" required>
+        <button class="primario" type="submit">Entrar</button>
+        <p id="entrar-msj" class="msj" role="status"></p>
+    </form>
+
+    <section id="panel" hidden>
+        <div class="barra">
+            <div class="pestanas" role="tablist">
+                <button type="button" role="tab" data-estado="pend" aria-selected="true">En espera (<span id="n-pend">0</span>)</button>
+                <button type="button" role="tab" data-estado="ok" aria-selected="false">Publicados</button>
+            </div>
+            <button type="button" class="enlace" id="salir">Salir</button>
+        </div>
+        <p id="panel-msj" class="msj" role="status"></p>
+        <div id="lista"></div>
+    </section>
+</main>
+<script>
+    let clave = '';
+    let estado = 'pend';
+    try { clave = sessionStorage.getItem('cf-clave') || ''; } catch (e) {}
+
+    const $ = id => document.getElementById(id);
+
+    async function api(metodo, cuerpo) {
+        const r = await fetch('/api/moderar' + (metodo === 'GET' ? '?estado=' + estado : ''), {
+            method: metodo,
+            headers: Object.assign({ Authorization: 'Bearer ' + clave }, cuerpo ? { 'Content-Type': 'application/json' } : {}),
+            body: cuerpo ? JSON.stringify(cuerpo) : undefined,
+        });
+        const d = await r.json().catch(() => ({}));
+        if (!r.ok) {
+            const e = new Error({
+                clave: 'Clave incorrecta.',
+                limite: 'Demasiados intentos. Esperá una hora.',
+                'sin-clave': 'Falta configurar la clave en Vercel (variable CADENA_CLAVE).',
+                'sin-base': 'La base de datos no está conectada.',
+                'no-esta': 'Ese comentario ya no está en espera.',
+            }[d.error] || 'Algo falló. Probá de nuevo.');
+            e.codigo = d.error;
+            throw e;
+        }
+        return d;
+    }
+
+    function item(k) {
+        const div = document.createElement('div');
+        div.className = 'item';
+        const t = document.createElement('p'); t.className = 'texto'; t.textContent = k.texto;
+        const m = document.createElement('p'); m.className = 'meta';
+        const partes = [k.nombre || 'Anónimo'];
+        if (k.eslabon) partes.push('Eslabón N.º ' + k.eslabon);
+        if (k.fecha) partes.push(new Date(k.fecha).toLocaleString('es-AR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }));
+        m.textContent = partes.join(' · ');
+        const acc = document.createElement('div'); acc.className = 'acciones';
+        const botones = estado === 'pend'
+            ? [['aprobar', 'Aprobar', 'aprobar'], ['rechazar', 'Rechazar', 'rechazar']]
+            : [['quitar', 'Quitar de la página', 'rechazar']];
+        for (const [accion, texto, clase] of botones) {
+            const b = document.createElement('button');
+            b.type = 'button'; b.className = clase; b.textContent = texto;
+            b.addEventListener('click', async () => {
+                if (accion !== 'aprobar' && !confirm(accion === 'quitar' ? '¿Quitar este comentario de la página?' : '¿Rechazar y borrar este comentario?')) return;
+                acc.querySelectorAll('button').forEach(x => { x.disabled = true; });
+                try {
+                    await api('POST', { id: k.id, accion });
+                    $('panel-msj').textContent = accion === 'aprobar' ? 'Publicado.' : 'Borrado.';
+                    cargar();
+                } catch (err) {
+                    $('panel-msj').textContent = err.message;
+                    acc.querySelectorAll('button').forEach(x => { x.disabled = false; });
+                }
+            });
+            acc.appendChild(b);
+        }
+        div.append(t, m, acc);
+        return div;
+    }
+
+    async function cargar() {
+        const lista = $('lista');
+        try {
+            const d = await api('GET');
+            $('entrar').hidden = true;
+            $('panel').hidden = false;
+            $('n-pend').textContent = d.pendientes;
+            lista.replaceChildren();
+            if (!d.comentarios.length) {
+                const p = document.createElement('p');
+                p.textContent = estado === 'pend' ? 'No hay comentarios esperando revisión.' : 'Todavía no hay comentarios publicados.';
+                lista.appendChild(p);
+            }
+            d.comentarios.forEach(k => lista.appendChild(item(k)));
+            return true;
+        } catch (err) {
+            if (err.codigo === 'clave') { salir(); $('entrar-msj').textContent = err.message; }
+            else if ($('panel').hidden) $('entrar-msj').textContent = err.message;
+            else $('panel-msj').textContent = err.message;
+            return false;
+        }
+    }
+
+    function salir() {
+        clave = '';
+        try { sessionStorage.removeItem('cf-clave'); } catch (e) {}
+        $('panel').hidden = true;
+        $('entrar').hidden = false;
+    }
+
+    $('entrar').addEventListener('submit', async ev => {
+        ev.preventDefault();
+        clave = $('clave').value;
+        $('entrar-msj').textContent = 'Entrando…';
+        if (await cargar()) {
+            $('entrar-msj').textContent = '';
+            $('clave').value = '';
+            try { sessionStorage.setItem('cf-clave', clave); } catch (e) {}
+        }
+    });
+
+    document.querySelectorAll('.pestanas button').forEach(b => b.addEventListener('click', () => {
+        estado = b.dataset.estado;
+        document.querySelectorAll('.pestanas button').forEach(x => x.setAttribute('aria-selected', String(x === b)));
+        $('panel-msj').textContent = '';
+        cargar();
+    }));
+    $('salir').addEventListener('click', salir);
+
+    if (clave) cargar();
+</script>
+</body>
+</html>

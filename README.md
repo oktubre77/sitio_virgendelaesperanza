@@ -65,3 +65,15 @@ en el enlace (`e`) y no muestra los totales.
 - `cf:l:<código>`: número de eslabón, código anterior y fecha.
 - `cf:total`, `cf:max`, `cf:cadenas`: los totales.
 - `cf:rl:<hash>`: límite de 30 eslabones nuevos por hora por conexión (la IP se guarda solo como hash y se borra a la hora).
+
+### Comentarios de la cadena
+En `/cadena-de-favores/` la gente puede contar cómo pasó la cadena. **Nada se publica
+sin aprobación**: los comentarios quedan en espera hasta que la persona que modera los aprueba en
+`/cadena-de-favores/moderar.html`.
+
+Para habilitar la moderación (una sola vez):
+1. En Vercel → **Settings** → **Environment Variables**, crear `CADENA_CLAVE` con una clave larga (Production y Preview).
+2. **Redeploy**.
+
+Límites: 5 comentarios por hora por conexión, 500 caracteres, hasta 300 en espera.
+Claves en la base: `cf:com:<id>` (texto, nombre, eslabón, fecha), `cf:com:pend` y `cf:com:ok`.
