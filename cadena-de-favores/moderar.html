@@ -83,6 +83,10 @@
                 'sin-base': 'La base de datos no está conectada.',
                 'no-esta': 'Ese comentario ya no está en espera.',
             }[d.error] || 'Algo falló. Probá de nuevo.');
+            if (d.error === 'sin-clave') {
+                e.message += ' Entorno: ' + (d.entorno || '?') + '. Variables parecidas: ' +
+                    (d.variables && d.variables.length ? d.variables.join(', ') : 'ninguna') + '.';
+            }
             e.codigo = d.error;
             throw e;
         }
