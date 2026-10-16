@@ -156,6 +156,18 @@
             </div>
         </section>
 
+        <!-- Totales de la cadena: se muestran solo si el servidor responde. -->
+        <section id="cf-totales" class="hidden py-10 md:py-14" style="background:#14284B;color:#F7F1E3">
+            <div class="container mx-auto px-4 md:px-6 max-w-4xl text-center">
+                <h2 class="text-2xl md:text-3xl mb-8" style="color:#F7F1E3">La cadena hasta hoy</h2>
+                <dl class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div><dt class="text-sm uppercase tracking-widest opacity-80 mb-1">Veces que se pasó</dt><dd id="cf-total" class="text-4xl md:text-5xl" style="font-family:'Fraunces',Georgia,serif;color:#B8862B">0</dd></div>
+                    <div><dt class="text-sm uppercase tracking-widest opacity-80 mb-1">Eslabón más lejano</dt><dd class="text-4xl md:text-5xl" style="font-family:'Fraunces',Georgia,serif;color:#B8862B">N.º <span id="cf-max">1</span></dd></div>
+                    <div><dt class="text-sm uppercase tracking-widest opacity-80 mb-1">Cadenas empezadas</dt><dd id="cf-cadenas" class="text-4xl md:text-5xl" style="font-family:'Fraunces',Georgia,serif;color:#B8862B">0</dd></div>
+                </dl>
+            </div>
+        </section>
+
         <section class="bg-white py-12 md:py-20">
             <div class="container mx-auto px-4 md:px-6 max-w-4xl">
                 <h2 class="text-2xl md:text-4xl text-center mb-3">Si te llegó este enlace</h2>
@@ -318,28 +330,61 @@
             document.getElementById('cf-canal-pronto').classList.remove('hidden');
         }
 
-        // La cadena: el número de eslabón viaja en el enlace (?e=7).
-        // Quien lo recibe ve ese número, y lo que comparte ya lleva el siguiente.
+        // La cadena. Cada enlace tiene su código (c) y el del eslabón anterior (p).
+        // La primera vez que alguien abre un enlace, el servidor lo registra y le
+        // asigna número = anterior + 1. El parámetro e es solo un respaldo para
+        // mostrar el número si el servidor no responde.
         (function () {
-            const e = parseInt(new URLSearchParams(location.search).get('e'), 10);
-            const actual = Number.isInteger(e) && e > 0 && e < 1000000 ? e : 1;
-            const siguiente = actual + 1;
-            const enlace = location.origin + '/cadena-de-favores/?e=' + siguiente;
-            const texto = 'Alguien te ayudó. Ahora ayudá vos a otra persona.\n' +
-                'No me devuelvas el favor: pasalo. Cuando lo hagas, la cadena sigue.\n\n' +
-                'Eslabón N.º ' + siguiente + ' 👉 ' + enlace;
+            const TOKEN = /^[A-Za-z0-9]{6,16}$/;
+            const q = new URLSearchParams(location.search);
+            const c = TOKEN.test(q.get('c') || '') ? q.get('c') : '';
+            const p = TOKEN.test(q.get('p') || '') ? q.get('p') : '';
+            const e = parseInt(q.get('e'), 10);
+            let actual = Number.isInteger(e) && e > 0 && e < 1000000 ? e : 1;
 
-            document.getElementById('cf-numero').textContent = actual;
-            document.querySelectorAll('.cf-siguiente').forEach(el => { el.textContent = siguiente; });
-            if (actual > 1) document.title = 'Eslabón N.º ' + actual + ' · Cadena de favores';
+            // Código del enlace que esta persona va a pasar.
+            const letras = 'abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            const nuevo = Array.from(crypto.getRandomValues(new Uint8Array(10)), x => letras[x % letras.length]).join('');
 
-            // QR con el enlace al eslabón siguiente, para pasarlo en persona.
-            const qr = qrcode(0, 'M');
-            qr.addData(enlace);
-            qr.make();
-            document.getElementById('cf-qr').innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true })
-                .replace('fill="black"', 'fill="#14284B"');
+            let enlace = '', texto = '';
+            function pintar() {
+                const siguiente = actual + 1;
+                const params = new URLSearchParams({ c: nuevo });
+                if (c) params.set('p', c);
+                params.set('e', siguiente);
+                enlace = location.origin + '/cadena-de-favores/?' + params.toString();
+                texto = 'Alguien te ayudó. Ahora ayudá vos a otra persona.\n' +
+                    'No me devuelvas el favor: pasalo. Cuando lo hagas, la cadena sigue.\n\n' +
+                    'Eslabón N.º ' + siguiente + ' 👉 ' + enlace;
 
+                document.getElementById('cf-numero').textContent = actual;
+                document.querySelectorAll('.cf-siguiente').forEach(el => { el.textContent = siguiente; });
+                document.title = (actual > 1 ? 'Eslabón N.º ' + actual + ' · ' : '') + 'Cadena de favores | Peregrinos de la Esperanza';
+
+                // QR con el enlace al eslabón siguiente, para pasarlo en persona.
+                const qr = qrcode(0, 'M');
+                qr.addData(enlace);
+                qr.make();
+                document.getElementById('cf-qr').innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true })
+                    .replace('fill="black"', 'fill="#14284B"');
+            }
+            pintar();
+
+            fetch('/api/cadena?' + new URLSearchParams({ c, p }).toString())
+                .then(r => r.json())
+                .then(d => {
+                    if (typeof d.total !== 'number') return;
+                    if (Number.isInteger(d.eslabon) && d.eslabon > 0) { actual = d.eslabon; pintar(); }
+                    const fmt = n => n.toLocaleString('es-AR');
+                    document.getElementById('cf-total').textContent = fmt(d.total);
+                    document.getElementById('cf-max').textContent = fmt(Math.max(d.max, actual));
+                    document.getElementById('cf-cadenas').textContent = fmt(d.cadenas);
+                    document.getElementById('cf-totales').classList.remove('hidden');
+                })
+                .catch(() => {});
+
+            // Se comparte sin esperar al servidor: el celular solo abre el menú
+            // de compartir si se llama justo al tocar el botón.
             document.getElementById('cf-pasar').addEventListener('click', async () => {
                 if (navigator.share) {
                     try { await navigator.share({ text: texto }); return; }
