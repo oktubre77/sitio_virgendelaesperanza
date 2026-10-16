@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadena de favores | Peregrinos de la Esperanza</title>
-    <meta name="description" content="Alguien te ayudó. Ahora ayudá vos a otra persona. Cómo funciona la cadena de favores de Peregrinos de la Esperanza, y la tarjeta para imprimir y pasar.">
+    <meta name="description" content="Alguien te ayudó. Ahora ayudá vos a otra persona. Cada vez que alguien pasa el enlace, la cadena suma un eslabón.">
     <link rel="canonical" href="https://www.peregrinosdelaesperanza.org/cadena-de-favores/">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#14284B">
@@ -121,14 +121,18 @@
                         <cite class="cf-text-dorado not-italic text-sm font-bold tracking-wider">1 Jn 3,18</cite>
                     </blockquote>
                     <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                        <button id="cf-pasar" type="button" class="cf-boton cf-boton-wa">
+                            <svg aria-hidden="true" viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.24 8.24 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.35-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+                            Pasar la cadena
+                        </button>
+                        <button id="cf-copiar" type="button" class="cf-boton cf-boton-borde">Copiar enlace</button>
+                    </div>
+                    <p class="text-sm mt-3 opacity-80" id="cf-ayuda-pasar">El enlace sale con el <strong>eslabón N.º <span class="cf-siguiente">2</span></strong>: el número se suma solo.</p>
+                    <p class="mt-6">
                         <!-- Canal de WhatsApp: reemplazar el href por el enlace del canal.
                              Mientras no sea un enlace https, el botón se muestra desactivado. -->
-                        <a id="cf-canal" href="[PEGAR ENLACE AQUÍ]" target="_blank" rel="noopener noreferrer" class="cf-boton cf-boton-wa">
-                            <svg aria-hidden="true" viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.24 8.24 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.35-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
-                            Seguir las novedades de la cadena
-                        </a>
-                        <a href="/cadena-de-favores/imprimir.html" class="cf-boton cf-boton-borde">Imprimir tarjetas</a>
-                    </div>
+                        <a id="cf-canal" href="[PEGAR ENLACE AQUÍ]" target="_blank" rel="noopener noreferrer" class="font-bold underline underline-offset-4" style="color:#14284B">Seguir las novedades de la cadena →</a>
+                    </p>
                     <p id="cf-canal-pronto" class="hidden text-sm mt-3 opacity-80">El canal de WhatsApp está por abrir.</p>
                 </div>
                 <div class="flex justify-center">
@@ -139,11 +143,11 @@
                             <p class="cf-subtitulo">No me devuelvas el favor: pasalo. Cuando lo hagas, la cadena sigue.</p>
                             <blockquote class="cf-versiculo">“No amemos de palabra, sino con obras y de verdad.”<cite>1 Jn 3,18</cite></blockquote>
                             <div class="cf-eslabon">
-                                <p class="cf-eslabon-numero">Eslabón N.º <span class="cf-eslabon-valor">&nbsp;</span></p>
+                                <p class="cf-eslabon-numero">Eslabón N.º <span class="cf-eslabon-valor" id="cf-numero">1</span></p>
                                 <p class="cf-eslabon-ayuda">Cuando la pases, actualizá el número de eslabón: sumá 1.</p>
                             </div>
                             <div class="cf-pie">
-                                <div class="cf-qr"><img src="/cadena-de-favores/qr-cadena.svg" alt="Código QR a esta página"></div>
+                                <div class="cf-qr" id="cf-qr" role="img" aria-label="Código QR con el enlace al eslabón siguiente"></div>
                                 <p class="cf-pie-texto"><strong>Conocé más y sumate a la cadena</strong><span class="cf-pie-url">peregrinosdelaesperanza.org</span></p>
                             </div>
                         </div>
@@ -154,7 +158,7 @@
 
         <section class="bg-white py-12 md:py-20">
             <div class="container mx-auto px-4 md:px-6 max-w-4xl">
-                <h2 class="text-2xl md:text-4xl text-center mb-3">Si te llegó esta tarjeta</h2>
+                <h2 class="text-2xl md:text-4xl text-center mb-3">Si te llegó este enlace</h2>
                 <p class="text-center text-lg mb-10 md:mb-14 max-w-2xl mx-auto">Alguien hizo algo por vos y no te pidió nada a cambio. Lo único que te pide es que no se corte acá.</p>
                 <ol class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                     <li class="cf-bg-crema rounded-xl p-6">
@@ -164,13 +168,13 @@
                     </li>
                     <li class="cf-bg-crema rounded-xl p-6">
                         <span class="cf-paso-num inline-flex w-10 h-10 rounded-full items-center justify-center text-lg mb-4">2</span>
-                        <h3 class="text-xl mb-2">Sumá 1 al eslabón</h3>
-                        <p class="leading-relaxed">Antes de pasar la tarjeta, tachá el número y escribí el siguiente. Así se ve hasta dónde llegó la cadena.</p>
+                        <h3 class="text-xl mb-2">Tocá «Pasar la cadena»</h3>
+                        <p class="leading-relaxed">El enlace que se comparte ya lleva el eslabón siguiente, sumado solo. Así se ve hasta dónde llegó la cadena.</p>
                     </li>
                     <li class="cf-bg-crema rounded-xl p-6">
                         <span class="cf-paso-num inline-flex w-10 h-10 rounded-full items-center justify-center text-lg mb-4">3</span>
-                        <h3 class="text-xl mb-2">Pasale la tarjeta</h3>
-                        <p class="leading-relaxed">Dásela a la persona que ayudaste. Ahora le toca a ella, y la cadena sigue.</p>
+                        <h3 class="text-xl mb-2">Mandáselo a quien ayudaste</h3>
+                        <p class="leading-relaxed">Por WhatsApp o como prefieras. Si están juntos, también puede escanear el QR de la tarjeta. Ahora le toca a esa persona.</p>
                     </li>
                 </ol>
             </div>
@@ -179,11 +183,9 @@
         <section class="cf-bg-crema py-12 md:py-16">
             <div class="container mx-auto px-4 md:px-6 max-w-3xl text-center">
                 <h2 class="text-2xl md:text-3xl mb-4">¿Querés empezar una cadena?</h2>
-                <p class="text-lg leading-relaxed mb-8">Imprimí las tarjetas (salen cuatro por hoja A4), ayudá a alguien y dale la primera con el eslabón N.º 1. Para enterarte cómo va creciendo, seguí el canal.</p>
-                <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                    <a href="/cadena-de-favores/imprimir.html" class="cf-boton cf-boton-wa">Imprimir tarjetas</a>
-                    <a href="[PEGAR ENLACE AQUÍ]" target="_blank" rel="noopener noreferrer" class="cf-boton cf-boton-borde cf-canal-link">Seguir las novedades de la cadena</a>
-                </div>
+                <p class="text-lg leading-relaxed mb-8">Entrá a <strong>peregrinosdelaesperanza.org/cadena-de-favores</strong> sin ningún número: ese es el eslabón N.º 1. Ayudá a alguien y pasale el enlace.</p>
+                <a href="[PEGAR ENLACE AQUÍ]" target="_blank" rel="noopener noreferrer" class="cf-boton cf-boton-wa cf-canal-link">Seguir las novedades de la cadena</a>
+                <p id="cf-canal-pronto" class="hidden text-sm mt-3 opacity-80">El canal de WhatsApp está por abrir.</p>
             </div>
         </section>
     </main>
@@ -299,6 +301,7 @@
             </a>
         </div>
     </nav>
+    <script src="/cadena-de-favores/qrcode.js"></script>
     <script>
         const btn = document.getElementById('mobile-menu-button');
         const menu = document.getElementById('mobile-menu');
@@ -306,12 +309,53 @@
         const anio = document.getElementById('footer-year');
         if (anio) anio.textContent = new Date().getFullYear();
         // Botones del canal de WhatsApp: si todavía no hay enlace, se desactivan.
-        const canales = document.querySelectorAll('#cf-canal, .cf-canal-link');
-        const hayCanal = /^https:\/\//.test(document.getElementById('cf-canal').getAttribute('href'));
-        if (!hayCanal) {
-            canales.forEach(a => { a.setAttribute('aria-disabled', 'true'); a.removeAttribute('href'); a.style.opacity = '.55'; a.style.pointerEvents = 'none'; });
+        const canal = document.getElementById('cf-canal');
+        if (!/^https:\/\//.test(canal.getAttribute('href'))) {
+            document.querySelectorAll('#cf-canal, .cf-canal-link').forEach(a => {
+                a.setAttribute('aria-disabled', 'true'); a.removeAttribute('href');
+                a.style.opacity = '.55'; a.style.pointerEvents = 'none';
+            });
             document.getElementById('cf-canal-pronto').classList.remove('hidden');
         }
+
+        // La cadena: el número de eslabón viaja en el enlace (?e=7).
+        // Quien lo recibe ve ese número, y lo que comparte ya lleva el siguiente.
+        (function () {
+            const e = parseInt(new URLSearchParams(location.search).get('e'), 10);
+            const actual = Number.isInteger(e) && e > 0 && e < 1000000 ? e : 1;
+            const siguiente = actual + 1;
+            const enlace = location.origin + '/cadena-de-favores/?e=' + siguiente;
+            const texto = 'Alguien te ayudó. Ahora ayudá vos a otra persona.\n' +
+                'No me devuelvas el favor: pasalo. Cuando lo hagas, la cadena sigue.\n\n' +
+                'Eslabón N.º ' + siguiente + ' 👉 ' + enlace;
+
+            document.getElementById('cf-numero').textContent = actual;
+            document.querySelectorAll('.cf-siguiente').forEach(el => { el.textContent = siguiente; });
+            if (actual > 1) document.title = 'Eslabón N.º ' + actual + ' · Cadena de favores';
+
+            // QR con el enlace al eslabón siguiente, para pasarlo en persona.
+            const qr = qrcode(0, 'M');
+            qr.addData(enlace);
+            qr.make();
+            document.getElementById('cf-qr').innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true })
+                .replace('fill="black"', 'fill="#14284B"');
+
+            document.getElementById('cf-pasar').addEventListener('click', async () => {
+                if (navigator.share) {
+                    try { await navigator.share({ text: texto }); return; }
+                    catch (err) { if (err && err.name === 'AbortError') return; }
+                }
+                window.open('https://wa.me/?text=' + encodeURIComponent(texto), '_blank', 'noopener');
+            });
+
+            const copiar = document.getElementById('cf-copiar');
+            copiar.addEventListener('click', async () => {
+                try { await navigator.clipboard.writeText(texto); }
+                catch (err) { window.prompt('Copiá el enlace:', enlace); return; }
+                copiar.textContent = '¡Copiado!';
+                setTimeout(() => { copiar.textContent = 'Copiar enlace'; }, 2000);
+            });
+        })();
     </script>
     <!-- Vercel Web Analytics: estadisticas de visitas sin cookies. Se activa en el panel de Vercel (pestana Analytics). -->
     <script defer src="/_vercel/insights/script.js"></script>
