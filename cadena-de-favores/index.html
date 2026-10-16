@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadena de favores | Peregrinos de la Esperanza</title>
+    <meta name="description" content="Alguien te ayudó. Ahora ayudá vos a otra persona. Cómo funciona la cadena de favores de Peregrinos de la Esperanza, y la tarjeta para imprimir y pasar.">
+    <link rel="canonical" href="https://www.peregrinosdelaesperanza.org/cadena-de-favores/">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#14284B">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Peregrinos de la Esperanza">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:url" content="https://www.peregrinosdelaesperanza.org/cadena-de-favores/">
+    <meta property="og:title" content="Cadena de favores: alguien te ayudó, ahora ayudá vos">
+    <meta property="og:description" content="No me devuelvas el favor: pasalo. Cuando lo hagas, la cadena sigue.">
+    <meta property="og:image" content="https://www.peregrinosdelaesperanza.org/og-peregrinos.jpg">
+    <meta property="og:image:alt" content="Logo de Peregrinos de la Esperanza, Jubileo 2025.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cadena de favores: alguien te ayudó, ahora ayudá vos">
+    <meta name="twitter:description" content="No me devuelvas el favor: pasalo. Cuando lo hagas, la cadena sigue.">
+    <meta name="twitter:image" content="https://www.peregrinosdelaesperanza.org/og-peregrinos.jpg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.peregrinosdelaesperanza.org/" },
+        { "@type": "ListItem", "position": 2, "name": "Cadena de favores", "item": "https://www.peregrinosdelaesperanza.org/cadena-de-favores/" }
+      ]
+    }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/cadena-de-favores/tarjeta.css">
+    <style>
+        body { background-color: #F8F5F0; color: #2C3E50; font-family: 'Open Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Merriweather', serif; }
+        .bg-azul-profundo { background-color: #2C3E50; }
+        .text-azul-profundo { color: #2C3E50; }
+        .bg-dorado-ocre { background-color: #B08D57; }
+        .text-dorado-ocre { color: #B08D57; }
+        .border-dorado-ocre { border-color: #B08D57; }
+        .bg-crema-suave { background-color: #F8F5F0; }
+        .nav-link { position: relative; transition: color 0.3s; }
+        .nav-link.active, .nav-link:hover { color: #B08D57; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 50%; transform: translateX(-50%); background-color: #B08D57; transition: width 0.3s ease-in-out; }
+        .nav-link.active::after { width: 100%; }
+
+        /* Contenido propio de la cadena: crema, azul y dorado, Fraunces y DM Sans. */
+        .cf { font-family: 'DM Sans', system-ui, sans-serif; color: #14284B; }
+        .cf h1, .cf h2, .cf h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; color: #14284B; }
+        .cf-bg-crema { background-color: #F7F1E3; }
+        .cf-text-dorado { color: #B8862B; }
+        .cf-paso-num { font-family: 'Fraunces', Georgia, serif; background: #14284B; color: #F7F1E3; }
+        .cf-boton { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; font-weight: 700; border-radius: 999px; padding: .9rem 1.6rem; transition: background-color .2s, opacity .2s; }
+        .cf-boton-wa { background: #14284B; color: #fff; }
+        .cf-boton-wa:hover { background: #0d1c37; }
+        .cf-boton-wa[aria-disabled="true"] { opacity: .55; pointer-events: none; }
+        .cf-boton-borde { border: 2px solid #14284B; color: #14284B; }
+        .cf-boton-borde:hover { background: #14284B; color: #fff; }
+    </style>
+</head>
+<body class="antialiased">
+<header id="header" class="bg-azul-profundo text-white shadow-lg sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2.5 md:gap-3 font-bold font-serif tracking-wider leading-tight">
+                <img src="/icon.png" alt="" aria-hidden="true" width="48" height="48"
+                     class="w-10 h-10 md:w-12 md:h-12 rounded-full shrink-0">
+                <span class="text-base md:hidden">Peregrinos de la Esperanza</span>
+                <span class="hidden md:flex md:flex-col leading-tight">
+                    <span class="text-xl lg:text-2xl">Peregrinos de la Esperanza</span>
+                    <span class="text-xs font-normal tracking-normal text-white/70" style="font-family: 'Open Sans', sans-serif;">Misión de las comunidades de Hurlingham</span>
+                </span>
+            </a>
+            <nav class="hidden md:flex space-x-5 lg:space-x-7 items-center">
+                <a href="/#inicio" class="nav-link">Inicio</a>
+                <a href="/#avisos" class="nav-link">Avisos</a>
+                <a href="/#vaticano" class="nav-link">Vaticano</a>
+                <a href="/pastoral-de-calle/" class="nav-link">Pastoral de Calle</a>
+                <a href="/#lectio" class="nav-link">Lectio del Día</a>
+                <a href="/caritas/" class="nav-link">Cáritas</a>
+                <a href="/#donaciones" class="nav-link bg-dorado-ocre text-white px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors">Donaciones</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden p-2" aria-label="Abrir menú">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-azul-profundo">
+            <a href="/#inicio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Inicio</a>
+            <a href="/#avisos" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Avisos</a>
+            <a href="/#vaticano" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Vaticano</a>
+            <a href="/pastoral-de-calle/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Pastoral de Calle</a>
+            <a href="/#lectio" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Lectio del Día</a>
+            <a href="/caritas/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Cáritas</a>
+            <a href="/carlo-acutis/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">San Carlo Acutis</a>
+            <a href="/san-francisco-de-asis/" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">San Francisco de Asís</a>
+            <a href="/cadena-de-favores/" class="block py-3 px-6 text-center bg-gray-700" aria-current="page">Cadena de favores</a>
+            <a href="/#donaciones" class="block py-3 px-6 text-center hover:bg-gray-700 transition-colors">Donaciones</a>
+        </div>
+    </header>
+    <nav aria-label="Migas de pan" class="container mx-auto px-4 md:px-6 pt-4 text-sm text-gray-500">
+        <a href="/" class="hover:text-dorado-ocre">Inicio</a>
+        <span class="mx-1">›</span>
+        <span class="text-azul-profundo font-semibold">Cadena de favores</span>
+    </nav>
+    <main class="cf pb-16 md:pb-0">
+        <section class="cf-bg-crema">
+            <div class="container mx-auto px-4 md:px-6 py-10 md:py-16 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                <div class="text-center lg:text-left">
+                    <p class="cf-text-dorado text-xs md:text-sm font-bold uppercase tracking-[0.24em] mb-4">Cadena de favores</p>
+                    <h1 class="text-3xl md:text-5xl leading-tight mb-5">Alguien te ayudó. Ahora ayudá vos a otra persona.</h1>
+                    <p class="text-lg md:text-xl leading-relaxed mb-6">No me devuelvas el favor: pasalo. Cuando lo hagas, la cadena sigue.</p>
+                    <blockquote class="border-l-4 pl-4 text-left max-w-md mx-auto lg:mx-0 mb-8" style="border-color:#B8862B">
+                        <p class="text-lg italic" style="font-family:'Fraunces',Georgia,serif">“No amemos de palabra, sino con obras y de verdad.”</p>
+                        <cite class="cf-text-dorado not-italic text-sm font-bold tracking-wider">1 Jn 3,18</cite>
+                    </blockquote>
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                        <!-- Canal de WhatsApp: reemplazar el href por el enlace del canal.
+                             Mientras no sea un enlace https, el botón se muestra desactivado. -->
+                        <a id="cf-canal" href="[PEGAR ENLACE AQUÍ]" target="_blank" rel="noopener noreferrer" class="cf-boton cf-boton-wa">
+                            <svg aria-hidden="true" viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.24 8.24 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.35-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+                            Seguir las novedades de la cadena
+                        </a>
+                        <a href="/cadena-de-favores/imprimir.html" class="cf-boton cf-boton-borde">Imprimir tarjetas</a>
+                    </div>
+                    <p id="cf-canal-pronto" class="hidden text-sm mt-3 opacity-80">El canal de WhatsApp está por abrir.</p>
+                </div>
+                <div class="flex justify-center">
+                    <article class="cf-tarjeta shadow-2xl" aria-label="Tarjeta de la cadena de favores">
+                        <div class="cf-marco">
+                            <p class="cf-etiqueta">Cadena de favores</p>
+                            <h2 class="cf-titulo">Alguien te ayudó. Ahora ayudá vos a otra persona.</h2>
+                            <p class="cf-subtitulo">No me devuelvas el favor: pasalo. Cuando lo hagas, la cadena sigue.</p>
+                            <blockquote class="cf-versiculo">“No amemos de palabra, sino con obras y de verdad.”<cite>1 Jn 3,18</cite></blockquote>
+                            <div class="cf-eslabon">
+                                <p class="cf-eslabon-numero">Eslabón N.º <span class="cf-eslabon-valor">&nbsp;</span></p>
+                                <p class="cf-eslabon-ayuda">Cuando la pases, actualizá el número de eslabón: sumá 1.</p>
+                            </div>
+                            <div class="cf-pie">
+                                <div class="cf-qr"><img src="/cadena-de-favores/qr-cadena.svg" alt="Código QR a esta página"></div>
+                                <p class="cf-pie-texto"><strong>Conocé más y sumate a la cadena</strong><span class="cf-pie-url">peregrinosdelaesperanza.org</span></p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white py-12 md:py-20">
+            <div class="container mx-auto px-4 md:px-6 max-w-4xl">
+                <h2 class="text-2xl md:text-4xl text-center mb-3">Si te llegó esta tarjeta</h2>
+                <p class="text-center text-lg mb-10 md:mb-14 max-w-2xl mx-auto">Alguien hizo algo por vos y no te pidió nada a cambio. Lo único que te pide es que no se corte acá.</p>
+                <ol class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                    <li class="cf-bg-crema rounded-xl p-6">
+                        <span class="cf-paso-num inline-flex w-10 h-10 rounded-full items-center justify-center text-lg mb-4">1</span>
+                        <h3 class="text-xl mb-2">Ayudá a otra persona</h3>
+                        <p class="leading-relaxed">No a quien te ayudó: a otra. Puede ser algo grande o algo chico. Lo que importa es que sea con obras.</p>
+                    </li>
+                    <li class="cf-bg-crema rounded-xl p-6">
+                        <span class="cf-paso-num inline-flex w-10 h-10 rounded-full items-center justify-center text-lg mb-4">2</span>
+                        <h3 class="text-xl mb-2">Sumá 1 al eslabón</h3>
+                        <p class="leading-relaxed">Antes de pasar la tarjeta, tachá el número y escribí el siguiente. Así se ve hasta dónde llegó la cadena.</p>
+                    </li>
+                    <li class="cf-bg-crema rounded-xl p-6">
+                        <span class="cf-paso-num inline-flex w-10 h-10 rounded-full items-center justify-center text-lg mb-4">3</span>
+                        <h3 class="text-xl mb-2">Pasale la tarjeta</h3>
+                        <p class="leading-relaxed">Dásela a la persona que ayudaste. Ahora le toca a ella, y la cadena sigue.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="cf-bg-crema py-12 md:py-16">
+            <div class="container mx-auto px-4 md:px-6 max-w-3xl text-center">
+                <h2 class="text-2xl md:text-3xl mb-4">¿Querés empezar una cadena?</h2>
+                <p class="text-lg leading-relaxed mb-8">Imprimí las tarjetas (salen cuatro por hoja A4), ayudá a alguien y dale la primera con el eslabón N.º 1. Para enterarte cómo va creciendo, seguí el canal.</p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a href="/cadena-de-favores/imprimir.html" class="cf-boton cf-boton-wa">Imprimir tarjetas</a>
+                    <a href="[PEGAR ENLACE AQUÍ]" target="_blank" rel="noopener noreferrer" class="cf-boton cf-boton-borde cf-canal-link">Seguir las novedades de la cadena</a>
+                </div>
+            </div>
+        </section>
+    </main>
+<footer class="bg-azul-profundo text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <div>
+                    <h3 class="text-xl font-bold font-serif mb-1">Peregrinos de la Esperanza</h3>
+                    <p class="text-gray-400 text-xs uppercase tracking-widest font-semibold mb-3">Misión de las comunidades de Hurlingham</p>
+                    <ul class="text-gray-300 text-sm space-y-1 mb-4">
+                        <li>Parroquia Virgen de la Esperanza</li>
+                        <li>Capilla Santa Clara</li>
+                        <li>Parroquia San Pablo Apóstol</li>
+                        <li>Medalla Milagrosa</li>
+                        <li>Parroquia Sagrado Corazón de Jesús</li>
+                    </ul>
+                    <p class="text-gray-300">Arribeños 2466, Hurlingham, Provincia de Buenos Aires, Argentina</p>
+                    <p class="text-gray-300 mt-2"><span class="text-white font-semibold">Secretaría parroquial:</span> lunes de 10 a 12 hs, miércoles y viernes de 16 a 18 hs.
+                        Tel. <a href="tel:+5491121943106" class="hover:text-white underline-offset-2 hover:underline">11-2194-3106</a> (solo llamadas en horario de secretaría).</p>
+                    <p class="text-gray-300 mt-2"><a href="mailto:vesperanzahurlingham@gmail.com" class="hover:text-white underline-offset-2 hover:underline">vesperanzahurlingham@gmail.com</a></p>
+                    <p class="mt-4">
+                        <a href="https://catedraldemoron.org.ar/" target="_blank" rel="noopener noreferrer"
+                           class="text-gray-400 hover:text-dorado-ocre transition text-sm">
+                            Diócesis de Morón · Catedral de Morón ↗
+                        </a>
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold font-serif mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/#inicio" class="text-gray-300 hover:text-dorado-ocre transition">Inicio</a></li>
+                        <li><a href="/#avisos" class="text-gray-300 hover:text-dorado-ocre transition">Avisos</a></li>
+                        <li><a href="/#vaticano" class="text-gray-300 hover:text-dorado-ocre transition">Vaticano</a></li>
+                        <li><a href="/pastoral-de-calle/" class="text-gray-300 hover:text-dorado-ocre transition">Pastoral de Calle</a></li>
+                        <li><a href="/#lectio" class="text-gray-300 hover:text-dorado-ocre transition">Lectio del Día</a></li>
+                        <li><a href="/caritas/" class="text-gray-300 hover:text-dorado-ocre transition">Cáritas</a></li>
+                        <li><a href="/carlo-acutis/" class="text-gray-300 hover:text-dorado-ocre transition">San Carlo Acutis</a></li>
+                        <li><a href="/san-francisco-de-asis/" class="text-gray-300 hover:text-dorado-ocre transition">San Francisco de Asís</a></li>
+                        <li><a href="/cadena-de-favores/" class="text-gray-300 hover:text-dorado-ocre transition">Cadena de favores</a></li>
+                        <li><a href="/#donaciones" class="text-gray-300 hover:text-dorado-ocre transition">Donaciones</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold font-serif mb-4">Seguinos</h3>
+                    <a href="https://www.instagram.com/peregrinosdelaesperanza2026" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 bg-dorado-ocre text-white px-4 py-2 rounded-full font-bold text-sm hover:bg-opacity-90 transition-colors mb-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg>
+                        @peregrinosdelaesperanza2026
+                    </a>
+                    <p class="text-gray-400 text-xs uppercase tracking-widest font-semibold mb-3">Comunidad Virgen de la Esperanza</p>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="https://www.facebook.com/virgendelaesperanza" class="text-gray-300 hover:text-dorado-ocre transition flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="blue" class="bi bi-facebook" viewBox="0 0 16 16">
+  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+</svg><b>Facebook</b>
+                        </a>
+                        <a href="https://www.instagram.com/pquiavirgendelaesperanzaok/" class="text-gray-300 hover:text-dorado-ocre transition flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+  <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+</svg> <b>Instagram</b>
+                        </a>
+                        <a href="https://www.youtube.com/@pquia.virgendelaesperanza2180" class="text-gray-300 hover:text-dorado-ocre transition flex items-center gap-1" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" class="bi bi-youtube" viewBox="0 0 16 16">
+  <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
+</svg> <b>YouTube</b>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
+                <p>&copy; <span id="footer-year"></span> Peregrinos de la Esperanza — Comunidad Virgen de la Esperanza y Santa Clara de Asís.</p>
+            </div>
+        </div>
+    </footer>
+    <a href="https://wa.me/5491121909764?text=Hola%2C%20quiero%20consultar%20para%20sumarme%20como%20voluntario%20o%20hacer%20una%20donaci%C3%B3n" target="_blank" rel="noopener noreferrer"
+       aria-label="WhatsApp: consultas para sumarse como voluntario o donar"
+       title="WhatsApp: solo consultas para sumarse como voluntario o donar"
+       class="fixed bottom-24 right-4 md:bottom-8 md:right-6 z-50 w-14 h-14 flex items-center justify-center rounded-full shadow-xl transition-transform hover:scale-110 active:scale-95"
+       style="background-color: #25D366;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+        </svg>
+    </a>
+    <a href="/#donaciones"
+       aria-label="Hacer una donación"
+       class="hidden md:flex fixed bottom-8 right-24 z-50 items-center gap-2 bg-dorado-ocre text-white px-5 py-3 rounded-full shadow-xl font-bold text-sm hover:bg-opacity-90 transition-all hover:scale-105 active:scale-95">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+        </svg>
+        Donar ahora
+    </a>
+        <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-lg" style="padding-bottom: env(safe-area-inset-bottom, 0px);">
+        <div class="grid grid-cols-5 h-16">
+            <a href="/#inicio" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">🏠</span>
+                <span class="text-gray-400 text-xs font-semibold">Inicio</span>
+            </a>
+            <a href="/#avisos" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">🔔</span>
+                <span class="text-gray-400 text-xs font-semibold">Avisos</span>
+            </a>
+            <a href="/pastoral-de-calle/" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">🗺️</span>
+                <span class="text-gray-400 text-xs font-semibold">Pastoral</span>
+            </a>
+            <a href="/#caritas" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">🤝</span>
+                <span class="text-gray-400 text-xs font-semibold">Cáritas</span>
+            </a>
+            <a href="/#donaciones" class="flex flex-col items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
+                <span class="text-gray-400 text-xl">💖</span>
+                <span class="text-gray-400 text-xs font-semibold">Donar</span>
+            </a>
+        </div>
+    </nav>
+    <script>
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+        if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+        const anio = document.getElementById('footer-year');
+        if (anio) anio.textContent = new Date().getFullYear();
+        // Botones del canal de WhatsApp: si todavía no hay enlace, se desactivan.
+        const canales = document.querySelectorAll('#cf-canal, .cf-canal-link');
+        const hayCanal = /^https:\/\//.test(document.getElementById('cf-canal').getAttribute('href'));
+        if (!hayCanal) {
+            canales.forEach(a => { a.setAttribute('aria-disabled', 'true'); a.removeAttribute('href'); a.style.opacity = '.55'; a.style.pointerEvents = 'none'; });
+            document.getElementById('cf-canal-pronto').classList.remove('hidden');
+        }
+    </script>
+    <!-- Vercel Web Analytics: estadisticas de visitas sin cookies. Se activa en el panel de Vercel (pestana Analytics). -->
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
