@@ -245,6 +245,24 @@
                         <a href="https://wa.me/5491121909764?text=Hola%2C%20vi%20un%20dato%20desactualizado%20en%20el%20buscador%20de%20C%C3%A1ritas" target="_blank" rel="noopener noreferrer" class="text-dorado-ocre font-semibold hover:underline">Avisanos</a>.
                     </p>
                 </div>
+                <!-- Ollas comunitarias: datos en OLLAS_COMUNITARIAS (script al final). Se filtran por dia;
+                     al entrar se abre el dia de hoy. Fuente: listado de Caritas, octubre 2026. -->
+                <div id="ollas" class="bg-white rounded-lg shadow-md p-6 md:p-10 mb-12 md:mb-16 scroll-mt-24 border-t-4 border-dorado-ocre">
+                    <h2 class="text-xl md:text-3xl font-bold text-azul-profundo mb-1">Ollas comunitarias y merenderos</h2>
+                    <p class="font-serif italic text-dorado-ocre mb-4">«Tuve hambre y me diste de comer»</p>
+                    <p class="text-gray-700 leading-relaxed mb-5">
+                        Elegí el día y te mostramos dónde hay comida, ordenado por horario.
+                    </p>
+                    <div id="ollas-dias" class="flex flex-wrap gap-2" role="group" aria-label="Elegí un día"></div>
+                    <p id="ollas-titulo" class="text-sm font-bold uppercase tracking-widest text-gray-500 mt-6 mb-3" aria-live="polite"></p>
+                    <div id="ollas-lista" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                    <noscript><p class="text-gray-700 text-sm">Para ver el listado necesitás tener JavaScript activado.</p></noscript>
+                    <p class="text-xs text-gray-500 mt-6">
+                        Listado de Cáritas, actualizado a octubre de 2026. Los horarios pueden cambiar: si podés, consultá antes de ir.
+                        ¿Ves un dato desactualizado o falta un lugar?
+                        <a href="mailto:vesperanzahurlingham@gmail.com?subject=Ollas%20comunitarias%3A%20dato%20para%20corregir" class="text-dorado-ocre font-semibold hover:underline">Escribinos</a>.
+                    </p>
+                </div>
                 <div class="border-l-4 border-dorado-ocre bg-white shadow-md rounded-r-lg p-6 md:p-8 mb-12 md:mb-16">
                     <h2 class="text-xl md:text-2xl font-bold text-azul-profundo mb-3">Novedades de Cáritas Morón</h2>
                     <p class="text-gray-700 leading-relaxed mb-5">
@@ -397,6 +415,132 @@
         if (anio) anio.textContent = new Date().getFullYear();
     </script>
     <script>
+        // Ollas comunitarias y merenderos. Para sumar o corregir un lugar, editar esta lista.
+        // dias: 0 domingo, 1 lunes ... 6 sabado. desde/hasta en formato HH:MM (hasta es opcional).
+        // tipo es opcional: solo se pone cuando el listado lo dice (olla, merienda).
+        // etiquetaHora reemplaza la hora cuando el listado no da una exacta (ej. 'Mediodía').
+        // Falta cargar el Centro Nuestra Señora de la Guardia: el listado no trae su direccion.
+        const OLLAS_COMUNITARIAS = [
+            { nombre: 'Parroquia Virgen de la Esperanza', direccion: 'Arribeños 2466',
+              turnos: [{ dias: [1, 5], desde: '18:00' }] },
+            { nombre: 'Frente al Instituto Cardenal Stepinac', direccion: 'Haydn y P. Díaz',
+              turnos: [{ dias: [1, 5], desde: '12:00', etiquetaHora: 'Mediodía' }] },
+            { nombre: 'Merendero El Comienzo', direccion: 'Huemul y Ojeda, casa 16',
+              turnos: [{ dias: [1, 3], desde: '20:00' }] },
+            { nombre: 'Centenera 472', direccion: 'Centenera 472, esquina Los Patos',
+              turnos: [{ dias: [1], desde: '19:00', hasta: '20:00', tipo: 'Olla' },
+                       { dias: [3, 5], desde: '18:00', hasta: '19:00', tipo: 'Merienda' }] },
+            { nombre: 'Comedor Carita de Ángel', direccion: 'Arribeños 3745, entre Ojeda y Olazcuaga',
+              turnos: [{ dias: [2, 3], desde: '20:00' }] },
+            { nombre: 'Taller Protegido Jesús de Nazaret', direccion: 'M. Piovano 2443, esquina Bustamante',
+              turnos: [{ dias: [4], desde: '19:00', hasta: '20:00' }] },
+            { nombre: 'Merendero Sociedad de Fomento Santa Clara', direccion: 'M. Piovano 1825',
+              turnos: [{ dias: [4], desde: '17:30' }] },
+            { nombre: 'Comedor San Cayetano', direccion: 'Mustoni esquina Minoguye',
+              nota: 'Con entrevista con asistente social.',
+              turnos: [{ dias: [1, 2, 3, 4, 5], desde: '12:00' }] },
+            { nombre: 'Niza 269', direccion: 'Niza 269, entre Pedraza y Rotterdam',
+              nota: 'Dejar el tupper un rato antes, con nombre y apellido.',
+              turnos: [{ dias: [2, 4], desde: '20:00' }] },
+            { nombre: 'Barrio 2 de Abril', direccion: 'Malvinas 4900, entre Juramento y Chopin',
+              turnos: [{ dias: [1], desde: '20:00' }] },
+            { nombre: 'Reina Madre La Juanita', direccion: 'Cetrángolo 635',
+              turnos: [{ dias: [3, 5], desde: '17:00', hasta: '18:30' }] },
+            { nombre: 'Cañada de Ruiz y Pedraza', direccion: 'Cañada de Ruiz y Pedraza',
+              turnos: [{ dias: [6], desde: '12:00', hasta: '13:00' }] },
+            { nombre: 'Planes 2803', direccion: 'Planes 2803, esquina Adrián Luna',
+              turnos: [{ dias: [3], desde: '20:00' }] },
+            { nombre: 'Capilla Santa Rita', direccion: 'Cañuelas y Levalle',
+              turnos: [{ dias: [2, 3, 4], desde: '19:00' }] },
+            { nombre: 'Parroquia San José Obrero', direccion: 'Levalle 1478',
+              turnos: [{ dias: [1, 3, 5], desde: '19:00' }] },
+            { nombre: 'Centro Barrial Papa Francisco', direccion: 'Plaza Urquiza',
+              nota: 'Traer tupper.',
+              turnos: [{ dias: [6], desde: '20:00' }] }
+        ];
+
+        // Compartido con el buscador de sedes.
+        const DIAS_SEMANA = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+        const mapaOlla = (o) => 'https://www.google.com/maps/search/?api=1&query=' +
+            encodeURIComponent(o.direccion + ', Hurlingham, Provincia de Buenos Aires');
+        const textoHora = (t) => t.etiquetaHora ? t.etiquetaHora
+            : (t.hasta ? 'De ' + t.desde + ' a ' + t.hasta + ' hs' : t.desde + ' hs');
+        const textoDias = (dias) => {
+            if (dias.length === 5 && [1, 2, 3, 4, 5].every((d) => dias.includes(d))) return 'Lunes a viernes';
+            const n = dias.map((d) => DIAS_SEMANA[d].toLowerCase());
+            const t = n.length > 1 ? n.slice(0, -1).join(', ') + ' y ' + n[n.length - 1] : n[0];
+            return t.charAt(0).toUpperCase() + t.slice(1);
+        };
+        const nodo = (tag, clase, texto) => {
+            const n = document.createElement(tag);
+            if (clase) n.className = clase;
+            if (texto) n.textContent = texto;
+            return n;
+        };
+        // Tarjeta de un lugar. Con dia: muestra solo el horario de ese dia; sin dia: todos sus horarios.
+        const tarjetaOlla = (o, dia) => {
+            const c = nodo('div', 'bg-crema-suave rounded-lg shadow p-5 border-l-4 border-dorado-ocre flex flex-col');
+            const turnos = dia === undefined ? o.turnos : o.turnos.filter((t) => t.dias.includes(dia));
+            turnos.forEach((t) => {
+                const fila = nodo('div', 'flex flex-wrap items-center gap-2 mb-1');
+                fila.appendChild(nodo('span', 'text-base font-bold text-dorado-ocre',
+                    (dia === undefined ? textoDias(t.dias) + ' · ' : '') + textoHora(t)));
+                if (t.tipo) fila.appendChild(nodo('span', 'text-xs font-semibold bg-white text-azul-profundo px-2 py-0.5 rounded-full', t.tipo));
+                c.appendChild(fila);
+            });
+            c.appendChild(nodo('h3', 'text-lg font-bold text-azul-profundo', o.nombre));
+            if (o.direccion !== o.nombre) c.appendChild(nodo('p', 'text-gray-700 text-sm', '📍 ' + o.direccion));
+            if (o.nota) c.appendChild(nodo('p', 'text-gray-700 text-sm mt-1', 'ℹ️ ' + o.nota));
+            const a = nodo('a', 'mt-3 self-start inline-flex items-center justify-center bg-azul-profundo text-white px-4 py-2 rounded-full font-bold text-sm hover:bg-dorado-ocre transition-colors', 'Cómo llegar');
+            a.href = mapaOlla(o); a.target = '_blank'; a.rel = 'noopener noreferrer';
+            c.appendChild(a);
+            return c;
+        };
+    </script>
+    <script>
+        // Ollas por dia: botones Lun..Dom; al entrar se abre el dia de hoy (hora local).
+        (function () {
+            const botones = document.getElementById('ollas-dias');
+            const titulo = document.getElementById('ollas-titulo');
+            const lista = document.getElementById('ollas-lista');
+            if (!botones || !lista) return;
+            const hoy = new Date().getDay();
+            const orden = [1, 2, 3, 4, 5, 6, 0];
+            const minutos = (h) => { const [a, b] = h.split(':').map(Number); return a * 60 + b; };
+
+            const mostrar = (dia) => {
+                botones.querySelectorAll('button').forEach((b) => {
+                    const activo = Number(b.dataset.dia) === dia;
+                    b.setAttribute('aria-pressed', activo ? 'true' : 'false');
+                    b.className = 'text-sm font-semibold px-4 py-2 rounded-full border-2 transition-colors ' +
+                        (activo ? 'bg-azul-profundo text-white border-azul-profundo' : 'bg-white text-azul-profundo border-gray-300 hover:border-dorado-ocre');
+                });
+                const delDia = OLLAS_COMUNITARIAS
+                    .map((o) => ({ o, t: o.turnos.find((t) => t.dias.includes(dia)) }))
+                    .filter((x) => x.t)
+                    .sort((x, y) => minutos(x.t.desde) - minutos(y.t.desde));
+                titulo.textContent = (dia === hoy ? 'Hoy, ' + DIAS_SEMANA[dia].toLowerCase() : DIAS_SEMANA[dia]) +
+                    ' · ' + (delDia.length ? delDia.length + (delDia.length === 1 ? ' lugar' : ' lugares') : 'sin lugares cargados');
+                lista.replaceChildren();
+                if (!delDia.length) {
+                    lista.appendChild(nodo('p', 'text-gray-700 text-sm md:col-span-2',
+                        'No tenemos ollas cargadas para este día. Mirá los demás días o comunicate con Cáritas.'));
+                    return;
+                }
+                delDia.forEach((x) => lista.appendChild(tarjetaOlla(x.o, dia)));
+            };
+
+            orden.forEach((d) => {
+                const b = nodo('button', '', (d === hoy ? 'Hoy · ' : '') + DIAS_SEMANA[d].slice(0, 3));
+                b.type = 'button'; b.dataset.dia = d;
+                b.setAttribute('aria-label', DIAS_SEMANA[d] + (d === hoy ? ' (hoy)' : ''));
+                b.addEventListener('click', () => mostrar(d));
+                botones.appendChild(b);
+            });
+            mostrar(hoy);
+        })();
+    </script>
+    <script>
         // Sedes del buscador "¿Dónde pedir ayuda cerca tuyo?".
         // Para sumar o corregir una sede, editar esta lista. Al confirmar los datos con la parroquia,
         // poner confirmado: true y la fecha en verificado (ej. 'octubre 2026').
@@ -535,7 +679,9 @@
                 if (q.length < 3) return;
                 const encontradas = SEDES_CARITAS.filter((s) => coincide(s, q))
                     .sort((a, b) => Number(b.confirmado) - Number(a.confirmado));
-                if (!encontradas.length) { salida.appendChild(tarjetaMoron(true)); return; }
+                // Las ollas comunitarias tambien aparecen al buscar por calle o por nombre.
+                const ollas = OLLAS_COMUNITARIAS.filter((o) => [o.nombre, o.direccion].map(normalizar).some((t) => t.includes(q)));
+                if (!encontradas.length && !ollas.length) { salida.appendChild(tarjetaMoron(true)); return; }
                 const grupos = [['caritas', 'Cáritas cerca tuyo'], ['otra', 'Otra ayuda en la zona']];
                 grupos.forEach(([tipo, nombre]) => {
                     const lista = encontradas.filter((s) => s.tipo === tipo);
@@ -545,6 +691,12 @@
                     lista.forEach((s) => grilla.appendChild(tarjeta(s)));
                     salida.appendChild(grilla);
                 });
+                if (ollas.length) {
+                    salida.appendChild(titulo('Ollas comunitarias y merenderos'));
+                    const grilla = el('div', 'grid grid-cols-1 md:grid-cols-2 gap-4');
+                    ollas.forEach((o) => grilla.appendChild(tarjetaOlla(o)));
+                    salida.appendChild(grilla);
+                }
                 salida.appendChild(titulo('Sede central de la zona'));
                 salida.appendChild(tarjetaMoron(false));
             };
