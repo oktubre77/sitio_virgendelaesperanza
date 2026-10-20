@@ -222,6 +222,29 @@
                         Donar por Mercado Pago
                     </a>
                 </div>
+                <!-- Buscador de sedes por barrio. Datos cargados a mano en SEDES_CARITAS (script al final).
+                     Sin geolocalizacion ni API de mapas: el sitio la bloquea en vercel.json y no hace falta. -->
+                <div id="buscar-sede" class="bg-crema-suave rounded-lg shadow-md p-6 md:p-10 mb-12 md:mb-16 scroll-mt-24">
+                    <h2 class="text-xl md:text-3xl font-bold text-azul-profundo mb-2">¿Dónde pedir ayuda cerca tuyo?</h2>
+                    <p class="text-gray-700 leading-relaxed mb-5">
+                        Escribí tu barrio o una calle de Hurlingham y te mostramos las Cáritas y lugares de ayuda más cercanos.
+                    </p>
+                    <label for="buscador-sede" class="sr-only">Barrio o calle</label>
+                    <input id="buscador-sede" type="search" autocomplete="off" inputmode="search"
+                           placeholder="Ej.: Villa Tesei, William Morris, Gdor. Vergara"
+                           class="w-full rounded-full border-2 border-gray-300 bg-white px-5 py-3 text-base focus:outline-none focus:border-dorado-ocre">
+                    <div class="flex flex-wrap gap-2 mt-3" aria-label="Localidades de Hurlingham">
+                        <button type="button" data-zona="Hurlingham" class="chip-zona bg-white border border-gray-300 text-azul-profundo text-sm font-semibold px-4 py-1.5 rounded-full hover:border-dorado-ocre">Hurlingham</button>
+                        <button type="button" data-zona="Villa Tesei" class="chip-zona bg-white border border-gray-300 text-azul-profundo text-sm font-semibold px-4 py-1.5 rounded-full hover:border-dorado-ocre">Villa Tesei</button>
+                        <button type="button" data-zona="William C. Morris" class="chip-zona bg-white border border-gray-300 text-azul-profundo text-sm font-semibold px-4 py-1.5 rounded-full hover:border-dorado-ocre">William C. Morris</button>
+                    </div>
+                    <div id="resultados-sede" class="mt-6" aria-live="polite"></div>
+                    <p class="text-xs text-gray-500 mt-6">
+                        Los lugares marcados <strong>“A confirmar”</strong> todavía no fueron verificados por el equipo: llamá o acercate a la parroquia antes de ir.
+                        ¿Ves un dato desactualizado?
+                        <a href="https://wa.me/5491121909764?text=Hola%2C%20vi%20un%20dato%20desactualizado%20en%20el%20buscador%20de%20C%C3%A1ritas" target="_blank" rel="noopener noreferrer" class="text-dorado-ocre font-semibold hover:underline">Avisanos</a>.
+                    </p>
+                </div>
                 <div class="border-l-4 border-dorado-ocre bg-white shadow-md rounded-r-lg p-6 md:p-8 mb-12 md:mb-16">
                     <h2 class="text-xl md:text-2xl font-bold text-azul-profundo mb-3">Novedades de Cáritas Morón</h2>
                     <p class="text-gray-700 leading-relaxed mb-5">
@@ -372,6 +395,166 @@
         if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
         const anio = document.getElementById('footer-year');
         if (anio) anio.textContent = new Date().getFullYear();
+    </script>
+    <script>
+        // Sedes del buscador "¿Dónde pedir ayuda cerca tuyo?".
+        // Para sumar o corregir una sede, editar esta lista. Al confirmar los datos con la parroquia,
+        // poner confirmado: true y la fecha en verificado (ej. 'octubre 2026').
+        // tipo: 'caritas' (Cáritas parroquial) u 'otra' (otra ayuda en la zona, no es Cáritas).
+        const SEDES_CARITAS = [
+            {
+                nombre: 'Cáritas Parroquia Virgen de la Esperanza',
+                tipo: 'caritas', localidad: 'Hurlingham',
+                direccion: 'Arribeños 2466, Hurlingham',
+                servicios: 'Asistencia alimentaria y acompañamiento a familias.',
+                horarios: 'Consultá días y horarios por WhatsApp antes de acercarte.',
+                whatsapp: '5491121909764',
+                confirmado: true, verificado: 'octubre 2026',
+                alias: ['hurlingham', 'hurli', 'arribenos']
+            },
+            {
+                nombre: 'Roperito de la Capilla Santa Clara de Asís',
+                tipo: 'caritas', localidad: 'William C. Morris',
+                direccion: 'Albariños 2640, William C. Morris',
+                servicios: 'Ropa, calzado y abrigo sin costo.',
+                horarios: 'Viernes de 16 a 18 hs.',
+                confirmado: true, verificado: 'octubre 2026',
+                alias: ['william c morris', 'william morris', 'w c morris', 'morris', 'albarinos']
+            },
+            {
+                nombre: 'Parroquia San Martín de Porres (Cáritas)',
+                tipo: 'caritas', localidad: 'Villa Tesei',
+                direccion: 'Einstein 450, Villa Tesei',
+                servicios: 'Ayuda social, entrega de ropa y calzado.',
+                confirmado: false,
+                alias: ['villa tesei', 'villa santos tesei', 'v tesei', 'tesei', 'einstein']
+            },
+            {
+                nombre: 'Parroquia Medalla Milagrosa',
+                tipo: 'caritas', localidad: 'Villa Tesei',
+                direccion: 'Av. Gdor. Vergara 2350, Villa Tesei',
+                servicios: 'Labor social y asistencia a vecinos de la zona.',
+                confirmado: false,
+                alias: ['villa tesei', 'villa santos tesei', 'v tesei', 'tesei', 'gobernador vergara', 'gdor vergara', 'vergara', 'bradley']
+            },
+            {
+                nombre: 'Parroquia Santa Marta',
+                tipo: 'caritas', localidad: 'Villa Tesei',
+                direccion: 'Av. Gdor. Vergara 1067, Villa Tesei',
+                servicios: 'Centro de integración comunitaria y desarrollo social.',
+                confirmado: false,
+                alias: ['villa tesei', 'villa santos tesei', 'v tesei', 'tesei', 'gobernador vergara', 'gdor vergara', 'vergara']
+            },
+            {
+                nombre: 'Ejército de Salvación',
+                tipo: 'otra', localidad: 'Villa Tesei',
+                direccion: 'Húsares 995, Villa Tesei',
+                servicios: 'Asistencia benéfica.',
+                horarios: 'Lunes a viernes de 9 a 12:30 y de 13:30 a 17 hs; sábados de 9 a 13 hs.',
+                confirmado: false,
+                alias: ['villa tesei', 'villa santos tesei', 'v tesei', 'tesei', 'husares']
+            }
+        ];
+
+        (function () {
+            const input = document.getElementById('buscador-sede');
+            const salida = document.getElementById('resultados-sede');
+            if (!input || !salida) return;
+
+            // Minúsculas, sin tildes ni signos: "V. Tesei" y "villa tesei" se comparan igual.
+            const normalizar = (t) => (t || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
+                .toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
+
+            const coincide = (sede, q) => {
+                const textos = [sede.nombre, sede.localidad, sede.direccion].concat(sede.alias).map(normalizar);
+                return textos.some((t) => t.includes(q) || (q.length >= 5 && q.includes(t) && t.length >= 4));
+            };
+
+            const el = (tag, clase, texto) => {
+                const n = document.createElement(tag);
+                if (clase) n.className = clase;
+                if (texto) n.textContent = texto;
+                return n;
+            };
+
+            const boton = (href, texto, principal) => {
+                const a = el('a', 'inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition-colors ' +
+                    (principal ? 'bg-azul-profundo text-white hover:bg-dorado-ocre' : 'bg-white text-azul-profundo border-2 border-azul-profundo hover:bg-azul-profundo hover:text-white'), texto);
+                a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer';
+                return a;
+            };
+
+            const tarjeta = (s) => {
+                const c = el('div', 'bg-white rounded-lg shadow p-5 border-l-4 ' + (s.confirmado ? 'border-dorado-ocre' : 'border-gray-300'));
+                const cab = el('div', 'flex flex-wrap items-center gap-2 mb-1');
+                cab.appendChild(el('h3', 'text-lg font-bold text-azul-profundo', s.nombre));
+                cab.appendChild(s.confirmado
+                    ? el('span', 'text-xs font-semibold bg-green-100 text-green-800 px-2 py-0.5 rounded-full', 'Verificado ' + s.verificado)
+                    : el('span', 'text-xs font-semibold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full', 'A confirmar'));
+                c.appendChild(cab);
+                c.appendChild(el('p', 'text-gray-700 text-sm', '📍 ' + s.direccion));
+                if (s.servicios) c.appendChild(el('p', 'text-gray-700 text-sm mt-1', s.servicios));
+                if (s.horarios) c.appendChild(el('p', 'text-gray-700 text-sm mt-1', '🕓 ' + s.horarios));
+                if (!s.confirmado) c.appendChild(el('p', 'text-amber-800 text-xs mt-2', 'Dato sin verificar: consultá antes de ir.'));
+                const acciones = el('div', 'flex flex-wrap gap-2 mt-3');
+                acciones.appendChild(boton('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s.nombre + ', ' + s.direccion), 'Cómo llegar', true));
+                if (s.whatsapp) acciones.appendChild(boton('https://wa.me/' + s.whatsapp + '?text=' + encodeURIComponent('Hola, quiero consultar por la ayuda de Cáritas'), 'WhatsApp', false));
+                c.appendChild(acciones);
+                return c;
+            };
+
+            const tarjetaMoron = (sinResultados) => {
+                const c = el('div', 'bg-white rounded-lg shadow p-5 border-l-4 border-azul-profundo');
+                if (sinResultados) c.appendChild(el('p', 'text-gray-700 text-sm mb-3', 'No encontramos una sede cargada para esa zona. Podés comunicarte con la sede central de la diócesis:'));
+                c.appendChild(el('h3', 'text-lg font-bold text-azul-profundo mb-1', 'Cáritas Morón · sede diocesana'));
+                c.appendChild(el('p', 'text-gray-700 text-sm', 'Coordina la acción social de toda la zona y te orienta sobre la Cáritas más cercana a tu casa.'));
+                // Datos de https://caritasmoron.org/contacto (octubre 2026).
+                const datos = el('ul', 'text-gray-700 text-sm mt-2 space-y-1');
+                [['📞 Teléfono: ', '7710-0642', 'tel:+541177100642'],
+                 ['✉️ ', 'info.moron@caritas.org.ar', 'mailto:info.moron@caritas.org.ar'],
+                 ['✈️ Telegram: ', '@Caritasmoron', 'https://t.me/Caritasmoron']].forEach(([pre, txt, href]) => {
+                    const li = el('li', '', pre);
+                    const a = el('a', 'text-dorado-ocre font-semibold hover:underline', txt);
+                    a.href = href;
+                    if (href.startsWith('http')) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+                    li.appendChild(a); datos.appendChild(li);
+                });
+                c.appendChild(datos);
+                const acciones = el('div', 'flex flex-wrap gap-2 mt-3');
+                acciones.appendChild(boton('https://wa.me/5491121640828?text=' + encodeURIComponent('Hola, necesito ayuda y quiero saber a qué Cáritas acercarme'), 'WhatsApp 11 2164-0828', true));
+                acciones.appendChild(boton('https://caritasmoron.org/contacto', 'Ver contacto', false));
+                c.appendChild(acciones);
+                return c;
+            };
+
+            const titulo = (texto) => el('h3', 'text-sm font-bold uppercase tracking-widest text-gray-500 mt-5 mb-3', texto);
+
+            const buscar = () => {
+                const q = normalizar(input.value);
+                salida.replaceChildren();
+                if (q.length < 3) return;
+                const encontradas = SEDES_CARITAS.filter((s) => coincide(s, q))
+                    .sort((a, b) => Number(b.confirmado) - Number(a.confirmado));
+                if (!encontradas.length) { salida.appendChild(tarjetaMoron(true)); return; }
+                const grupos = [['caritas', 'Cáritas cerca tuyo'], ['otra', 'Otra ayuda en la zona']];
+                grupos.forEach(([tipo, nombre]) => {
+                    const lista = encontradas.filter((s) => s.tipo === tipo);
+                    if (!lista.length) return;
+                    salida.appendChild(titulo(nombre));
+                    const grilla = el('div', 'grid grid-cols-1 md:grid-cols-2 gap-4');
+                    lista.forEach((s) => grilla.appendChild(tarjeta(s)));
+                    salida.appendChild(grilla);
+                });
+                salida.appendChild(titulo('Sede central de la zona'));
+                salida.appendChild(tarjetaMoron(false));
+            };
+
+            let espera;
+            input.addEventListener('input', () => { clearTimeout(espera); espera = setTimeout(buscar, 150); });
+            document.querySelectorAll('.chip-zona').forEach((b) => b.addEventListener('click', () => {
+                input.value = b.dataset.zona; buscar();
+            }));
+        })();
     </script>
     <!-- Vercel Web Analytics: estadisticas de visitas sin cookies. Se activa en el panel de Vercel (pestana Analytics). -->
     <script defer src="/_vercel/insights/script.js"></script>
