@@ -508,9 +508,21 @@
                 if (sinResultados) c.appendChild(el('p', 'text-gray-700 text-sm mb-3', 'No encontramos una sede cargada para esa zona. Podés comunicarte con la sede central de la diócesis:'));
                 c.appendChild(el('h3', 'text-lg font-bold text-azul-profundo mb-1', 'Cáritas Morón · sede diocesana'));
                 c.appendChild(el('p', 'text-gray-700 text-sm', 'Coordina la acción social de toda la zona y te orienta sobre la Cáritas más cercana a tu casa.'));
+                // Datos de https://caritasmoron.org/contacto (octubre 2026).
+                const datos = el('ul', 'text-gray-700 text-sm mt-2 space-y-1');
+                [['📞 Teléfono: ', '7710-0642', 'tel:+541177100642'],
+                 ['✉️ ', 'info.moron@caritas.org.ar', 'mailto:info.moron@caritas.org.ar'],
+                 ['✈️ Telegram: ', '@Caritasmoron', 'https://t.me/Caritasmoron']].forEach(([pre, txt, href]) => {
+                    const li = el('li', '', pre);
+                    const a = el('a', 'text-dorado-ocre font-semibold hover:underline', txt);
+                    a.href = href;
+                    if (href.startsWith('http')) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+                    li.appendChild(a); datos.appendChild(li);
+                });
+                c.appendChild(datos);
                 const acciones = el('div', 'flex flex-wrap gap-2 mt-3');
-                acciones.appendChild(boton('https://caritasmoron.org/', 'Contacto de Cáritas Morón', true));
-                acciones.appendChild(boton('https://wa.me/5491121909764?text=' + encodeURIComponent('Hola, necesito ayuda y no sé a qué Cáritas acercarme'), 'Consultanos por WhatsApp', false));
+                acciones.appendChild(boton('https://wa.me/5491121640828?text=' + encodeURIComponent('Hola, necesito ayuda y quiero saber a qué Cáritas acercarme'), 'WhatsApp 11 2164-0828', true));
+                acciones.appendChild(boton('https://caritasmoron.org/contacto', 'Ver contacto', false));
                 c.appendChild(acciones);
                 return c;
             };
