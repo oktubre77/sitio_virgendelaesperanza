@@ -902,6 +902,33 @@
 
         const VATICAN_RSS_URL = 'https://www.vaticannews.va/es.rss.xml';
         const VATICAN_RSS_PROXY = 'https://api.rss2json.com/v1/api.json?rss_url=';
+
+        // Lee un RSS de Vatican News. Primero con la funcion propia del sitio
+        // (/api/rss, corre en Vercel y queda en cache); si falla, con rss2json,
+        // que es gratuito pero tiene limite diario y se cae seguido: por eso la
+        // Lectio mostraba "No pudimos cargar las lecturas de hoy".
+        async function leerFeedVaticano(nombre, rssUrl) {
+            const fuentes = [
+                `/api/rss?feed=${nombre}`,
+                `${VATICAN_RSS_PROXY}${encodeURIComponent(rssUrl)}`
+            ];
+            let ultimoError;
+            for (const url of fuentes) {
+                try {
+                    const respuesta = await fetch(url);
+                    if (!respuesta.ok) throw new Error(`Error HTTP ${respuesta.status} en ${url}`);
+                    const data = await respuesta.json();
+                    // rss2json responde 200 con status "error" cuando agota el limite.
+                    if (!data || data.status === 'error' || !Array.isArray(data.items) || data.items.length === 0) {
+                        throw new Error(`Sin items en ${url}${data && data.message ? ': ' + data.message : ''}`);
+                    }
+                    return data;
+                } catch (error) {
+                    ultimoError = error;
+                }
+            }
+            throw ultimoError;
+        }
         const vaticanNewsFallback = [
             {
                 title: 'Vatican News: información oficial',
@@ -1441,13 +1468,7 @@
 
         async function initVaticanNews() {
             try {
-                const response = await fetch(`${VATICAN_RSS_PROXY}${encodeURIComponent(VATICAN_RSS_URL)}`);
-                if (!response.ok) throw new Error(`Error HTTP ${response.status}`);
-
-                const data = await response.json();
-                if (!data || !Array.isArray(data.items) || data.items.length === 0) {
-                    throw new Error('Sin items en feed Vaticano');
-                }
+                const data = await leerFeedVaticano('noticias', VATICAN_RSS_URL);
 
                 const mapped = data.items.slice(0, 3).map(item => ({
                     title: item.title || 'Noticia Vaticano',
@@ -1475,8 +1496,8 @@
         // --- LECTIO DEL DIA ---
         // Se arma en el sitio en vez de incrustar un iframe: lo que vive adentro de
         // un iframe es invisible para Google, asi que esta seccion no aportaba una
-        // sola palabra a la busqueda. Fuente: el RSS de Vatican News, el mismo proxy
-        // que ya usan las noticias.
+        // sola palabra a la busqueda. Fuente: el RSS de Vatican News, leido con
+        // leerFeedVaticano (funcion propia /api/rss, con rss2json de respaldo).
         //
         // CUIDADO CON LA FECHA, son dos trampas distintas:
         //  1. El feed publica el dia siguiente la noche anterior, asi que items[0]
@@ -1513,13 +1534,7 @@
             if (!caja) return;
 
             try {
-                const respuesta = await fetch(`${VATICAN_RSS_PROXY}${encodeURIComponent(LECTIO_RSS_URL)}`);
-                if (!respuesta.ok) throw new Error(`Error HTTP ${respuesta.status}`);
-
-                const data = await respuesta.json();
-                if (!data || !Array.isArray(data.items) || data.items.length === 0) {
-                    throw new Error('Sin items en el feed de lecturas');
-                }
+                const data = await leerFeedVaticano('lectio', LECTIO_RSS_URL);
 
                 const hoy = new Date().toLocaleDateString('en-CA');
                 const fechados = data.items.filter(i => fechaDelLectio(i));
